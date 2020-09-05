@@ -1,6 +1,6 @@
 {
   "name": "@gerritkit/rest",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -38,7 +38,7 @@
   "dependencies": {
     "@qiwi/substrate": "^1.18.37",
     "tslib": "^2.0.1",
-    "@gerritkit/core": "*"
+    "@gerritkit/core": "1.0.0"
   },
   "devDependencies": {},
   "peerDependencies": {},
