@@ -7,26 +7,11 @@
   },
   "description": "Gerritkit infra assets",
   "keywords": [],
-  "main": "target/es5/index.js",
-  "source": "target/ts/index.ts",
-  "types": "target/es5/index.d.ts",
-  "typescript": {
-    "definition": "target/es5/index.d.ts"
-  },
-  "files": [
-    "README.md",
-    "CHANGELOG.md",
-    "target",
-    "typings",
-    "flow-typed"
-  ],
+  "files": [],
   "scripts": {
     "postupdate": "yarn"
   },
-  "dependencies": {
-    "@qiwi/substrate": "^1.18.37",
-    "tslib": "^2.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@qiwi/libdefkit": "^1.0.3",
     "@qiwi/semantic-release-gh-pages-plugin": "^4.0.3",
