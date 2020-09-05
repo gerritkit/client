@@ -1,7 +1,7 @@
 {
-  "name": "blank-ts-monorepo",
+  "name": "@gerritkit/monorepo",
   "version": "0.0.0",
-  "description": "Blank TS monorepo",
+  "description": "Gerritkit monorepo",
   "main": "target/es5/index.ts",
   "workspaces": [
     "packages/*"
@@ -9,8 +9,7 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean --yes && lerna run clean",
-    "prebuild": "tsc -b packages/facade/tsconfig.es5.json",
-    "build": "yarn clean && yarn prebuild && lerna run build --stream --concurrency 2",
+    "build": "lerna run build --stream --concurrency 2",
     "bootstrap": "lerna bootstrap",
     "jest": "jest",
     "test:report": "yarn test && yarn coveralls:push",
@@ -19,7 +18,7 @@
     "coverage:merge": "node scripts/js/coverage-merge.js",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls || echo 'coveralls push failed :(' && exit 0",
     "docs": "typedoc packages/**/src/main --ignoreCompilerErrors || exit 0",
-    "postupdate": "yarn && yarn bootstrap && npx yarn-audit-fix --audit-level=moderate && yarn build && yarn test",
+    "postupdate": "yarn && npx yarn-audit-fix --audit-level=moderate && yarn bootstrap && yarn build && yarn test",
     "release": "multi-semantic-release"
   },
   "devDependencies": {
@@ -34,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antongolub/blank-ts-monorepo.git"
+    "url": "git+https://github.com/gerritkit/client.git"
   }
 }

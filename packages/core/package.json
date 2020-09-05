@@ -1,11 +1,11 @@
 {
-  "name": "blank-ts-monorepo-common",
+  "name": "@gerritkit/core",
   "version": "0.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "description": "Common",
+  "description": "Gerritkit core components",
   "keywords": [],
   "main": "target/es5/index.js",
   "source": "target/ts/index.ts",
@@ -30,7 +30,7 @@
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
     "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
     "build:ts": "cp -r src/main/ts/ target/ts/",
-    "build:libdef": "dts-generator --project ./ --out typings/index.d.ts --prefix blank-ts-monorepo-common/target/es5 --name blank-ts-monorepo-common --main blank-ts-monorepo-common/target/es5/index && libdeffix --dts=./typings/index.d.ts --prefix=blank-ts-monorepo-common/target/es5 && flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
+    "build:libdef": "dts-generator --project ./ --out typings/index.d.ts --prefix @gerritkit/core/target/es5 --name @gerritkit/core --main @gerritkit/core/target/es5/index && libdeffix --dts=./typings/index.d.ts --prefix=@gerritkit/core/target/es5 && flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
     "docs": "typedoc --readme README.md --tsconfig tsconfig.es5.json src/main --ignoreCompilerErrors || exit 0",
     "uglify": "for f in $(find target -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done",
     "postupdate": "yarn && yarn build && yarn test"
@@ -40,18 +40,18 @@
     "tslib": "^2.0.1"
   },
   "devDependencies": {
-    "blank-ts-monorepo-infra": "*"
+    "@gerritkit/infra": "*"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antongolub/blank-ts-monorepo.git"
+    "url": "git+https://github.com/gerritkit/client.git"
   },
   "author": "Anton Golub <mailbox@antongolub.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/antongolub/blank-ts-monorepo/issues"
+    "url": "https://github.com/gerritkit/client/issues"
   },
-  "homepage": "https://github.com/antongolub/blank-ts-monorepo/#readme"
+  "homepage": "https://github.com/gerritkit/client/#readme"
 }

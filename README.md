@@ -1,2 +1,2 @@
-# blank-ts-monorepo
-Template mono repository for TS OSS projects
+# Gerritkit
+Gerrit client with [octokit](https://github.com/octokit/rest.js) -like API

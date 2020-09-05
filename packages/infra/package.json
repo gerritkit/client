@@ -1,11 +1,11 @@
 {
-  "name": "blank-ts-monorepo-infra",
+  "name": "@gerritkit/infra",
   "version": "0.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "description": "Infra",
+  "description": "Gerritkit infra assets",
   "keywords": [],
   "main": "target/es5/index.js",
   "source": "target/ts/index.ts",
@@ -52,12 +52,12 @@
   "optionalDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antongolub/blank-ts-monorepo.git"
+    "url": "git+https://github.com/gerritkit/client.git"
   },
   "author": "Anton Golub <mailbox@antongolub.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/antongolub/blank-ts-monorepo/issues"
+    "url": "https://github.com/gerritkit/client/issues"
   },
-  "homepage": "https://github.com/antongolub/blank-ts-monorepo/#readme"
+  "homepage": "https://github.com/gerritkit/client/#readme"
 }

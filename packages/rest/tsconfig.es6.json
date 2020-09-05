@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "outDir": "target/es5"
+    "target": "es6",
+    "outDir": "target/es6"
   },
   "references": [
-    { "path": "../common/tsconfig.es5.json" }
+    { "path": "../core/tsconfig.es6.json" }
   ],
   "include": [
     "src/main/**/*"

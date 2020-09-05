@@ -61,3 +61,6 @@ buildcache
 .rts2_cache_cjs
 .rts2_cache_es
 .rts2_cache_umd
+
+# Integration test assets
+creds.json
