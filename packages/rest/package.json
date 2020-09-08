@@ -38,17 +38,11 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@gerritkit/core": "1.0.0",
     "@qiwi/substrate": "^1.18.37",
     "axios": "^0.20.0",
     "tslib": "^2.0.1"
   },
-  "devDependencies": {
-    "eslint": "^7.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-qiwi": "^1.7.0",
-    "prettier": "^2.1.1"
-  },
+  "devDependencies": {},
   "peerDependencies": {},
   "optionalDependencies": {},
   "repository": {
