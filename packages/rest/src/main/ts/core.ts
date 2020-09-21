@@ -6,20 +6,7 @@ import {
   UnionToIntersection,
 } from './types'
 
-export type IListProjectsOpts = {
-  branch?: string
-  description?: string
-  limit?: number
-  prefix?: string
-  regex?: string
-  skip?: string
-  substring?: string
-  tree?: string
-  state?: string
-  type?: string
-}
-
-export class GerritKitCore {
+export class Core {
   static plugins: GerritKitPlugin[] = []
   static plugin<
     S extends Constructor<any> & { plugins: any[] },
@@ -43,7 +30,7 @@ export class GerritKitCore {
       password: string
     },
   ) {
-    const classConstructor = this.constructor as typeof GerritKitCore
+    const classConstructor = this.constructor as typeof Core
     classConstructor.plugins.forEach((plugin) =>
       Object.assign(this, plugin({ baseUrl, auth })),
     )

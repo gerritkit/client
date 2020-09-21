@@ -1,12 +1,7 @@
-import { GerritKitCore } from './gerritKitCore'
-import { projectsEndpoints } from './projectsEndpoints'
-import { commitEndpoints } from './commitEndpoints'
-import { branchEndpoints } from './branchEndpoints'
+import { Core } from './core'
+import { repos } from './repos'
+import { commit } from './commit'
 
-export const GerritKit = GerritKitCore.plugin(
-  branchEndpoints,
-  commitEndpoints,
-  projectsEndpoints,
-)
+export const GerritKit = Core.plugin(commit, repos)
 
-export type GerritKit = InstanceType<typeof GerritKitCore>
+export type GerritKit = InstanceType<typeof Core>
