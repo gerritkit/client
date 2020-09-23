@@ -24,7 +24,6 @@ export type TGetContentOpts = {
   ref: string
 }
 
-
 export const repos = ({ baseUrl, auth }: IGerritConstructorOpts) => {
   return {
     repos: {
@@ -58,12 +57,7 @@ export const repos = ({ baseUrl, auth }: IGerritConstructorOpts) => {
           })
           .then((d) => parseGerritResponse(d))
       },
-      getContent({
-        owner,
-        repo,
-        path,
-        ref,
-      }: TGetContentOpts) {
+      getContent({ owner, repo, path, ref }: TGetContentOpts) {
         return axios.get(
           `${baseUrl}/a/projects/${owner}/${repo}/branches/${
             ref || defaultRef

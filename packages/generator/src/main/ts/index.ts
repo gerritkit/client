@@ -28,21 +28,51 @@ export function generateFunction({
   method,
   args,
   path,
+  opts,
+  returnType,
+  bodyType,
 }: {
   methodName: string
   method: string
   args: string[]
   path: string
+  opts: Array<[string, string]>
+  isUnsupported: boolean
+  returnType: string
+  bodyType?: string
 }) {
+  const data = bodyType ? 'data,' : ''
+  const dataType = bodyType ? `data: ${bodyType},` : ''
+
+  const pathArgs = args.length > 0 ? `args: {${args.join(', ')}},` : ''
+  const pathArgsType =
+    args.length > 0
+      ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
+      : ''
+
+  const params =
+    opts.length > 0 ? `params: {${opts.map(([name]) => name).join(', ')}},` : ''
+  const paramsType =
+    opts.length > 0
+      ? `params: {${opts.map(([name]) => `${name}: string`).join(', ')}},`
+      : ''
   return `
-  async ${methodName} ({${args.join(', ')}}: {${args
-    .map((el) => `${el}: string`)
-    .join(', ')}}) {
+  async ${methodName} ( {
+    ${data} ${pathArgs} ${params}  
+  }: {
+  ${dataType}
+  ${pathArgsType}
+  ${paramsType}
+  } ) {
     return axios({
       method: '${method}',
       url: \`\${baseUrl}${path}\`,
       auth,
-    }).then(parseGerritResponse)
+      params: {
+        ${opts.map(([name, filed]) => `${filed}: ${name}`).join(',\n')}
+      },
+      ${bodyType ? 'data,' : ''}
+    }).then(({data}) => parseGerritResponse(data) as ${returnType})
   },
 `
 }
@@ -63,7 +93,8 @@ export function parseArg(arg: string) {
 }
 
 export function parseApiString(str: string) {
-  const method = str.match(/^\S+/g)?.[0]
+  const method = str.trim().replace(/['"`]/g, '').match(/^\S+/g)?.[0]
+
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
   const argsCount = args.reduce((acc, el) => {
     if (acc[el]) {
@@ -91,6 +122,7 @@ export function parseApiString(str: string) {
       return `\${${parsed}${count === max ? '' : max - count}\}`
     })
     .replace(/.*\s/, '')
+    .replace(/['"`]/g, '')
 
   return {
     method,
@@ -99,23 +131,95 @@ export function parseApiString(str: string) {
   }
 }
 
-// @ts-ignore
-export function parseOptions(opts: any, inf: any) {
-  if (inf) {
-    // TODO: provide opts
-    return true
+export function parseOptions(optsSection: string[]) {
+  return optsSection
+    .map((el) => {
+      const parsed = (el[0].toLowerCase() + el.slice(1)).split('(')
+      if (!parsed[1]) {
+        console.log('unsupported options:', el)
+        return
+      }
+      parsed[1] = parsed[1].slice(0, -1)
+      return parsed
+    })
+    .filter((el) => el)
+}
+
+export function getReturnType(method: CheerioElement) {
+  const $ = cheerio.load(method)
+
+  const sentences =
+    $('.paragraph')
+      .text()
+      .match(/([^.!?]+[.!?]+)|([^.!?]+$)/g) || []
+  const types = sentences.reduce((acc, el) => {
+    if (el.includes('returned')) {
+      ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
+        acc.add(`${type.trim()}[]`),
+      )
+      ;(el.match(/\S+?\s(?=entities)/g) || []).forEach((type) =>
+        acc.add(`${type.trim()}[]`),
+      )
+      ;(el.match(/\S+?\s(?=entity)/g) || []).forEach((type) =>
+        acc.add(type.trim()),
+      )
+    }
+    return acc
+  }, new Set() as Set<string>)
+
+  if (types.size > 1) {
+    console.log('UNRESOLVER TYPE')
+    return 'any'
   }
+
+  if (types.size === 0) {
+    return 'any'
+  }
+
+  return `T${[...types][0]}`
+}
+
+export function getBodyType(method: CheerioElement) {
+  const $ = cheerio.load(method)
+
+  const sentences =
+    $('.paragraph')
+      .text()
+      .match(/([^.!?]+[.!?]+)|([^.!?]+$)/g) || []
+  const types = sentences.reduce((acc, el) => {
+    if (el.includes('body')) {
+      ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
+        acc.add(`${type.trim()}[]`),
+      )
+      ;(el.match(/\S+?\s(?=entities)/g) || []).forEach((type) =>
+        acc.add(`${type.trim()}[]`),
+      )
+      ;(el.match(/\S+?\s(?=entity)/g) || []).forEach((type) =>
+        acc.add(type.trim()),
+      )
+    }
+    return acc
+  }, new Set() as Set<string>)
+
+  if (types.size !== 1) {
+    return undefined
+  }
+
+  return `T${[...types][0]}`
 }
 
 export function getMethodInfo(method: CheerioElement) {
   const $ = cheerio.load(method)
+  const path = ($('.openblock').first().text().match(/'.*?'/g) || [])[0]
+
   const originalName = $('h3').text()
   const methodName = normaliseName(originalName)
-  const path = $('.openblock').first().text().trim().slice(1, -1)
-  const isUnsupported =
-    parseOptions(methodName, $('.sect3').text()) ||
-    !path ||
-    unsupportedMethods.includes(methodName)
+  const returnType = getReturnType(method)
+  const bodyType = getBodyType(method)
+
+  const opts: string[] = []
+  $('.hdlist1').each((_index, element) => opts.push($(element).text()))
+  const isUnsupported = !path || unsupportedMethods.includes(methodName)
 
   if (isUnsupported) {
     return {
@@ -128,6 +232,9 @@ export function getMethodInfo(method: CheerioElement) {
     originalName,
     methodName,
     ...parseApiString(path),
+    opts: parseOptions(opts),
+    returnType,
+    bodyType,
     isUnsupported,
   }
 }
@@ -159,9 +266,12 @@ export function getTypesInfo(elem: CheerioElement) {
   const $ = cheerio.load(elem)
   const originalName = $('h3').text()
   const data: any = []
-  $('tr').each((_, elem) => {
-    data.push(parseTd(elem))
-  })
+  $('tbody')
+    .first()
+    .children('tr')
+    .each((_, elem) => {
+      data.push(parseTd(elem))
+    })
 
   return {
     typeName: originalName,

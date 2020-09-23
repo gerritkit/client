@@ -5,9 +5,9 @@ import {
   parseApiString,
   generateFunction,
   generate,
+  parseOptions,
 } from '../../main/ts'
-// import fs from 'fs'
-// import exp from 'constants'
+
 const api =
   'https://gerrit-review.googlesource.com/Documentation/rest-api-projects.html'
 
@@ -30,6 +30,7 @@ describe('generator', () => {
           method: 'GET',
           args: ['projectName'],
           path: '/projects/${projectName}/children/',
+          opts: [],
           isUnsupported: false,
         },
         {
@@ -38,6 +39,7 @@ describe('generator', () => {
           method: 'GET',
           args: ['projectName', 'projectName1'],
           path: '/projects/${projectName}/children/${projectName1}',
+          opts: [],
           isUnsupported: false,
         },
       ],
@@ -98,27 +100,117 @@ describe('generator', () => {
       method: 'GET',
       args: ['projectName'],
       path: '/projects/${projectName}/children/',
+      opts: [],
+      isUnsupported: false,
+      returnType: 'any',
     })
     expect(res).toBe(
       `
-  async listChildProjects ({projectName}) {
+  async listChildProjects ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/children/\`,
       auth,
-    })
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
   },
 `,
     )
+  })
+
+  it('generateFunction with opts', async () => {
+    const res = generateFunction({
+      methodName: 'listProjects',
+      method: 'GET',
+      args: [],
+      path: '/projects/',
+      opts: [
+        ['branch', 'b'],
+        ['description', 'd'],
+        ['limit', 'n'],
+        ['prefix', 'p'],
+        ['regex', 'r'],
+        ['skip', 's'],
+        ['substring', 'm'],
+        ['tree', 't'],
+        ['type', 'type'],
+        ['state', 's'],
+      ],
+      returnType: 'any',
+      isUnsupported: false,
+    })
+    expect(res).toBe(`
+  async listProjects ( {
+      params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state},  
+  }: {
+  
+  
+  params: {branch: string, description: string, limit: string, prefix: string, regex: string, skip: string, substring: string, tree: string, type: string, state: string},
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\`,
+      auth,
+      params: {
+        b: branch,
+d: description,
+n: limit,
+p: prefix,
+r: regex,
+s: skip,
+m: substring,
+t: tree,
+type: type,
+s: state
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+`)
+  })
+
+  it('parseOptions', async () => {
+    const res = parseOptions([
+      'Branch(b)',
+      'Description(d)',
+      'Limit(n)',
+      'Prefix(p)',
+      'Regex(r)',
+      'Skip(S)',
+      'Substring(m)',
+      'Tree(t)',
+      'Type(type)',
+      'All',
+      'State(s)',
+    ])
+    expect(res).toMatchObject([
+      ['branch', 'b'],
+      ['description', 'd'],
+      ['limit', 'n'],
+      ['prefix', 'p'],
+      ['regex', 'r'],
+      ['skip', 'S'],
+      ['substring', 'm'],
+      ['tree', 't'],
+      ['type', 'type'],
+      ['state', 's'],
+    ])
   })
 
   it('generate', async () => {
     const { code, types } = await generate(api)
     expect(code).toMatchSnapshot()
     expect(types).toMatchSnapshot()
-    // console.log(`${process.cwd()}/test.js`)
     // fs.writeFileSync(`${process.cwd()}/test.ts`, code)
     // fs.writeFileSync(`${process.cwd()}/types.ts`, types)
-    // console.log('1')
   })
 })
