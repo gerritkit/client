@@ -210,7 +210,5 @@ s: state
     const { code, types } = await generate(api)
     expect(code).toMatchSnapshot()
     expect(types).toMatchSnapshot()
-    // fs.writeFileSync(`${process.cwd()}/test.ts`, code)
-    // fs.writeFileSync(`${process.cwd()}/types.ts`, types)
   })
 })

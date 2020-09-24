@@ -1,0 +1,1372 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generator generate 1`] = `
+"
+  import axios from 'axios'
+  export const parseGerritResponse = (data: { data: string }) => JSON.parse(data.data.slice(4))
+  
+    export function projectEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async listProjects ( {
+        
+  }: {
+  
+  
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
+  },
+
+
+  async queryProjects ( {
+        
+  }: {
+  
+  
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/?query=<query>\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
+  },
+
+
+  async getProject ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
+  },
+
+
+  async createProject ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
+  },
+
+
+  async getProjectDescription ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/description\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async setProjectDescription ( {
+    data, args: {projectName},   
+  }: {
+  data: TProjectDescriptionInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/description\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async deleteProjectDescription ( {
+    data, args: {projectName},   
+  }: {
+  data: TProjectDescriptionInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'DELETE',
+      url: \`\${baseUrl}/projects/\${projectName}/description\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async getProjectParent ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/parent\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async setProjectParent ( {
+    data, args: {projectName},   
+  }: {
+  data: TProjectParentInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/parent\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async getHEAD ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/HEAD\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async setHEAD ( {
+    data, args: {projectName},   
+  }: {
+  data: THeadInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/HEAD\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async getRepositoryStatistics ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/statistics.git\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TRepositoryStatisticsInfo)
+  },
+
+
+  async getConfig ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/config\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TConfigInfo)
+  },
+
+
+  async setConfig ( {
+    data, args: {projectName},   
+  }: {
+  data: TConfigInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/config\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as TConfigInfo)
+  },
+
+
+  async runGC ( {
+    data, args: {projectName},   
+  }: {
+  data: TGCInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/gc\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async banCommit ( {
+    data, args: {projectName},   
+  }: {
+  data: TBanInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/ban\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as TBanResultInfo)
+  },
+
+
+  async listAccessRightsforProject ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/access\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectAccessInfo)
+  },
+
+
+  async addUpdateandDeleteAccessRightsforProject ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/access\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectAccessInfo)
+  },
+
+
+  async checkAccess ( {
+        
+  }: {
+  
+  
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/MyProject/check.access?account=1000098&ref=refs%2Fheads%2Fsecret%2Fbla\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TAccessCheckInfo)
+  },
+
+      }
+    }
+    
+
+    export function branchEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async listBranches ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TBranchInfo[])
+  },
+
+
+  async getBranch ( {
+     args: {projectName, branchId},   
+  }: {
+  
+  args: {projectName: string, branchId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TBranchInfo)
+  },
+
+
+  async createBranch ( {
+     args: {projectName, branchId},   
+  }: {
+  
+  args: {projectName: string, branchId: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TBranchInfo)
+  },
+
+
+  async deleteBranch ( {
+     args: {projectName, branchId},   
+  }: {
+  
+  args: {projectName: string, branchId: string},
+  
+  } ) {
+    return axios({
+      method: 'DELETE',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async deleteBranches ( {
+    data, args: {projectName},   
+  }: {
+  data: TDeleteBranchesInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/branches:delete\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async getContent ( {
+     args: {projectName, branchId, fileId},   
+  }: {
+  
+  args: {projectName: string, branchId: string, fileId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/files/\${fileId}/content\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async getMergeableInformation ( {
+     args: {projectName, branchId},   
+  }: {
+  
+  args: {projectName: string, branchId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/mergeable\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TMergeableInfo)
+  },
+
+
+  async getReflog ( {
+     args: {projectName, branchId},   
+  }: {
+  
+  args: {projectName: string, branchId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/reflog\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+      }
+    }
+    
+
+    export function childProjectEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async listChildProjects ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/children/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
+  },
+
+
+  async getChildProject ( {
+     args: {projectName, projectName1},   
+  }: {
+  
+  args: {projectName: string, projectName1: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/children/\${projectName1}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
+  },
+
+      }
+    }
+    
+
+    export function tagEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async createTag ( {
+     args: {projectName, tagId},   
+  }: {
+  
+  args: {projectName: string, tagId: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TTagInfo)
+  },
+
+
+  async listTags ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/tags/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TTagInfo[])
+  },
+
+
+  async getTag ( {
+     args: {projectName, tagId},   
+  }: {
+  
+  args: {projectName: string, tagId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TTagInfo)
+  },
+
+
+  async deleteTag ( {
+     args: {projectName, tagId},   
+  }: {
+  
+  args: {projectName: string, tagId: string},
+  
+  } ) {
+    return axios({
+      method: 'DELETE',
+      url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async deleteTags ( {
+    data, args: {projectName},   
+  }: {
+  data: TDeleteTagsInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/tags:delete\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+      }
+    }
+    
+
+    export function commitEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async getCommit ( {
+     args: {projectName, commitId},   
+  }: {
+  
+  args: {projectName: string, commitId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TCommitInfo)
+  },
+
+
+  async getIncludedIn ( {
+     args: {projectName, commitId},   
+  }: {
+  
+  args: {projectName: string, commitId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/in\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TIncludedInInfo)
+  },
+
+
+  async getContent ( {
+     args: {projectName, commitId, fileId},   
+  }: {
+  
+  args: {projectName: string, commitId: string, fileId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/files/\${fileId}/content\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async cherryPickCommit ( {
+    data, args: {projectName, commitId},   
+  }: {
+  data: TCherryPickInput,
+  args: {projectName: string, commitId: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/cherrypick\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as TChangeInfo)
+  },
+
+
+  async listFiles ( {
+     args: {projectName, commitId},   
+  }: {
+  
+  args: {projectName: string, commitId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/files/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TFileInfo)
+  },
+
+      }
+    }
+    
+
+    export function dashboardEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async listDashboards ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/dashboards/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TDashboardInfo[])
+  },
+
+
+  async getDashboard ( {
+     args: {projectName, dashboardId},   
+  }: {
+  
+  args: {projectName: string, dashboardId: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
+  },
+
+
+  async createDashboard ( {
+    data, args: {projectName, dashboardId},   
+  }: {
+  data: TDashboardInput,
+  args: {projectName: string, dashboardId: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
+  },
+
+
+  async updateDashboard ( {
+    data, args: {projectName, dashboardId},   
+  }: {
+  data: TDashboardInput,
+  args: {projectName: string, dashboardId: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
+  },
+
+
+  async deleteDashboard ( {
+    data, args: {projectName, dashboardId},   
+  }: {
+  data: TDashboardInput,
+  args: {projectName: string, dashboardId: string},
+  
+  } ) {
+    return axios({
+      method: 'DELETE',
+      url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+      }
+    }
+    
+
+    export function labelEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {
+      username: string
+      password: string
+    } }) {
+      return {
+        
+  async listLabels ( {
+     args: {projectName},   
+  }: {
+  
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo[])
+  },
+
+
+  async getLabel ( {
+     args: {projectName, labelName},   
+  }: {
+  
+  args: {projectName: string, labelName: string},
+  
+  } ) {
+    return axios({
+      method: 'GET',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
+  },
+
+
+  async createLabel ( {
+     args: {projectName, labelName},   
+  }: {
+  
+  args: {projectName: string, labelName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
+  },
+
+
+  async setLabel ( {
+     args: {projectName, labelName},   
+  }: {
+  
+  args: {projectName: string, labelName: string},
+  
+  } ) {
+    return axios({
+      method: 'PUT',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
+      auth,
+      params: {
+        
+      },
+      
+    }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
+  },
+
+
+  async deleteLabel ( {
+    data, args: {projectName, labelName},   
+  }: {
+  data: TDeleteLabelInput,
+  args: {projectName: string, labelName: string},
+  
+  } ) {
+    return axios({
+      method: 'DELETE',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+
+  async batchUpdateLabels ( {
+    data, args: {projectName},   
+  }: {
+  data: TBatchLabelInput,
+  args: {projectName: string},
+  
+  } ) {
+    return axios({
+      method: 'POST',
+      url: \`\${baseUrl}/projects/\${projectName}/labels/\`,
+      auth,
+      params: {
+        
+      },
+      data,
+    }).then(({data}) => parseGerritResponse(data) as any)
+  },
+
+      }
+    }
+    
+  "
+`;
+
+exports[`generator generate 2`] = `
+"
+    export type TAccessCheckInfo = {
+      status: any,
+message?: any,
+    };
+  
+
+    export type TAutoCloseableChangesCheckInput = {
+      fix?: any,
+branch: any,
+skip_commits?: any,
+max_commits?: any,
+    };
+  
+
+    export type TAutoCloseableChangesCheckResult = {
+      auto_closeable_changes: any,
+    };
+  
+
+    export type TBanInput = {
+      commits: any,
+reason?: any,
+    };
+  
+
+    export type TBanResultInfo = {
+      newly_banned?: any,
+already_banned?: any,
+ignored?: any,
+    };
+  
+
+    export type TBranchInfo = {
+      ref: any,
+revision: any,
+can_delete: any,
+web_links?: any,
+    };
+  
+
+    export type TBranchInput = {
+      ref?: any,
+revision?: any,
+    };
+  
+
+    export type TCheckProjectInput = {
+      auto_closeable_changes_check?: any,
+    };
+  
+
+    export type TCheckProjectResultInfo = {
+      auto_closeable_changes_check_result?: any,
+    };
+  
+
+    export type TCommentLinkInfo = {
+      match: any,
+link: any,
+enabled?: any,
+    };
+  
+
+    export type TConfigInfo = {
+      description?: any,
+use_contributor_agreements?: any,
+use_content_merge?: any,
+use_signed_off_by?: any,
+create_new_change_for_all_not_in_target?: any,
+require_change_id?: any,
+enable_signed_push: any,
+require_signed_push: any,
+reject_implicit_merges?: any,
+private_by_default: any,
+work_in_progress_by_default: any,
+max_object_size_limit: any,
+default_submit_type: any,
+submit_type: any,
+match_author_to_committer_date?: any,
+state?: any,
+commentlinks: any,
+plugin_config?: any,
+actions?: any,
+reject_empty_commit?: any,
+    };
+  
+
+    export type TConfigInput = {
+      description?: any,
+use_contributor_agreements?: any,
+use_content_merge?: any,
+use_signed_off_by?: any,
+create_new_change_for_all_not_in_target?: any,
+require_change_id?: any,
+reject_implicit_merges?: any,
+max_object_size_limit?: any,
+submit_type?: any,
+state?: any,
+plugin_config_values?: any,
+reject_empty_commit?: any,
+commentlinks?: any,
+    };
+  
+
+    export type TConfigParameterInfo = {
+      display_name?: any,
+description?: any,
+warning?: any,
+type: any,
+value?: any,
+values?: any,
+editable: any,
+permitted_values?: any,
+inheritable: any,
+configured_value?: any,
+inherited_value?: any,
+    };
+  
+
+    export type TDashboardInfo = {
+      id: any,
+project: any,
+defining_project: any,
+ref: any,
+path: any,
+description?: any,
+foreach?: any,
+url: any,
+is_default: any,
+title?: any,
+sections: any,
+    };
+  
+
+    export type TDashboardInput = {
+      id?: any,
+commit_message?: any,
+    };
+  
+
+    export type TDashboardSectionInfo = {
+      name: any,
+query: any,
+    };
+  
+
+    export type TDeleteLabelInput = {
+      commit_message?: any,
+    };
+  
+
+    export type TDeleteBranchesInput = {
+      branches: any,
+    };
+  
+
+    export type TDeleteTagsInput = {
+      tags: any,
+    };
+  
+
+    export type TGCInput = {
+      show_progress: any,
+aggressive: any,
+async: any,
+    };
+  
+
+    export type THeadInput = {
+      ref: any,
+    };
+  
+
+    export type TIndexProjectInput = {
+      index_children: any,
+async: any,
+    };
+  
+
+    export type TInheritedBooleanInfo = {
+      value: any,
+configured_value: any,
+inherited_value?: any,
+    };
+  
+
+    export type TLabelDefinitionInfo = {
+      name: any,
+project_name: any,
+function: any,
+values: any,
+default_value: any,
+branches?: any,
+can_override: any,
+copy_any_score: any,
+copy_min_score: any,
+copy_max_score: any,
+copy_all_scores_if_no_change: any,
+copy_all_scores_if_no_code_change: any,
+copy_all_scores_on_trivial_rebase: any,
+copy_all_scores_on_merge_first_parent_update: any,
+copy_values?: any,
+allow_post_submit: any,
+ignore_self_approval: any,
+    };
+  
+
+    export type TLabelDefinitionInput = {
+      commit_message?: any,
+name?: any,
+function?: any,
+values?: any,
+default_value?: any,
+branches?: any,
+can_override?: any,
+copy_any_score?: any,
+copy_min_score?: any,
+copy_max_score?: any,
+copy_all_scores_if_no_change?: any,
+copy_all_scores_if_no_code_change?: any,
+copy_all_scores_on_trivial_rebase?: any,
+copy_all_scores_on_merge_first_parent_update?: any,
+copy_values?: any,
+allow_post_submit?: any,
+ignore_self_approval?: any,
+    };
+  
+
+    export type TLabelTypeInfo = {
+      values: any,
+default_value: any,
+    };
+  
+
+    export type TMaxObjectSizeLimitInfo = {
+      value?: any,
+configured_value?: any,
+summary?: any,
+    };
+  
+
+    export type TBatchLabelInput = {
+      commit_message?: any,
+delete?: any,
+create?: any,
+update?: any,
+    };
+  
+
+    export type TProjectAccessInput = {
+      remove?: any,
+add?: any,
+message?: any,
+parent?: any,
+    };
+  
+
+    export type TProjectDescriptionInput = {
+      description?: any,
+commit_message?: any,
+    };
+  
+
+    export type TProjectInfo = {
+      id: any,
+name: any,
+parent?: any,
+description?: any,
+state?: any,
+branches?: any,
+labels?: any,
+web_links?: any,
+    };
+  
+
+    export type TProjectInput = {
+      name?: any,
+parent?: any,
+description?: any,
+permissions_only: any,
+create_empty_commit: any,
+submit_type?: any,
+branches?: any,
+owners?: any,
+use_contributor_agreements: any,
+use_signed_off_by: any,
+create_new_change_for_all_not_in_target: any,
+use_content_merge: any,
+require_change_id: any,
+enable_signed_push: any,
+require_signed_push: any,
+max_object_size_limit?: any,
+plugin_config_values?: any,
+reject_empty_commit?: any,
+    };
+  
+
+    export type TProjectParentInput = {
+      parent: any,
+commit_message?: any,
+    };
+  
+
+    export type TReflogEntryInfo = {
+      old_id: any,
+new_id: any,
+who: any,
+comment: any,
+    };
+  
+
+    export type TRepositoryStatisticsInfo = {
+      number_of_loose_objects: any,
+number_of_loose_refs: any,
+number_of_pack_files: any,
+number_of_packed_objects: any,
+number_of_packed_refs: any,
+size_of_loose_objects: any,
+size_of_packed_objects: any,
+    };
+  
+
+    export type TSubmitTypeInfo = {
+      value: any,
+configured_value: any,
+inherited_value: any,
+    };
+  
+
+    export type TTagInfo = {
+      ref: any,
+revision: any,
+object: any,
+message: any,
+tagger: any,
+created?: any,
+can_delete: any,
+web_links?: any,
+    };
+  
+
+    export type TTagInput = {
+      ref: any,
+revision?: any,
+message?: any,
+    };
+  "
+`;

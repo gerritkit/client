@@ -11,6 +11,10 @@ export function generateSectionCode({
   titleSection: string
   methods: string[]
 }) {
+  if (methods.length === 0) {
+    return ''
+  }
+
   return `
     export function ${titleSection} ({ baseUrl, auth }: { baseUrl: string, auth: {
       username: string
@@ -81,7 +85,7 @@ export function normaliseName(name: string) {
   const names = name.split(' ')
   const firstName = names[0]
   names[0] = firstName[0].toLowerCase() + firstName.slice(1)
-  return names.join('').replace(/[.,/\-`]/g, '')
+  return names.join('').replace(/[,./`-]/g, '')
 }
 
 export function parseArg(arg: string) {
@@ -93,7 +97,7 @@ export function parseArg(arg: string) {
 }
 
 export function parseApiString(str: string) {
-  const method = str.trim().replace(/['"`]/g, '').match(/^\S+/g)?.[0]
+  const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0]
 
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
   const argsCount = args.reduce((acc, el) => {
@@ -119,10 +123,11 @@ export function parseApiString(str: string) {
       const max = maxCount[parsed]
       const count = pathCount[parsed]
       pathCount[parsed] -= 1
-      return `\${${parsed}${count === max ? '' : max - count}\}`
+      return `\${${parsed}${count === max ? '' : max - count}}`
     })
     .replace(/.*\s/, '')
-    .replace(/['"`]/g, '')
+    .replace(/["'`]/g, '')
+    .replace(/\?.+/, '')
 
   return {
     method,
@@ -151,9 +156,13 @@ export function getReturnType(method: CheerioElement) {
   const sentences =
     $('.paragraph')
       .text()
-      .match(/([^.!?]+[.!?]+)|([^.!?]+$)/g) || []
+      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
   const types = sentences.reduce((acc, el) => {
-    if (el.includes('returned')) {
+    if (
+      el.includes('returned') ||
+      el.includes('returns') ||
+      el.includes('result')
+    ) {
       ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
         acc.add(`${type.trim()}[]`),
       )
@@ -163,12 +172,14 @@ export function getReturnType(method: CheerioElement) {
       ;(el.match(/\S+?\s(?=entity)/g) || []).forEach((type) =>
         acc.add(type.trim()),
       )
+      ;(el.match(/\S+?\s(?=entry)/g) || []).forEach((type) =>
+        acc.add(type.trim()),
+      )
     }
     return acc
   }, new Set() as Set<string>)
 
   if (types.size > 1) {
-    console.log('UNRESOLVER TYPE')
     return 'any'
   }
 
@@ -185,7 +196,7 @@ export function getBodyType(method: CheerioElement) {
   const sentences =
     $('.paragraph')
       .text()
-      .match(/([^.!?]+[.!?]+)|([^.!?]+$)/g) || []
+      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
   const types = sentences.reduce((acc, el) => {
     if (el.includes('body')) {
       ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
@@ -207,6 +218,9 @@ export function getBodyType(method: CheerioElement) {
 
   return `T${[...types][0]}`
 }
+
+// @ts-ignore
+const unsupported = []
 
 export function getMethodInfo(method: CheerioElement) {
   const $ = cheerio.load(method)
@@ -275,9 +289,9 @@ export function getTypesInfo(elem: CheerioElement) {
 
   return {
     typeName: originalName,
-    //@ts-ignore
+    // @ts-ignore
     fields: data.reduce((acc, [field, optional]) => {
-      //@ts-ignore
+      // @ts-ignore
       if (field && !acc.find((type) => type.name === field)) {
         acc.push({
           name: field,
