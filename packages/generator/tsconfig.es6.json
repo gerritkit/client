@@ -4,9 +4,6 @@
     "target": "es6",
     "outDir": "target/es6"
   },
-  "references": [
-    { "path": "../generator/tsconfig.es6.json" }
-  ],
   "include": [
     "src/main/**/*"
   ],

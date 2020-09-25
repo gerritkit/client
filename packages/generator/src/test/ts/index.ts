@@ -7,18 +7,24 @@ import {
   generate,
   parseOptions,
 } from '../../main/ts'
+import stubDoc from './stub/api.json'
 
-const api =
-  'https://gerrit-review.googlesource.com/Documentation/rest-api-projects.html'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 
 describe('generator', () => {
+  const testDocsUrl = 'gerrit-host/Documentation/rest-api-projects.html'
+
+  const mock = new MockAdapter(axios)
+  mock.onGet(testDocsUrl).reply(200, stubDoc)
+
   it('getEndpoints ', async () => {
-    const sections = await getSections(api)
+    const sections = await getSections(testDocsUrl)
     expect(sections.length).toBe(9)
   })
 
   it('getSectionInfo', async () => {
-    const sections = await getSections(api)
+    const sections = await getSections(testDocsUrl)
     const section = sections[2]
     const res = getSectionInfo(section)
     expect(res).toMatchObject({
@@ -96,6 +102,7 @@ describe('generator', () => {
 
   it('generateFunction', async () => {
     const res = generateFunction({
+      originalName: 'test',
       methodName: 'listChildProjects',
       method: 'GET',
       args: ['projectName'],
@@ -106,13 +113,7 @@ describe('generator', () => {
     })
     expect(res).toBe(
       `
-  async listChildProjects ( {
-     args: {projectName},   
-  }: {
-  
-  args: {projectName: string},
-  
-  } ) {
+  async listChildProjects ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/children/\`,
@@ -129,6 +130,7 @@ describe('generator', () => {
 
   it('generateFunction with opts', async () => {
     const res = generateFunction({
+      originalName: 'test',
       methodName: 'listProjects',
       method: 'GET',
       args: [],
@@ -149,13 +151,7 @@ describe('generator', () => {
       isUnsupported: false,
     })
     expect(res).toBe(`
-  async listProjects ( {
-      params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state},  
-  }: {
-  
-  
-  params: {branch: string, description: string, limit: string, prefix: string, regex: string, skip: string, substring: string, tree: string, type: string, state: string},
-  } ) {
+  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch: string, description: string, limit: string, prefix: string, regex: string, skip: string, substring: string, tree: string, type: string, state: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,
@@ -207,7 +203,7 @@ s: state
   })
 
   it('generate', async () => {
-    const { code, types } = await generate(api)
+    const { code, types } = await generate(testDocsUrl)
     expect(code).toMatchSnapshot()
     expect(types).toMatchSnapshot()
   })

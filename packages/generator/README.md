@@ -1,9 +1,8 @@
-# @gerritkit/rest
-Gerrit client with [octokit](https://github.com/octokit/rest.js) -like API
+# @gerritkit/generator
+Code generator for gerrit REST API
 
 ## Install
 ```shell script
-yarn add @gerritkit/rest
 ```
 
 ## Usage

@@ -4,16 +4,19 @@ import {
   TCacheOperationInput,
   TCapabilityInfo,
   TConsistencyCheckInfo,
-  TConsistencyCheckInput,
   TDiffPreferencesInput,
   TEmailConfirmationInput,
   TPreferencesInput,
   TServerInfo,
   TSummaryInfo,
   TTaskInfo,
-} from '../types'
+  TConsistencyCheckInput,
+} from '../types/index'
+
+// NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
+const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: { data: string }) =>
-  JSON.parse(data.data.slice(4))
+  JSON.parse(data.data.slice(xssiPrefix.length))
 
 export function configEndpoints({
   baseUrl,
@@ -26,7 +29,7 @@ export function configEndpoints({
   }
 }) {
   return {
-    async getVersion({}: {}) {
+    async getVersion() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/version`,
@@ -35,7 +38,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getServerInfo({}: {}) {
+    async getServerInfo() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/info`,
@@ -54,7 +57,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TConsistencyCheckInfo)
     },
 
-    async reloadConfig({}: {}) {
+    async reloadConfig() {
       return axios({
         method: 'POST',
         url: `${baseUrl}/config/server/reload`,
@@ -73,7 +76,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async listCaches({}: {}) {
+    async listCaches() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/caches/`,
@@ -110,7 +113,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getSummary({}: {}) {
+    async getSummary() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/summary`,
@@ -119,7 +122,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TSummaryInfo)
     },
 
-    async listCapabilities({}: {}) {
+    async listCapabilities() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/capabilities`,
@@ -128,7 +131,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TCapabilityInfo[])
     },
 
-    async listTasks({}: {}) {
+    async listTasks() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/tasks/`,
@@ -155,7 +158,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getTopMenus({}: {}) {
+    async getTopMenus() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/top-menus`,
@@ -164,7 +167,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getDefaultUserPreferences({}: {}) {
+    async getDefaultUserPreferences() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/preferences`,
@@ -183,7 +186,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getDefaultDiffPreferences({}: {}) {
+    async getDefaultDiffPreferences() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/preferences.diff`,
@@ -202,7 +205,7 @@ export function configEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as any)
     },
 
-    async getDefaultEditPreferences({}: {}) {
+    async getDefaultEditPreferences() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/config/server/preferences.edit`,

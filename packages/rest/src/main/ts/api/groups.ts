@@ -7,10 +7,11 @@ import {
   TGroupOptionsInput,
   TGroupsInput,
   TMembersInput,
-} from '../types'
-
+} from '../types/index'
+// NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
+const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: { data: string }) =>
-  JSON.parse(data.data.slice(4))
+  JSON.parse(data.data.slice(xssiPrefix.length))
 
 export function groupEndpoints({
   baseUrl,
@@ -23,7 +24,7 @@ export function groupEndpoints({
   }
 }) {
   return {
-    async listGroups({}: {}) {
+    async listGroups() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/groups/`,
@@ -32,7 +33,7 @@ export function groupEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TGroupInfo[])
     },
 
-    async queryGroups({}: {}) {
+    async queryGroups() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/groups/`,

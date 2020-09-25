@@ -52,3 +52,4 @@ export const GerritKit = Core.plugin(
 )
 
 export type GerritKit = InstanceType<typeof Core>
+export { VERSION } from './version'

@@ -7,9 +7,6 @@
     "outDir": "target/es5",
     "tsBuildInfoFile": "./buildcache/.tsbuildinfo"
   },
-  "references": [
-    { "path": "../generator" }
-  ],
   "include": [
     "src/main/**/*"
   ],

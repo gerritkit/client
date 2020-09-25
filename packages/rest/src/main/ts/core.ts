@@ -1,16 +1,11 @@
-import {
-  AnyFunction,
-  Constructor,
-  GerritKitPlugin,
-  ReturnTypeOf,
-  UnionToIntersection,
-} from './types'
+import { GerritKitPlugin, ReturnTypeOf } from './types'
+import { IConstructor, IFunction, UnionToIntersection } from '@qiwi/substrate'
 
 export class Core {
   static plugins: GerritKitPlugin[] = []
   static plugin<
-    S extends Constructor<any> & { plugins: any[] },
-    T extends Array<AnyFunction>
+    S extends IConstructor<any> & { plugins: any[] },
+    T extends Array<IFunction>
   >(this: S, ...newPlugins: T) {
     const currentPlugins = this.plugins
     const NewGerritKit = class extends this {
@@ -20,7 +15,7 @@ export class Core {
     }
 
     return NewGerritKit as typeof NewGerritKit &
-      Constructor<UnionToIntersection<ReturnTypeOf<T>>>
+      IConstructor<UnionToIntersection<ReturnTypeOf<T>>>
   }
 
   constructor(

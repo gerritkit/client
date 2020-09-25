@@ -9,6 +9,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'camelcase': 'off',
-    'no-template-curly-in-string': 'off'
+    'no-template-curly-in-string': 'off',
+    'unicorn/consistent-function-scoping': 'off',
+    'no-useless-escape': "off"
   }
 };

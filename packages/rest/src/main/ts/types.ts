@@ -1,22 +1,14 @@
-export type AnyFunction = (...args: any) => any
+import { IFunction, UnionToIntersection } from '@qiwi/substrate'
 
 export type GerritKitPlugin = (
   options: IGerritConstructorOpts,
 ) => { [key: string]: any } | void
 
-export type Constructor<T> = new (...args: any[]) => T
-
-export type UnionToIntersection<Union> = (
-  Union extends any ? (argument: Union) => void : never
-) extends (argument: infer Intersection) => void
-  ? Intersection
-  : never
-
 export type ReturnTypeOf<
-  T extends AnyFunction | AnyFunction[]
-> = T extends AnyFunction
+  T extends IFunction | IFunction[]
+> = T extends IFunction
   ? ReturnType<T>
-  : T extends AnyFunction[]
+  : T extends IFunction[]
   ? UnionToIntersection<ReturnType<T[number]>>
   : never
 

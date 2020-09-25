@@ -1,7 +1,6 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
 
-const unsupportedMethods = ['checkprojectconsistency']
 const unsupportedSections = ['iDs', 'jSONEntities']
 
 export function generateSectionCode({
@@ -30,21 +29,12 @@ export function generateSectionCode({
 export function generateFunction({
   methodName,
   method,
-  args,
-  path,
-  opts,
+  args = [],
+  path = '',
+  opts = [],
   returnType,
   bodyType,
-}: {
-  methodName: string
-  method: string
-  args: string[]
-  path: string
-  opts: Array<[string, string]>
-  isUnsupported: boolean
-  returnType: string
-  bodyType?: string
-}) {
+}: TMethodInfo) {
   const data = bodyType ? 'data,' : ''
   const dataType = bodyType ? `data: ${bodyType},` : ''
 
@@ -54,26 +44,31 @@ export function generateFunction({
       ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
       : ''
 
-  const params =
+  const paramsInput =
     opts.length > 0 ? `params: {${opts.map(([name]) => name).join(', ')}},` : ''
-  const paramsType =
+  const paramsInputType =
     opts.length > 0
       ? `params: {${opts.map(([name]) => `${name}: string`).join(', ')}},`
       : ''
+
+  const empty = !data && !pathArgs && !paramsInput
+  const argsStr = empty ? '' : `{${data} ${pathArgs} ${paramsInput} } :`
+  const argsStrType = empty
+    ? ''
+    : `{${dataType} ${pathArgsType} ${paramsInputType}}`
+
+  const params = `${opts
+    .map(([name, filed]) => `${filed}: ${name}`)
+    .join(',\n')}`
+
   return `
-  async ${methodName} ( {
-    ${data} ${pathArgs} ${params}  
-  }: {
-  ${dataType}
-  ${pathArgsType}
-  ${paramsType}
-  } ) {
+  async ${methodName} ( ${argsStr} ${argsStrType} ) {
     return axios({
       method: '${method}',
       url: \`\${baseUrl}${path}\`,
       auth,
       params: {
-        ${opts.map(([name, filed]) => `${filed}: ${name}`).join(',\n')}
+        ${params}
       },
       ${bodyType ? 'data,' : ''}
     }).then(({data}) => parseGerritResponse(data) as ${returnType})
@@ -81,35 +76,45 @@ export function generateFunction({
 `
 }
 
+function unCapitalize(str: string) {
+  return str.charAt(0).toLowerCase() + str.slice(1)
+}
+
+function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export function normaliseName(name: string) {
-  const names = name.split(' ')
-  const firstName = names[0]
-  names[0] = firstName[0].toLowerCase() + firstName.slice(1)
-  return names.join('').replace(/[,./`-]/g, '')
+  return unCapitalize(name.replace(/[\s,./`-]/g, ''))
 }
 
 export function parseArg(arg: string) {
-  const trimed = arg.slice(1, arg.length - 1)
-  const parsed = trimed.split('-')
+  const trimmed = arg.slice(1, arg.length - 1)
+  const parsed = trimmed.split('-')
   const first = parsed[0]
-  const rest = parsed.slice(1).map((str) => str[0].toUpperCase() + str.slice(1))
+  const rest = parsed.slice(1).map(capitalize)
   return [first, ...rest].join('')
 }
 
 export function parseApiString(str: string) {
+  function calculateUniq(arr: string[]) {
+    return arr.reduce((acc, el) => {
+      if (acc[el]) {
+        acc[el] += 1
+      } else {
+        acc[el] = 1
+      }
+      return acc
+    }, {} as Record<string, any>)
+  }
   const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0]
 
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
-  const argsCount = args.reduce((acc, el) => {
-    if (acc[el]) {
-      acc[el] += 1
-    } else {
-      acc[el] = 1
-    }
-    return acc
-  }, {} as Record<any, any>)
-  const pathCount = { ...argsCount }
-  const maxCount = { ...argsCount }
+
+  const maxCount = calculateUniq(args)
+  const pathCount = { ...maxCount }
+  const argsCount = { ...maxCount }
+
   const uniqArgs = args.map((arg) => {
     const max = maxCount[arg]
     const count = argsCount[arg]
@@ -147,10 +152,16 @@ export function parseOptions(optsSection: string[]) {
       parsed[1] = parsed[1].slice(0, -1)
       return parsed
     })
-    .filter((el) => el)
+    .filter((el) => el) as string[][]
 }
 
-export function getReturnType(method: CheerioElement) {
+export function getReturnType(method: cheerio.Element) {
+  function generateType(sentence: string, regexp: RegExp, array?: boolean) {
+    return (sentence.match(regexp) || []).map(
+      (type) => `${type.trim()}${array ? '[]' : ''}`,
+    )
+  }
+
   const $ = cheerio.load(method)
 
   const sentences =
@@ -163,18 +174,14 @@ export function getReturnType(method: CheerioElement) {
       el.includes('returns') ||
       el.includes('result')
     ) {
-      ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
-        acc.add(`${type.trim()}[]`),
+      generateType(el, /\S+?\s(?=entries)/g, true).forEach((type) =>
+        acc.add(type),
       )
-      ;(el.match(/\S+?\s(?=entities)/g) || []).forEach((type) =>
-        acc.add(`${type.trim()}[]`),
+      generateType(el, /\S+?\s(?=entities)/g, true).forEach((type) =>
+        acc.add(type),
       )
-      ;(el.match(/\S+?\s(?=entity)/g) || []).forEach((type) =>
-        acc.add(type.trim()),
-      )
-      ;(el.match(/\S+?\s(?=entry)/g) || []).forEach((type) =>
-        acc.add(type.trim()),
-      )
+      generateType(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
+      generateType(el, /\S+?\s(?=entry)/g).forEach((type) => acc.add(type))
     }
     return acc
   }, new Set() as Set<string>)
@@ -190,7 +197,7 @@ export function getReturnType(method: CheerioElement) {
   return `T${[...types][0]}`
 }
 
-export function getBodyType(method: CheerioElement) {
+export function getBodyType(method: cheerio.Element) {
   const $ = cheerio.load(method)
 
   const sentences =
@@ -219,10 +226,19 @@ export function getBodyType(method: CheerioElement) {
   return `T${[...types][0]}`
 }
 
-// @ts-ignore
-const unsupported = []
+type TMethodInfo = {
+  originalName: string
+  isUnsupported: boolean
+  methodName?: string
+  bodyType?: string
+  returnType?: string
+  opts?: string[][]
+  method?: string
+  args?: string[]
+  path?: string
+}
 
-export function getMethodInfo(method: CheerioElement) {
+export function getMethodInfo(method: cheerio.Element): TMethodInfo {
   const $ = cheerio.load(method)
   const path = ($('.openblock').first().text().match(/'.*?'/g) || [])[0]
 
@@ -233,7 +249,7 @@ export function getMethodInfo(method: CheerioElement) {
 
   const opts: string[] = []
   $('.hdlist1').each((_index, element) => opts.push($(element).text()))
-  const isUnsupported = !path || unsupportedMethods.includes(methodName)
+  const isUnsupported = !path
 
   if (isUnsupported) {
     return {
@@ -242,21 +258,25 @@ export function getMethodInfo(method: CheerioElement) {
     }
   }
 
+  const { method: parsedMethod, args, path: parsedPath } = parseApiString(path)
+
   return {
     originalName,
     methodName,
-    ...parseApiString(path),
-    opts: parseOptions(opts),
+    args,
     returnType,
     bodyType,
+    method: parsedMethod,
+    path: parsedPath,
+    opts: parseOptions(opts),
     isUnsupported,
   }
 }
 
-export function getSectionInfo(section: CheerioElement) {
+export function getSectionInfo(section: cheerio.Element) {
   const $ = cheerio.load(section)
   const titleSection = normaliseName($('h2').text())
-  const methods: any[] = []
+  const methods: TMethodInfo[] = []
   $('div.sect2').each((_i, elem) => methods.push(getMethodInfo(elem)))
 
   return {
@@ -265,26 +285,26 @@ export function getSectionInfo(section: CheerioElement) {
   }
 }
 
-export function parseTd(elem: CheerioElement) {
+export function parseTd(elem: cheerio.Element) {
   const result: string[] = []
   const $ = cheerio.load(elem)
   cheerio
     .load(elem)('td')
-    .each((_, elem) => {
-      result.push($(elem).text())
+    .each((_, tebleItem) => {
+      result.push($(tebleItem).text())
     })
   return result
 }
 
-export function getTypesInfo(elem: CheerioElement) {
+export function getTypesInfo(elem: cheerio.Element) {
   const $ = cheerio.load(elem)
   const originalName = $('h3').text()
-  const data: any = []
+  const data: string[][] = []
   $('tbody')
     .first()
     .children('tr')
-    .each((_, elem) => {
-      data.push(parseTd(elem))
+    .each((_, tableRow) => {
+      data.push(parseTd(tableRow))
     })
 
   return {
@@ -303,7 +323,7 @@ export function getTypesInfo(elem: CheerioElement) {
   }
 }
 
-export function getTypes(section: CheerioElement) {
+export function getTypes(section: cheerio.Element) {
   const $ = cheerio.load(section)
   const titleSection = normaliseName($('h2').text())
 
@@ -312,7 +332,7 @@ export function getTypes(section: CheerioElement) {
   }
 
   const result: any[] = []
-  $('div.sect2').each((_i, elem) => result.push(getTypesInfo(elem)))
+  $('div.sect2').each((_, method) => result.push(getTypesInfo(method)))
 
   return result
 }
@@ -321,9 +341,9 @@ export async function getSections(api: string) {
   const html = await axios.get(api)
   const $ = cheerio.load(html.data)
 
-  const resalt: CheerioElement[] = []
-  $('#content > div.sect1').each((_i, elem) => resalt.push(elem))
-  return resalt
+  const result: cheerio.Element[] = []
+  $('#content > div.sect1').each((_, section) => result.push(section))
+  return result
 }
 
 export function generateType({
@@ -348,13 +368,21 @@ export function generateType({
 function addGlobalVariables(code: string) {
   return `
   import axios from 'axios'
-  export const parseGerritResponse = (data: { data: string }) => JSON.parse(data.data.slice(4))
+  // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
+  const xssiPrefix = ')]}\\''
+  const parseGerritResponse = (data: string) => JSON.parse(data.slice(xssiPrefix.length))
   ${code}
   `
 }
 
-export async function generate(api: string) {
-  const sections = await getSections(api)
+export async function getDocsApiVersion(url: string) {
+  const html = await axios.get(url)
+  const $ = cheerio.load(html.data)
+  return $('#revnumber').first().text().split(' ')[1]
+}
+
+export async function generate(url: string) {
+  const sections = await getSections(url)
   const types = sections
     .map((el) => getTypes(el))
     .filter((el) => el)

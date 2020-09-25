@@ -27,9 +27,12 @@ import {
   TProjectParentInput,
   TRepositoryStatisticsInfo,
   TTagInfo,
-} from '../types'
-const parseGerritResponse = (data: { data: string }) =>
-  JSON.parse(data.data.slice(4))
+} from '../types/index'
+
+// NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
+const xssiPrefix = ")]}'"
+const parseGerritResponse = (data: string) =>
+  JSON.parse(data.slice(xssiPrefix.length))
 
 export function projectEndpoints({
   baseUrl,
@@ -42,7 +45,7 @@ export function projectEndpoints({
   }
 }) {
   return {
-    async listProjects({}: {}) {
+    async listProjects() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/projects/`,
@@ -51,7 +54,7 @@ export function projectEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TProjectInfo[])
     },
 
-    async queryProjects({}: {}) {
+    async queryProjects() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/projects/`,
@@ -291,7 +294,7 @@ export function projectEndpoints({
       }).then(({ data }) => parseGerritResponse(data) as TProjectAccessInfo)
     },
 
-    async checkAccess({}: {}) {
+    async checkAccess() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/projects/MyProject/check.access`,
@@ -335,8 +338,13 @@ export function branchEndpoints({
         method: 'GET',
         url: `${baseUrl}/projects/${projectName}/branches/${branchId}`,
         auth,
-        params: {},
-      }).then(({ data }) => parseGerritResponse(data) as TBranchInfo)
+        // params: {},
+      })
+        .then(({ data }) => {
+          console.log(data)
+          return parseGerritResponse(data) as TBranchInfo
+        })
+        .catch(console.log)
     },
 
     async createBranch({

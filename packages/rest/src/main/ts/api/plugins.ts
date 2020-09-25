@@ -1,8 +1,10 @@
 import axios from 'axios'
-import { TPluginInfo } from '../types'
+import { TPluginInfo } from '../types/index'
 
+// NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
+const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: { data: string }) =>
-  JSON.parse(data.data.slice(4))
+  JSON.parse(data.data.slice(xssiPrefix.length))
 
 export function pluginEndpoints({
   baseUrl,
@@ -15,7 +17,7 @@ export function pluginEndpoints({
   }
 }) {
   return {
-    async listPlugins({}: {}) {
+    async listPlugins() {
       return axios({
         method: 'GET',
         url: `${baseUrl}/plugins/`,
