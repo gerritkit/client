@@ -26,6 +26,36 @@ export function generateSectionCode({
     `
 }
 
+function getData(bodyType?: string) {
+  return bodyType ? 'data,' : ''
+}
+
+function getDataType(bodyType?: string) {
+  return bodyType ? `data: ${bodyType},` : ''
+}
+
+function getPathArgs(args: string[]) {
+  return args.length > 0 ? `args: {${args.join(', ')}},` : ''
+}
+
+function getPathArgsTypes(args: string[]) {
+  return args.length > 0
+    ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
+    : ''
+}
+
+function getParams(params: string[][]) {
+  return params.length > 0
+    ? `params: {${params.map(([name]) => name).join(', ')}},`
+    : ''
+}
+
+function getParamsType(params: string[][]) {
+  return params.length > 0
+    ? `params: {${params.map(([name]) => `${name}: string`).join(', ')}},`
+    : ''
+}
+
 export function generateFunction({
   methodName,
   method,
@@ -35,27 +65,19 @@ export function generateFunction({
   returnType,
   bodyType,
 }: TMethodInfo) {
-  const data = bodyType ? 'data,' : ''
-  const dataType = bodyType ? `data: ${bodyType},` : ''
+  const data = getData(bodyType)
+  const dataType = getDataType(bodyType)
+  const pathArgs = getPathArgs(args)
+  const pathArgsTypes = getPathArgsTypes(args)
 
-  const pathArgs = args.length > 0 ? `args: {${args.join(', ')}},` : ''
-  const pathArgsType =
-    args.length > 0
-      ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
-      : ''
-
-  const paramsInput =
-    opts.length > 0 ? `params: {${opts.map(([name]) => name).join(', ')}},` : ''
-  const paramsInputType =
-    opts.length > 0
-      ? `params: {${opts.map(([name]) => `${name}: string`).join(', ')}},`
-      : ''
+  const paramsInput = getParams(opts)
+  const paramsInputTypes = getParamsType(opts)
 
   const empty = !data && !pathArgs && !paramsInput
   const argsStr = empty ? '' : `{${data} ${pathArgs} ${paramsInput} } :`
   const argsStrType = empty
     ? ''
-    : `{${dataType} ${pathArgsType} ${paramsInputType}}`
+    : `{${dataType} ${pathArgsTypes} ${paramsInputTypes}}`
 
   const params = `${opts
     .map(([name, filed]) => `${filed}: ${name}`)
@@ -107,6 +129,7 @@ export function parseApiString(str: string) {
       return acc
     }, {} as Record<string, any>)
   }
+
   const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0]
 
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
@@ -155,13 +178,13 @@ export function parseOptions(optsSection: string[]) {
     .filter((el) => el) as string[][]
 }
 
-export function getReturnType(method: cheerio.Element) {
-  function generateType(sentence: string, regexp: RegExp, array?: boolean) {
-    return (sentence.match(regexp) || []).map(
-      (type) => `${type.trim()}${array ? '[]' : ''}`,
-    )
-  }
+function parseTypes(sentence: string, regexp: RegExp, array?: boolean) {
+  return (sentence.match(regexp) || []).map(
+    (type) => `${type.trim()}${array ? '[]' : ''}`,
+  )
+}
 
+export function getReturnType(method: cheerio.Element) {
   const $ = cheerio.load(method)
 
   const sentences =
@@ -174,14 +197,14 @@ export function getReturnType(method: cheerio.Element) {
       el.includes('returns') ||
       el.includes('result')
     ) {
-      generateType(el, /\S+?\s(?=entries)/g, true).forEach((type) =>
+      parseTypes(el, /\S+?\s(?=entries)/g, true).forEach((type) =>
         acc.add(type),
       )
-      generateType(el, /\S+?\s(?=entities)/g, true).forEach((type) =>
+      parseTypes(el, /\S+?\s(?=entities)/g, true).forEach((type) =>
         acc.add(type),
       )
-      generateType(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
-      generateType(el, /\S+?\s(?=entry)/g).forEach((type) => acc.add(type))
+      parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
+      parseTypes(el, /\S+?\s(?=entry)/g).forEach((type) => acc.add(type))
     }
     return acc
   }, new Set() as Set<string>)
@@ -206,15 +229,9 @@ export function getBodyType(method: cheerio.Element) {
       .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
   const types = sentences.reduce((acc, el) => {
     if (el.includes('body')) {
-      ;(el.match(/\S+?\s(?=entries)/g) || []).forEach((type) =>
-        acc.add(`${type.trim()}[]`),
-      )
-      ;(el.match(/\S+?\s(?=entities)/g) || []).forEach((type) =>
-        acc.add(`${type.trim()}[]`),
-      )
-      ;(el.match(/\S+?\s(?=entity)/g) || []).forEach((type) =>
-        acc.add(type.trim()),
-      )
+      parseTypes(el, /\S+?\s(?=entries)/g).forEach((type) => acc.add(type))
+      parseTypes(el, /\S+?\s(?=entities)/g).forEach((type) => acc.add(type))
+      parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
     }
     return acc
   }, new Set() as Set<string>)
