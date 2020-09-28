@@ -8,10 +8,12 @@ import {
 import { generateFunction } from '../../main/ts/generator/formatters'
 import { generate } from '@gerritkit/generator'
 
-import stubDoc from './stub/api.json'
-
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
+
+import stubDoc from './stub/api.json'
+
+
 
 describe('generator', () => {
   const testDocsUrl = 'gerrit-host/Documentation/rest-api-projects.html'
