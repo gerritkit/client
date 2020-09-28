@@ -1,1 +1,55 @@
-export {foo} from '@gerritkit/core'
+import { Core } from './core'
+import {
+  attentionSetEndpoints,
+  tagEndpoints,
+  labelEndpoints,
+  dashboardEndpoints,
+  childProjectEndpoints,
+  commitEndpoints,
+  branchEndpoints,
+  projectEndpoints,
+  pluginEndpoints,
+  subgroupEndpoints,
+  groupMemberEndpoints,
+  groupEndpoints,
+  documentationSearchEndpoints,
+  configEndpoints,
+  revisionReviewerEndpoints,
+  revisionEndpoints,
+  changeEditEndpoints,
+  changeEndpoints,
+  reviewerEndpoints,
+  defaultStarEndpoints,
+  starEndpoints,
+  accountEndpoints,
+  accessRightsEndpoints,
+} from './api'
+
+export const GerritKit = Core.plugin(
+  attentionSetEndpoints,
+  tagEndpoints,
+  labelEndpoints,
+  dashboardEndpoints,
+  childProjectEndpoints,
+  commitEndpoints,
+  branchEndpoints,
+  projectEndpoints,
+  pluginEndpoints,
+  subgroupEndpoints,
+  groupMemberEndpoints,
+  groupEndpoints,
+  documentationSearchEndpoints,
+  configEndpoints,
+  revisionReviewerEndpoints,
+  revisionEndpoints,
+  changeEditEndpoints,
+  changeEndpoints,
+  reviewerEndpoints,
+  defaultStarEndpoints,
+  starEndpoints,
+  accountEndpoints,
+  accessRightsEndpoints,
+)
+
+export type GerritKit = InstanceType<typeof Core>
+export { VERSION } from './version'

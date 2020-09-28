@@ -1,7 +1,8 @@
-import {foo} from '../../main/ts'
+import { GerritKit, VERSION } from '../../main/ts'
 
-describe('',() => {
-  it('', () => {
-    expect(foo).toBe('bar')
+describe('GerritKit', () => {
+  it('is properly exported ', async () => {
+    expect(GerritKit).toBeDefined()
+    expect(VERSION).toBeDefined()
   })
 })

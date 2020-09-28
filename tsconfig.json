@@ -4,6 +4,7 @@
     "baseUrl": "./packages",
     "paths": {
       "@gerritkit/core": ["./core/src/main/ts"],
+      "@gerritkit/generator": ["./generator/src/main/ts"],
       "@gerritkit/rest": ["./rest/src/main/ts"]
     }
   }
