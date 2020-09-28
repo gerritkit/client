@@ -1,20 +1,26 @@
+export { accessRightsEndpoints } from './access'
 export {
-  accessRightsEndpoints,
   accountEndpoints,
   starEndpoints,
   defaultStarEndpoints,
+} from './accounts'
+export {
   attentionSetEndpoints,
   reviewerEndpoints,
   changeEndpoints,
   changeEditEndpoints,
   revisionEndpoints,
   revisionReviewerEndpoints,
-  configEndpoints,
-  documentationSearchEndpoints,
+} from './changes'
+export { configEndpoints } from './config'
+export { documentationSearchEndpoints } from './documentation'
+export {
   groupEndpoints,
   groupMemberEndpoints,
   subgroupEndpoints,
-  pluginEndpoints,
+} from './groups'
+export { pluginEndpoints } from './plugins'
+export {
   projectEndpoints,
   branchEndpoints,
   commitEndpoints,
@@ -22,4 +28,4 @@ export {
   dashboardEndpoints,
   labelEndpoints,
   tagEndpoints,
-} from '@gerritkit/generator'
+} from './projects'

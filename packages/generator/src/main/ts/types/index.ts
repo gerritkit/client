@@ -3,6 +3,8 @@ export {
   TPermissionInfo,
   TPermissionRuleInfo,
   TProjectAccessInfo,
+} from './access'
+export {
   TAccountDetailInfo,
   TAccountExternalIdInfo,
   TAccountInfo,
@@ -32,6 +34,8 @@ export {
   TSshKeyInfo,
   TStarsInput,
   TUsernameInput,
+} from './accounts'
+export {
   TCommitInfo,
   TAbandonInput,
   TActionInfo,
@@ -112,6 +116,8 @@ export {
   TVotingRangeInfo,
   TWebLinkInfo,
   TWorkInProgressInput,
+} from './changes'
+export {
   TAccountsConfigInfo,
   TAuthInfo,
   TCacheInfo,
@@ -151,7 +157,9 @@ export {
   TTopMenuEntryInfo,
   TTopMenuItemInfo,
   TUserConfigInfo,
-  TDocResult,
+} from './config'
+export { TDocResult } from './documentation'
+export {
   TGroupAuditEventInfo,
   TGroupInfo,
   TGroupInput,
@@ -159,8 +167,9 @@ export {
   TGroupOptionsInput,
   TGroupsInput,
   TMembersInput,
-  TPluginInfo,
-  TPluginInput,
+} from './groups'
+export { TPluginInfo, TPluginInput } from './plugins'
+export {
   TAccessCheckInfo,
   TAutoCloseableChangesCheckInput,
   TAutoCloseableChangesCheckResult,
@@ -199,4 +208,4 @@ export {
   TSubmitTypeInfo,
   TTagInfo,
   TTagInput,
-} from '@gerritkit/generator'
+} from './projects'
