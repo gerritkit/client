@@ -1,12 +1,13 @@
 import {
-  getSections,
   getSectionInfo,
-  normaliseName,
+  getSections,
   parseApiString,
-  generateFunction,
-  generate,
   parseOptions,
-} from '../../main/ts'
+  normaliseName,
+} from '../../main/ts/generator/parsers'
+import { generateFunction } from '../../main/ts/generator/formatters'
+import { generate } from '@gerritkit/generator'
+
 import stubDoc from './stub/api.json'
 
 import axios from 'axios'

@@ -1,4 +1,4 @@
-import { GerritKit, VERSION  } from '../../main/ts'
+import { GerritKit, VERSION } from '../../main/ts'
 
 describe('GerritKit', () => {
   it('is properly exported ', async () => {
