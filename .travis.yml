@@ -1,27 +1,31 @@
+os: linux
 language: node_js
-node_js:
-  - '12'
+node_js: 14
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+jobs:
+  include:
+    - stage: test
+      install: yarn
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script:
+        - yarn build
+        - yarn test:report
+      after_script:
+        - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+      workspaces:
+        create:
+          name: shared
+          paths:
+            - node_modules
+            - packages
 
-after_script:
-  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-install:
-  - yarn
-
-script:
-  - yarn build
-  - yarn test:report
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - yarn release
-  on:
-    branch: master
+    - stage: release
+      if: branch = master AND type != pull_request
+      workspaces:
+        use: shared
+      install: skip
+      script: yarn release
