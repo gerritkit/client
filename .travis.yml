@@ -15,13 +15,11 @@ jobs:
             - packages
     - &test
       stage: test
-      node_js: 10
+      node_js: 12
       install: skip
-      script: yarn test
+      script: yarn jest
       workspaces:
         use: shared
-    - <<: *test
-      node_js: 12
     - <<: *test
       node_js: 14
       before_script:
