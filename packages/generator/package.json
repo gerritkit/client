@@ -38,7 +38,6 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@qiwi/libdefkit": "^2.0.1",
     "@types/cheerio": "^0.22.22",
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",

@@ -38,7 +38,7 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@qiwi/substrate": "^1.18.37",
+    "@qiwi/substrate": "^1.19.0",
     "axios": "^0.20.0",
     "tslib": "^2.0.1"
   },
