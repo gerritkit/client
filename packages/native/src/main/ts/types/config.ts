@@ -31,6 +31,11 @@ export type TCacheOperationInput = {
   caches?: any
 }
 
+export type TCapabilityInfo = {
+  id: any
+  name: any
+}
+
 export type TChangeConfigInfo = {
   allow_blame: any
   large_change: any

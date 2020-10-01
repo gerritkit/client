@@ -1,16 +1,12 @@
 export { accessRightsEndpoints } from './access'
+export { accountEndpoints } from './accounts'
 export {
-  accountEndpoints,
-  starEndpoints,
-  defaultStarEndpoints,
-} from './accounts'
-export {
-  attentionSetEndpoints,
-  reviewerEndpoints,
   changeEndpoints,
+  reviewerEndpoints,
   changeEditEndpoints,
   revisionEndpoints,
   revisionReviewerEndpoints,
+  attentionSetEndpoints,
 } from './changes'
 export { configEndpoints } from './config'
 export { documentationSearchEndpoints } from './documentation'

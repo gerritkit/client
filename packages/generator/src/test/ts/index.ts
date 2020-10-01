@@ -4,8 +4,8 @@ import {
   parseApiString,
   parseOptions,
   normaliseName,
-} from '../../main/ts/generator/parsers'
-import { generateFunction } from '../../main/ts/generator/formatters'
+} from '../../main/ts/parsers'
+import { generateFunction } from '../../main/ts/formatters'
 import { generate } from '@gerritkit/generator'
 
 import axios from 'axios'

@@ -338,13 +338,8 @@ export function branchEndpoints({
         method: 'GET',
         url: `${baseUrl}/projects/${projectName}/branches/${branchId}`,
         auth,
-        // params: {},
-      })
-        .then(({ data }) => {
-          console.log(data)
-          return parseGerritResponse(data) as TBranchInfo
-        })
-        .catch(console.log)
+        params: {},
+      }).then(({ data }) => parseGerritResponse(data) as TBranchInfo)
     },
 
     async createBranch({

@@ -8,10 +8,11 @@ import {
   TGroupsInput,
   TMembersInput,
 } from '../types/index'
+
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
-const parseGerritResponse = (data: { data: string }) =>
-  JSON.parse(data.data.slice(xssiPrefix.length))
+const parseGerritResponse = (data: string) =>
+  JSON.parse(data.slice(xssiPrefix.length))
 
 export function groupEndpoints({
   baseUrl,

@@ -1,0 +1,51 @@
+import { Core } from './core'
+import {
+  accountEndpoints,
+  tagEndpoints,
+  labelEndpoints,
+  dashboardEndpoints,
+  childProjectEndpoints,
+  commitEndpoints,
+  branchEndpoints,
+  projectEndpoints,
+  pluginEndpoints,
+  subgroupEndpoints,
+  groupMemberEndpoints,
+  groupEndpoints,
+  documentationSearchEndpoints,
+  configEndpoints,
+  attentionSetEndpoints,
+  revisionReviewerEndpoints,
+  revisionEndpoints,
+  changeEditEndpoints,
+  reviewerEndpoints,
+  changeEndpoints,
+  accessRightsEndpoints,
+} from './api'
+
+export const GerritKit = Core.plugin(
+  accountEndpoints,
+  tagEndpoints,
+  labelEndpoints,
+  dashboardEndpoints,
+  childProjectEndpoints,
+  commitEndpoints,
+  branchEndpoints,
+  projectEndpoints,
+  pluginEndpoints,
+  subgroupEndpoints,
+  groupMemberEndpoints,
+  groupEndpoints,
+  documentationSearchEndpoints,
+  configEndpoints,
+  attentionSetEndpoints,
+  revisionReviewerEndpoints,
+  revisionEndpoints,
+  changeEditEndpoints,
+  reviewerEndpoints,
+  changeEndpoints,
+  accessRightsEndpoints,
+)
+
+export type GerritKit = InstanceType<typeof Core>
+export { VERSION } from './version'
