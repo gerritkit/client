@@ -12,7 +12,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        projectEndpoints: {
+          
   async listProjects (   ) {
     return axios({
       method: 'GET',
@@ -258,7 +259,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as TAccessCheckInfo)
   },
-
+  
+        }
       }
     }
     
@@ -268,7 +270,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        branchEndpoints: {
+          
   async listBranches ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -371,7 +374,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -381,7 +385,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        childProjectEndpoints: {
+          
   async listChildProjects ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -406,7 +411,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
-
+  
+        }
       }
     }
     
@@ -416,7 +422,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        tagEndpoints: {
+          
   async createTag ( { args: {projectName, tagId},  } : { args: {projectName: string, tagId: string}, } ) {
     return axios({
       method: 'PUT',
@@ -480,7 +487,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -490,7 +498,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        commitEndpoints: {
+          
   async getCommit ( { args: {projectName, commitId},  } : { args: {projectName: string, commitId: string}, } ) {
     return axios({
       method: 'GET',
@@ -554,7 +563,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as TFileInfo)
   },
-
+  
+        }
       }
     }
     
@@ -564,7 +574,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        dashboardEndpoints: {
+          
   async listDashboards ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -628,7 +639,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -638,7 +650,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        labelEndpoints: {
+          
   async listLabels ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -715,7 +728,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     

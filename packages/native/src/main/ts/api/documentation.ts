@@ -17,13 +17,15 @@ export function documentationSearchEndpoints({
   }
 }) {
   return {
-    async searchDocumentation() {
-      return axios({
-        method: 'GET',
-        url: `${baseUrl}/Documentation/`,
-        auth,
-        params: {},
-      }).then(({ data }) => parseGerritResponse(data) as TDocResult[])
+    documentationSearchEndpoints: {
+      async searchDocumentation() {
+        return axios({
+          method: 'GET',
+          url: `${baseUrl}/Documentation/`,
+          auth,
+          params: {},
+        }).then(({ data }) => parseGerritResponse(data) as TDocResult[])
+      },
     },
   }
 }

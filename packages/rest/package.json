@@ -42,7 +42,9 @@
     "axios": "^0.20.0",
     "tslib": "^2.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "axios-mock-adapter": "^1.18.2"
+  },
   "peerDependencies": {},
   "optionalDependencies": {},
   "repository": {

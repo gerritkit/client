@@ -118,7 +118,9 @@ export function generateSectionCode({
       password: string
     } }) {
       return {
-        ${methods.join('\n')}
+        ${titleSection}: {
+          ${methods.join('\n')}  
+        }
       }
     }
     `
