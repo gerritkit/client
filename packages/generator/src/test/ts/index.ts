@@ -6,14 +6,12 @@ import {
   normaliseName,
 } from '../../main/ts/parsers'
 import { generateFunction } from '../../main/ts/formatters'
-import { generate } from '@gerritkit/generator'
+import { generate } from '../../main/ts/index'
 
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 import stubDoc from './stub/api.json'
-
-
 
 describe('generator', () => {
   const testDocsUrl = 'gerrit-host/Documentation/rest-api-projects.html'
@@ -26,7 +24,7 @@ describe('generator', () => {
     expect(sections.length).toBe(9)
   })
 
-  it('getSectionInfo', async () => {
+  it('getSectionInfo simple', async () => {
     const sections = await getSections(testDocsUrl)
     const section = sections[2]
     const res = getSectionInfo(section)
@@ -53,6 +51,13 @@ describe('generator', () => {
         },
       ],
     })
+  })
+
+  it('getSectionInfo with params', async () => {
+    const sections = await getSections(testDocsUrl)
+    const section = sections[0]
+    const res = getSectionInfo(section)
+    expect(res).toMatchSnapshot()
   })
 
   it('normaliseName', async () => {

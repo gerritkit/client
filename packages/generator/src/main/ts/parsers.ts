@@ -61,16 +61,21 @@ export function getBodyType(method: cheerio.Element) {
 }
 
 export function getMethodInfo(method: cheerio.Element): TMethodInfo {
-  const $ = cheerio.load(method)
-  const path = ($('.openblock').first().text().match(/'.*?'/g) || [])[0]
-
-  const originalName = $('h3').text()
+  const path = (cheerio
+    .load(method)('.openblock')
+    .first()
+    .text()
+    .match(/'.*?'/g) || [])[0]
+  const originalName = cheerio.load(method)('h3').text()
   const methodName = normaliseName(originalName)
   const returnType = getReturnType(method)
   const bodyType = getBodyType(method)
 
   const opts: string[] = []
-  $('.hdlist1').each((_index, element) => opts.push($(element).text()))
+  cheerio
+    .load(method)('.hdlist1')
+    .each((_index, element) => opts.push(cheerio.load(method)(element).text()))
+
   const isUnsupported = !path
 
   if (isUnsupported) {

@@ -68,6 +68,11 @@ export function generateFunction({
   returnType,
   bodyType,
 }: TMethodInfo) {
+  // if(opts.length > 0) {
+  //   console.log('-opts-', opts)
+  //   process.exit()
+  // }
+
   const data = getData(bodyType)
   const dataType = getDataType(bodyType)
   const pathArgs = getPathArgs(args)
