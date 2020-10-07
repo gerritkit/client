@@ -28,7 +28,7 @@ export function groupEndpoints({
       async listGroups({
         params: { regex, substring },
       }: {
-        params: { regex: string; substring: string }
+        params: { regex?: string; substring?: string }
       }) {
         return axios({
           method: 'GET',

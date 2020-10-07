@@ -161,7 +161,7 @@ describe('generator', () => {
       isUnsupported: false,
     })
     expect(res).toBe(`
-  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch: string, description: string, limit: string, prefix: string, regex: string, skip: string, substring: string, tree: string, type: string, state: string},} ) {
+  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,

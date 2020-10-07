@@ -21,12 +21,12 @@ export function pluginEndpoints({
         params: { all, limit, prefix, regex, skip, substring },
       }: {
         params: {
-          all: string
-          limit: string
-          prefix: string
-          regex: string
-          skip: string
-          substring: string
+          all?: string
+          limit?: string
+          prefix?: string
+          regex?: string
+          skip?: string
+          substring?: string
         }
       }) {
         return axios({

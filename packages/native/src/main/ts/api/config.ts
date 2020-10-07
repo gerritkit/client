@@ -5,7 +5,6 @@ import {
   TCacheOperationInput,
   TPreferencesInput,
   TDiffPreferencesInput,
-  TEditPreferencesInput,
   TServerInfo,
   TConsistencyCheckInfo,
   TCacheInfo,
@@ -230,11 +229,7 @@ export function configEndpoints({
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async setDefaultEditPreferences({
-        data,
-      }: {
-        data: TEditPreferencesInput
-      }) {
+      async setDefaultEditPreferences({ data }: { data: any }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/preferences.edit`,

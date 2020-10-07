@@ -1237,7 +1237,7 @@ export function revisionEndpoints({
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/content`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as any)
+        }).then(({ data }) => data as any)
       },
 
       async downloadContent({
@@ -1250,7 +1250,7 @@ export function revisionEndpoints({
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/download`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as any)
+        }).then(({ data }) => data as any)
       },
 
       async getDiff({

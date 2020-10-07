@@ -46,7 +46,7 @@ function getParams(params: string[][]) {
 
 function getParamsType(params: string[][]) {
   return params.length > 0
-    ? `params: {${params.map(([name]) => `${name}: string`).join(', ')}},`
+    ? `params: {${params.map(([name]) => `${name}?: string`).join(', ')}},`
     : ''
 }
 
@@ -142,10 +142,3 @@ function mygenerateFunc(data: { wrapper?: string; type: string } | undefined) {
   if (wrapper === 'list') return `T${type}[]`
   return `T${type}`
 }
-
-// export function generateIndexSection(types: string[], code: string) {
-//   return `
-//   import { ${types.join(',\n')} } from '../types/index'
-//   ${code}
-//   `
-// }
