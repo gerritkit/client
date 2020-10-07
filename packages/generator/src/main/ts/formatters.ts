@@ -1,8 +1,11 @@
 import { TMethodInfo } from './types'
 
-export function addGlobalVariables(code: string) {
+export function addGlobalVariables(types: string[], code: string) {
   return `
   import axios from 'axios'
+  import {
+    ${types.join(', \n')}
+     } from '../types/index'
   // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
   const xssiPrefix = ')]}\\''
   const parseGerritResponse = (data: string) => JSON.parse(data.slice(xssiPrefix.length))
@@ -68,13 +71,8 @@ export function generateFunction({
   returnType,
   bodyType,
 }: TMethodInfo) {
-  // if(opts.length > 0) {
-  //   console.log('-opts-', opts)
-  //   process.exit()
-  // }
-
-  const data = getData(bodyType)
-  const dataType = getDataType(bodyType)
+  const data = getData(mygenerateFunc(bodyType))
+  const dataType = getDataType(mygenerateFunc(bodyType))
   const pathArgs = getPathArgs(args)
   const pathArgsTypes = getPathArgsTypes(args)
 
@@ -101,7 +99,9 @@ export function generateFunction({
         ${params}
       },
       ${bodyType ? 'data,' : ''}
-    }).then(({data}) => parseGerritResponse(data) as ${returnType})
+    }).then(({data}) => parseGerritResponse(data) as ${mygenerateFunc(
+      returnType,
+    )})
   },
 `
 }
@@ -130,3 +130,22 @@ export function generateSectionCode({
     }
     `
 }
+
+function mygenerateFunc(data: { wrapper?: string; type: string } | undefined) {
+  if (!data) {
+    return
+  }
+
+  const { type, wrapper } = data
+  if (type === 'any') return 'any'
+  if (wrapper === 'map') return `Record<string, T${type}>`
+  if (wrapper === 'list') return `T${type}[]`
+  return `T${type}`
+}
+
+// export function generateIndexSection(types: string[], code: string) {
+//   return `
+//   import { ${types.join(',\n')} } from '../types/index'
+//   ${code}
+//   `
+// }

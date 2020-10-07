@@ -1,16 +1,17 @@
 import axios from 'axios'
 import {
-  TCacheInfo,
-  TCacheOperationInput,
-  TCapabilityInfo,
-  TConsistencyCheckInfo,
-  TDiffPreferencesInput,
-  TEmailConfirmationInput,
-  TPreferencesInput,
-  TServerInfo,
-  TSummaryInfo,
-  TTaskInfo,
   TConsistencyCheckInput,
+  TEmailConfirmationInput,
+  TCacheOperationInput,
+  TPreferencesInput,
+  TDiffPreferencesInput,
+  TEditPreferencesInput,
+  TServerInfo,
+  TConsistencyCheckInfo,
+  TCacheInfo,
+  TSummaryInfo,
+  TCapabilityInfo,
+  TTaskInfo,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -84,7 +85,9 @@ export function configEndpoints({
           url: `${baseUrl}/config/server/caches/`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TCacheInfo[])
+        }).then(
+          ({ data }) => parseGerritResponse(data) as Record<string, TCacheInfo>,
+        )
       },
 
       async cacheOperations({ data }: { data: TCacheOperationInput }) {
@@ -134,7 +137,10 @@ export function configEndpoints({
           url: `${baseUrl}/config/server/capabilities`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TCapabilityInfo[])
+        }).then(
+          ({ data }) =>
+            parseGerritResponse(data) as Record<string, TCapabilityInfo>,
+        )
       },
 
       async listTasks() {
@@ -224,7 +230,11 @@ export function configEndpoints({
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async setDefaultEditPreferences({ data }: { data: any }) {
+      async setDefaultEditPreferences({
+        data,
+      }: {
+        data: TEditPreferencesInput
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/preferences.edit`,

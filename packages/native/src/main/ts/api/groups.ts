@@ -1,12 +1,12 @@
 import axios from 'axios'
 import {
-  TAccountInfo,
-  TGroupAuditEventInfo,
+  TGroupOptionsInput,
+  TMembersInput,
+  TGroupsInput,
   TGroupInfo,
   TGroupOptionsInfo,
-  TGroupOptionsInput,
-  TGroupsInput,
-  TMembersInput,
+  TGroupAuditEventInfo,
+  TAccountInfo,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -25,13 +25,22 @@ export function groupEndpoints({
 }) {
   return {
     groupEndpoints: {
-      async listGroups() {
+      async listGroups({
+        params: { regex, substring },
+      }: {
+        params: { regex: string; substring: string }
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/groups/`,
           auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TGroupInfo[])
+          params: {
+            r: regex,
+            m: substring,
+          },
+        }).then(
+          ({ data }) => parseGerritResponse(data) as Record<string, TGroupInfo>,
+        )
       },
 
       async queryGroups() {

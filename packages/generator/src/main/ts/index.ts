@@ -29,18 +29,30 @@ export async function generate(url: string) {
   const code = sections
     .map(getSectionInfo)
     .filter((section) => !unsupportedSections.includes(section.titleSection))
-    .map(({ titleSection, methods }) => ({
-      titleSection,
-      methods: methods
-        .filter(({ isUnsupported }) => !isUnsupported)
-        .map(generateFunction),
-    }))
-    .map(generateSectionCode)
-    .join('\n')
+
+  const importTypes = [
+    ...new Set([
+      ...code.flatMap((el) => el.methods.map((q) => q.bodyType?.type)),
+      ...code.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
+    ]),
+  ]
+    .filter((el) => el && el !== 'any')
+    .map((type) => `T${type}`)
 
   return {
     types,
-    code: addGlobalVariables(code),
+    code: addGlobalVariables(
+      importTypes,
+      code
+        .map(({ titleSection, methods }) => ({
+          titleSection,
+          methods: methods
+            .filter(({ isUnsupported }) => !isUnsupported)
+            .map(generateFunction),
+        }))
+        .map(generateSectionCode)
+        .join('\n'),
+    ),
   }
 }
 

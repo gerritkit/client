@@ -1,49 +1,49 @@
 import axios from 'axios'
 import {
-  TAbandonInput,
-  TAccountInfo,
-  TAddReviewerResult,
-  TAssigneeInput,
-  TAttentionSetInfo,
-  TAttentionSetInput,
-  TBlameInfo,
-  TChangeInfo,
   TChangeInput,
-  TChangeMessageInfo,
-  TCherryPickInput,
-  TCommentInfo,
-  TCommentInput,
-  TCommitInfo,
   TCommitMessageInput,
+  TTopicInput,
+  TAssigneeInput,
+  TAbandonInput,
+  TRestoreInput,
+  TMoveInput,
+  TRevertInput,
+  TSubmitInput,
+  TFixInput,
+  TWorkInProgressInput,
+  TPrivateInput,
+  THashtagsInput,
   TDeleteChangeMessageInput,
-  TDeleteCommentInput,
+  TReviewerInput,
   TDeleteReviewerInput,
   TDeleteVoteInput,
   TDescriptionInput,
-  TDiffInfo,
-  TFileInfo,
-  TFixInput,
-  THashtagsInput,
-  TIncludedInInfo,
-  TMergeableInfo,
-  TMoveInput,
-  TPrivateInput,
-  TPureRevertInfo,
-  TRelatedChangesInfo,
-  TRestoreInput,
-  TRevertInput,
-  TRevertSubmissionInfo,
-  TReviewerInfo,
-  TReviewerInput,
   TReviewInput,
-  TReviewResult,
-  TRobotCommentInfo,
-  TSubmitInfo,
-  TSubmitInput,
+  TCommentInput,
+  TDeleteCommentInput,
+  TCherryPickInput,
+  TAttentionSetInput,
+  TChangeInfo,
+  TAccountInfo,
+  TPureRevertInfo,
+  TRevertSubmissionInfo,
   TSubmittedTogetherInfo,
+  TIncludedInInfo,
+  TChangeMessageInfo,
+  TReviewerInfo,
   TSuggestedReviewerInfo,
-  TTopicInput,
-  TWorkInProgressInput,
+  TAddReviewerResult,
+  TCommitInfo,
+  TRelatedChangesInfo,
+  TReviewResult,
+  TSubmitInfo,
+  TMergeableInfo,
+  TCommentInfo,
+  TRobotCommentInfo,
+  TFileInfo,
+  TDiffInfo,
+  TBlameInfo,
+  TAttentionSetInfo,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -1183,7 +1183,7 @@ export function revisionEndpoints({
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/ported_comments`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TCommentInfo[])
+        }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getPortedDrafts({
@@ -1222,7 +1222,9 @@ export function revisionEndpoints({
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TFileInfo)
+        }).then(
+          ({ data }) => parseGerritResponse(data) as Record<string, TFileInfo>,
+        )
       },
 
       async getContent({
@@ -1274,7 +1276,9 @@ export function revisionEndpoints({
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/fixes/${fixId}/preview`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TDiffInfo[])
+        }).then(
+          ({ data }) => parseGerritResponse(data) as Record<string, TDiffInfo>,
+        )
       },
 
       async getBlame({
@@ -1398,7 +1402,7 @@ export function attentionSetEndpoints({
           url: `${baseUrl}/changes/${changeId}/attention`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TAttentionSetInfo)
+        }).then(({ data }) => parseGerritResponse(data) as TAttentionSetInfo[])
       },
 
       async addToAttentionSet({

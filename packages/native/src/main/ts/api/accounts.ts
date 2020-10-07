@@ -1,29 +1,29 @@
 import axios from 'axios'
 import {
-  TAccountExternalIdInfo,
-  TAccountInfo,
   TAccountNameInput,
   TAccountStatusInput,
+  TUsernameInput,
+  TDisplayNameInput,
+  THttpPasswordInput,
+  TGpgKeysInput,
+  TPreferencesInput,
+  TDiffPreferencesInput,
+  TEditPreferencesInfo,
+  TProjectWatchInfo,
+  TStarsInput,
+  TAccountInfo,
+  TOAuthTokenInfo,
+  TEmailInfo,
+  TSshKeyInfo,
+  TGpgKeyInfo,
   TCapabilityInfo,
-  TChangeInfo,
+  TGroupInfo,
+  TPreferencesInfo,
+  TDiffPreferencesInfo,
+  TAccountExternalIdInfo,
   TContributorAgreementInfo,
   TDeletedDraftCommentInfo,
-  TDiffPreferencesInfo,
-  TDiffPreferencesInput,
-  TDisplayNameInput,
-  TEditPreferencesInfo,
-  TEmailInfo,
-  TGpgKeyInfo,
-  TGpgKeysInput,
-  TGroupInfo,
-  THttpPasswordInput,
-  TOAuthTokenInfo,
-  TPreferencesInfo,
-  TPreferencesInput,
-  TProjectWatchInfo,
-  TSshKeyInfo,
-  TStarsInput,
-  TUsernameInput,
+  TChangeInfo,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -414,7 +414,10 @@ export function accountEndpoints({
           url: `${baseUrl}/accounts/${accountId}/gpgkeys`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TGpgKeyInfo[])
+        }).then(
+          ({ data }) =>
+            parseGerritResponse(data) as Record<string, TGpgKeyInfo>,
+        )
       },
 
       async getGPGKey({
@@ -443,7 +446,10 @@ export function accountEndpoints({
           auth,
           params: {},
           data,
-        }).then(({ data }) => parseGerritResponse(data) as TGpgKeyInfo[])
+        }).then(
+          ({ data }) =>
+            parseGerritResponse(data) as Record<string, TGpgKeyInfo>,
+        )
       },
 
       async deleteGPGKey({
@@ -644,7 +650,7 @@ export function accountEndpoints({
         data,
         args: { accountId },
       }: {
-        data: TProjectWatchInfo
+        data: TProjectWatchInfo[]
         args: { accountId: string }
       }) {
         return axios({

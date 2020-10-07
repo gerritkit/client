@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { TPluginInfo } from '../types/index'
-
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: string) =>
@@ -18,13 +17,34 @@ export function pluginEndpoints({
 }) {
   return {
     pluginEndpoints: {
-      async listPlugins() {
+      async listPlugins({
+        params: { all, limit, prefix, regex, skip, substring },
+      }: {
+        params: {
+          all: string
+          limit: string
+          prefix: string
+          regex: string
+          skip: string
+          substring: string
+        }
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/plugins/`,
           auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TPluginInfo[])
+          params: {
+            a: all,
+            n: limit,
+            p: prefix,
+            r: regex,
+            S: skip,
+            m: substring,
+          },
+        }).then(
+          ({ data }) =>
+            parseGerritResponse(data) as Record<string, TPluginInfo>,
+        )
       },
 
       async installPlugin({

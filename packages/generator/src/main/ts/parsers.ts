@@ -44,20 +44,26 @@ export function getBodyType(method: cheerio.Element) {
     $('.paragraph')
       .text()
       .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
-  const types = sentences.reduce((acc, el) => {
-    if (el.includes('body')) {
-      parseTypes(el, /\S+?\s(?=entries)/g).forEach((type) => acc.add(type))
-      parseTypes(el, /\S+?\s(?=entities)/g).forEach((type) => acc.add(type))
-      parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
-    }
-    return acc
-  }, new Set() as Set<string>)
+  const types = sentences.reduce(
+    (acc, el) => {
+      if (el.includes('body')) {
+        parseTypes(el, /\S+?\s(?=entries)/g).forEach((type) => acc.push(type))
+        parseTypes(el, /\S+?\s(?=entities)/g).forEach((type) => acc.push(type))
+        parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.push(type))
+      }
+      return acc
+    },
+    [] as Array<{
+      wrapper?: string
+      type: string
+    }>,
+  )
 
-  if (types.size !== 1) {
+  if (types.length !== 1) {
     return undefined
   }
 
-  return `T${[...types][0]}`
+  return types[0]
 }
 
 export function getMethodInfo(method: cheerio.Element): TMethodInfo {
@@ -66,6 +72,7 @@ export function getMethodInfo(method: cheerio.Element): TMethodInfo {
     .first()
     .text()
     .match(/'.*?'/g) || [])[0]
+
   const originalName = cheerio.load(method)('h3').text()
   const methodName = normaliseName(originalName)
   const returnType = getReturnType(method)
@@ -218,10 +225,20 @@ export function parseOptions(optsSection: string[]) {
     .filter((el) => el) as string[][]
 }
 
-function parseTypes(sentence: string, regexp: RegExp, array?: boolean) {
-  return (sentence.match(regexp) || []).map(
-    (type) => `${type.trim()}${array ? '[]' : ''}`,
-  )
+function parseTypes(sentence: string, regexp: RegExp) {
+  let wrapper: 'map' | 'list' | undefined
+  if (sentence.includes('map')) {
+    wrapper = 'map'
+  }
+
+  if (sentence.includes('list')) {
+    wrapper = 'list'
+  }
+
+  return (sentence.match(regexp) || []).map((type) => ({
+    type: type.trim(),
+    wrapper,
+  }))
 }
 
 export function getReturnType(method: cheerio.Element) {
@@ -231,31 +248,37 @@ export function getReturnType(method: cheerio.Element) {
     $('.paragraph')
       .text()
       .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
-  const types = sentences.reduce((acc, el) => {
-    if (
-      el.includes('returned') ||
-      el.includes('returns') ||
-      el.includes('result')
-    ) {
-      parseTypes(el, /\S+?\s(?=entries)/g, true).forEach((type) =>
-        acc.add(type),
-      )
-      parseTypes(el, /\S+?\s(?=entities)/g, true).forEach((type) =>
-        acc.add(type),
-      )
-      parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.add(type))
-      parseTypes(el, /\S+?\s(?=entry)/g).forEach((type) => acc.add(type))
+  const types = sentences.reduce(
+    (acc, el) => {
+      if (
+        el.includes('returned') ||
+        el.includes('returns') ||
+        el.includes('result')
+      ) {
+        parseTypes(el, /\S+?\s(?=entries)/g).forEach((type) => acc.push(type))
+        parseTypes(el, /\S+?\s(?=entities)/g).forEach((type) => acc.push(type))
+        parseTypes(el, /\S+?\s(?=entity)/g).forEach((type) => acc.push(type))
+        parseTypes(el, /\S+?\s(?=entry)/g).forEach((type) => acc.push(type))
+      }
+      return acc
+    },
+    [] as Array<{
+      wrapper?: string
+      type: string
+    }>,
+  )
+
+  if (types.length > 1) {
+    return {
+      type: 'any',
     }
-    return acc
-  }, new Set() as Set<string>)
-
-  if (types.size > 1) {
-    return 'any'
   }
 
-  if (types.size === 0) {
-    return 'any'
+  if (types.length === 0) {
+    return {
+      type: 'any',
+    }
   }
 
-  return `T${[...types][0]}`
+  return types[0]
 }

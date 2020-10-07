@@ -117,7 +117,7 @@ describe('generator', () => {
       path: '/projects/${projectName}/children/',
       opts: [],
       isUnsupported: false,
-      returnType: 'any',
+      returnType: { type: 'any' },
     })
     expect(res).toBe(
       `
@@ -155,7 +155,9 @@ describe('generator', () => {
         ['type', 'type'],
         ['state', 's'],
       ],
-      returnType: 'any',
+      returnType: {
+        type: 'any',
+      },
       isUnsupported: false,
     })
     expect(res).toBe(`
