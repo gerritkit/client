@@ -1,29 +1,29 @@
-import { Core } from './core'
 import { UnionToIntersection } from '@qiwi/substrate'
 
 import {
+  accessRightsEndpoints,
   accountEndpoints,
-  tagEndpoints,
-  labelEndpoints,
-  dashboardEndpoints,
+  attentionSetEndpoints,
+  branchEndpoints,
+  changeEditEndpoints,
+  changeEndpoints,
   childProjectEndpoints,
   commitEndpoints,
-  branchEndpoints,
-  projectEndpoints,
-  pluginEndpoints,
-  subgroupEndpoints,
-  groupMemberEndpoints,
-  groupEndpoints,
-  documentationSearchEndpoints,
   configEndpoints,
-  attentionSetEndpoints,
-  revisionReviewerEndpoints,
-  revisionEndpoints,
-  changeEditEndpoints,
+  dashboardEndpoints,
+  documentationSearchEndpoints,
+  groupEndpoints,
+  groupMemberEndpoints,
+  labelEndpoints,
+  pluginEndpoints,
+  projectEndpoints,
   reviewerEndpoints,
-  changeEndpoints,
-  accessRightsEndpoints,
+  revisionEndpoints,
+  revisionReviewerEndpoints,
+  subgroupEndpoints,
+  tagEndpoints,
 } from './api'
+import { Core } from './core'
 
 export const plugins = [
   accountEndpoints,
@@ -55,10 +55,5 @@ export type GerritNative = InstanceType<typeof Core>
 export type GerritNativeInstance = UnionToIntersection<
   ReturnType<typeof plugins[number]>
 >
-// const a = {} as GerritNativeInstance
-// a.commitEndpoints.getCommit({args: {
-//   projectName: '132',
-//     commitId: 'efef'
-//   }})
 
 export { VERSION } from './version'

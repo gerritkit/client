@@ -1,5 +1,6 @@
-import { GerritKitPlugin, ReturnTypeOf } from './types'
 import { IConstructor, IFunction, UnionToIntersection } from '@qiwi/substrate'
+
+import { GerritKitPlugin, ReturnTypeOf } from './types'
 
 export class Core {
   static plugins: GerritKitPlugin[] = []

@@ -1,5 +1,6 @@
-import cheerio from 'cheerio'
 import axios from 'axios'
+import cheerio from 'cheerio'
+
 import { TMethodInfo } from './types'
 
 export function capitalize(str: string) {
@@ -60,7 +61,7 @@ export function getBodyType(method: cheerio.Element) {
   )
 
   if (types.length !== 1) {
-    return undefined
+    return
   }
 
   return types[0]
@@ -158,7 +159,7 @@ export function getTypesInfo(elem: cheerio.Element) {
 }
 
 export function parseArg(arg: string) {
-  const trimmed = arg.slice(1, arg.length - 1)
+  const trimmed = arg.slice(1, - 1)
   const parsed = trimmed.split('-')
   const first = parsed[0]
   const rest = parsed.slice(1).map(capitalize)

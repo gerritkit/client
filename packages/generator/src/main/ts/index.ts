@@ -1,13 +1,14 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
 import { promises as fs } from 'fs'
-import { getSectionInfo, getTypes, getSections } from './parsers'
+
 import {
   addGlobalVariables,
   generateFunction,
   generateSectionCode,
   generateType,
 } from './formatters'
+import { getSectionInfo, getSections,getTypes } from './parsers'
 
 const unsupportedSections = ['iDs', 'jSONEntities']
 

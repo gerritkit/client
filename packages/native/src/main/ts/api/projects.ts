@@ -1,51 +1,37 @@
 import axios from 'axios'
 import {
-  TAccessCheckInfo,
-  TBanInput,
-  TBanResultInfo,
-  TBatchLabelInput,
-  TBranchInfo,
-  TChangeInfo,
-  TCherryPickInput,
-  TCommitInfo,
-  TConfigInfo,
-  TConfigInput,
-  TDashboardInfo,
-  TDashboardInput,
-  TDeleteBranchesInput,
-  TDeleteLabelInput,
-  TDeleteTagsInput,
-  TFileInfo,
-  TGCInput,
-  THeadInput,
-  TIncludedInInfo,
-  TLabelDefinitionInfo,
-  TMergeableInfo,
-  TProjectAccessInfo,
   TProjectDescriptionInput,
-  TProjectInfo,
   TProjectParentInput,
+  THeadInput,
+  TConfigInput,
+  TGCInput,
+  TBanInput,
+  TDeleteBranchesInput,
+  TDeleteTagsInput,
+  TCherryPickInput,
+  TDashboardInput,
+  TDeleteLabelInput,
+  TBatchLabelInput,
+  TProjectInfo,
   TRepositoryStatisticsInfo,
+  TConfigInfo,
+  TBanResultInfo,
+  TProjectAccessInfo,
+  TAccessCheckInfo,
+  TBranchInfo,
+  TMergeableInfo,
   TTagInfo,
+  TCommitInfo,
+  TIncludedInInfo,
+  TChangeInfo,
+  TFileInfo,
+  TDashboardInfo,
+  TLabelDefinitionInfo,
 } from '../types/index'
-
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: string) =>
   JSON.parse(data.slice(xssiPrefix.length))
-
-export type IListProjectsOpts = {
-  branch?: string
-  description?: string
-  limit?: number
-  prefix?: string
-  regex?: string
-  skip?: string
-  substring?: string
-  tree?: string
-  state?: string
-  type?: string
-}
 
 export function projectEndpoints({
   baseUrl,
@@ -69,11 +55,22 @@ export function projectEndpoints({
           skip,
           substring,
           tree,
-          state,
           type,
+          state,
         },
       }: {
-        params: IListProjectsOpts
+        params: {
+          branch?: string
+          description?: string
+          limit?: string
+          prefix?: string
+          regex?: string
+          skip?: string
+          substring?: string
+          tree?: string
+          type?: string
+          state?: string
+        }
       }) {
         return axios({
           method: 'GET',
@@ -88,10 +85,13 @@ export function projectEndpoints({
             S: skip,
             m: substring,
             t: tree,
+            type: type,
             s: state,
-            type,
           },
-        }).then(({ data }) => parseGerritResponse(data) as TProjectInfo[])
+        }).then(
+          ({ data }) =>
+            parseGerritResponse(data) as Record<string, TProjectInfo>,
+        )
       },
 
       async queryProjects() {
@@ -334,12 +334,20 @@ export function projectEndpoints({
         }).then(({ data }) => parseGerritResponse(data) as TProjectAccessInfo)
       },
 
-      async checkAccess() {
+      async checkAccess({
+        params: { account, permission, ref },
+      }: {
+        params: { account?: string; permission?: string; ref?: string }
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/projects/MyProject/check.access`,
           auth,
-          params: {},
+          params: {
+            account: account,
+            perm: permission,
+            ref: ref,
+          },
         }).then(({ data }) => parseGerritResponse(data) as TAccessCheckInfo)
       },
     },
@@ -360,14 +368,26 @@ export function branchEndpoints({
     branchEndpoints: {
       async listBranches({
         args: { projectName },
+        params: { limit, skip, substring, regex },
       }: {
         args: { projectName: string }
+        params: {
+          limit?: string
+          skip?: string
+          substring?: string
+          regex?: string
+        }
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/projects/${projectName}/branches/`,
           auth,
-          params: {},
+          params: {
+            n: limit,
+            S: skip,
+            m: substring,
+            r: regex,
+          },
         }).then(({ data }) => parseGerritResponse(data) as TBranchInfo[])
       },
 
@@ -536,14 +556,26 @@ export function tagEndpoints({
 
       async listTags({
         args: { projectName },
+        params: { limit, skip, substring, regex },
       }: {
         args: { projectName: string }
+        params: {
+          limit?: string
+          skip?: string
+          substring?: string
+          regex?: string
+        }
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/projects/${projectName}/tags/`,
           auth,
-          params: {},
+          params: {
+            n: limit,
+            S: skip,
+            m: substring,
+            r: regex,
+          },
         }).then(({ data }) => parseGerritResponse(data) as TTagInfo[])
       },
 
@@ -669,7 +701,9 @@ export function commitEndpoints({
           url: `${baseUrl}/projects/${projectName}/commits/${commitId}/files/`,
           auth,
           params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TFileInfo)
+        }).then(
+          ({ data }) => parseGerritResponse(data) as Record<string, TFileInfo>,
+        )
       },
     },
   }
@@ -786,9 +820,7 @@ export function labelEndpoints({
           url: `${baseUrl}/projects/${projectName}/labels/`,
           auth,
           params: {},
-        }).then(
-          ({ data }) => parseGerritResponse(data) as TLabelDefinitionInfo[],
-        )
+        }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getLabel({
