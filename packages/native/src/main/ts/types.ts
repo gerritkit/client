@@ -1,6 +1,12 @@
 import { IFunction, UnionToIntersection } from '@qiwi/substrate'
 
-export type IGerritConstructorOpts = any
+export type IGerritConstructorOpts = {
+  baseUrl: string
+  auth?: {
+    username: string
+    password: string
+  }
+}
 
 export type GerritKitPlugin = (
   options: IGerritConstructorOpts,
@@ -13,3 +19,4 @@ export type ReturnTypeOf<
   : T extends IFunction[]
   ? UnionToIntersection<ReturnType<T[number]>>
   : never
+

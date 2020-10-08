@@ -4,16 +4,14 @@ import {
   parseApiString,
   parseOptions,
   normaliseName,
-} from '../../main/ts/generator/parsers'
-import { generateFunction } from '../../main/ts/generator/formatters'
-import { generate } from '@gerritkit/generator'
+} from '../../main/ts/parsers'
+import { generateFunction } from '../../main/ts/formatters'
+import { generate } from '../../main/ts/index'
 
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 import stubDoc from './stub/api.json'
-
-
 
 describe('generator', () => {
   const testDocsUrl = 'gerrit-host/Documentation/rest-api-projects.html'
@@ -26,7 +24,7 @@ describe('generator', () => {
     expect(sections.length).toBe(9)
   })
 
-  it('getSectionInfo', async () => {
+  it('getSectionInfo simple', async () => {
     const sections = await getSections(testDocsUrl)
     const section = sections[2]
     const res = getSectionInfo(section)
@@ -53,6 +51,13 @@ describe('generator', () => {
         },
       ],
     })
+  })
+
+  it('getSectionInfo with params', async () => {
+    const sections = await getSections(testDocsUrl)
+    const section = sections[0]
+    const res = getSectionInfo(section)
+    expect(res).toMatchSnapshot()
   })
 
   it('normaliseName', async () => {
@@ -112,7 +117,7 @@ describe('generator', () => {
       path: '/projects/${projectName}/children/',
       opts: [],
       isUnsupported: false,
-      returnType: 'any',
+      returnType: { type: 'any' },
     })
     expect(res).toBe(
       `
@@ -150,11 +155,13 @@ describe('generator', () => {
         ['type', 'type'],
         ['state', 's'],
       ],
-      returnType: 'any',
+      returnType: {
+        type: 'any',
+      },
       isUnsupported: false,
     })
     expect(res).toBe(`
-  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch: string, description: string, limit: string, prefix: string, regex: string, skip: string, substring: string, tree: string, type: string, state: string},} ) {
+  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,

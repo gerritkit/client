@@ -1,4 +1,3 @@
-import { GerritNative } from '@gerritkit/native'
 import { IConstructor, IFunction, UnionToIntersection } from '@qiwi/substrate'
 
 import { GerritKitPlugin, ReturnTypeOf } from './types'
@@ -28,10 +27,8 @@ export class Core {
     },
   ) {
     const classConstructor = this.constructor as typeof Core
-    const gerritNative = new GerritNative(baseUrl, auth)
-
     classConstructor.plugins.forEach((plugin) =>
-      Object.assign(this, plugin(gerritNative)),
+      Object.assign(this, plugin({ baseUrl, auth })),
     )
   }
 }

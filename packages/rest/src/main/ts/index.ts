@@ -1,55 +1,6 @@
 import { Core } from './core'
-import {
-  attentionSetEndpoints,
-  tagEndpoints,
-  labelEndpoints,
-  dashboardEndpoints,
-  childProjectEndpoints,
-  commitEndpoints,
-  branchEndpoints,
-  projectEndpoints,
-  pluginEndpoints,
-  subgroupEndpoints,
-  groupMemberEndpoints,
-  groupEndpoints,
-  documentationSearchEndpoints,
-  configEndpoints,
-  revisionReviewerEndpoints,
-  revisionEndpoints,
-  changeEditEndpoints,
-  changeEndpoints,
-  reviewerEndpoints,
-  defaultStarEndpoints,
-  starEndpoints,
-  accountEndpoints,
-  accessRightsEndpoints,
-} from './api'
+import { gitPlugin, orgsPlugin, reposPlugin } from './plugins'
 
-export const GerritKit = Core.plugin(
-  attentionSetEndpoints,
-  tagEndpoints,
-  labelEndpoints,
-  dashboardEndpoints,
-  childProjectEndpoints,
-  commitEndpoints,
-  branchEndpoints,
-  projectEndpoints,
-  pluginEndpoints,
-  subgroupEndpoints,
-  groupMemberEndpoints,
-  groupEndpoints,
-  documentationSearchEndpoints,
-  configEndpoints,
-  revisionReviewerEndpoints,
-  revisionEndpoints,
-  changeEditEndpoints,
-  changeEndpoints,
-  reviewerEndpoints,
-  defaultStarEndpoints,
-  starEndpoints,
-  accountEndpoints,
-  accessRightsEndpoints,
-)
-
+const plugins = [gitPlugin, orgsPlugin, reposPlugin]
+export const GerritKit = Core.plugin(...plugins)
 export type GerritKit = InstanceType<typeof Core>
-export { VERSION } from './version'

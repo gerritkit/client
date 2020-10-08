@@ -3,6 +3,35 @@
 exports[`generator generate 1`] = `
 "
   import axios from 'axios'
+  import {
+    TProjectDescriptionInput, 
+TProjectParentInput, 
+THeadInput, 
+TConfigInput, 
+TGCInput, 
+TBanInput, 
+TDeleteBranchesInput, 
+TDeleteTagsInput, 
+TCherryPickInput, 
+TDashboardInput, 
+TDeleteLabelInput, 
+TBatchLabelInput, 
+TProjectInfo, 
+TRepositoryStatisticsInfo, 
+TConfigInfo, 
+TBanResultInfo, 
+TProjectAccessInfo, 
+TAccessCheckInfo, 
+TBranchInfo, 
+TMergeableInfo, 
+TTagInfo, 
+TCommitInfo, 
+TIncludedInInfo, 
+TChangeInfo, 
+TFileInfo, 
+TDashboardInfo, 
+TLabelDefinitionInfo
+     } from '../types/index'
   // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
   const xssiPrefix = ')]}\\\\''
   const parseGerritResponse = (data: string) => JSON.parse(data.slice(xssiPrefix.length))
@@ -12,17 +41,27 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
-  async listProjects (   ) {
+        projectEndpoints: {
+          
+  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,
       auth,
       params: {
-        
+        b: branch,
+d: description,
+n: limit,
+p: prefix,
+r: regex,
+S: skip,
+m: substring,
+t: tree,
+type: type,
+s: state
       },
       
-    }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
+    }).then(({data}) => parseGerritResponse(data) as Record<string, TProjectInfo>)
   },
 
 
@@ -247,18 +286,21 @@ exports[`generator generate 1`] = `
   },
 
 
-  async checkAccess (   ) {
+  async checkAccess ( {  params: {account, permission, ref}, } : {  params: {account?: string, permission?: string, ref?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/MyProject/check.access\`,
       auth,
       params: {
-        
+        account: account,
+perm: permission,
+ref: ref
       },
       
     }).then(({data}) => parseGerritResponse(data) as TAccessCheckInfo)
   },
-
+  
+        }
       }
     }
     
@@ -268,14 +310,18 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
-  async listBranches ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+        branchEndpoints: {
+          
+  async listBranches ( { args: {projectName}, params: {limit, skip, substring, regex}, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\`,
       auth,
       params: {
-        
+        n: limit,
+S: skip,
+m: substring,
+r: regex
       },
       
     }).then(({data}) => parseGerritResponse(data) as TBranchInfo[])
@@ -371,7 +417,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -381,7 +428,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        childProjectEndpoints: {
+          
   async listChildProjects ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -406,7 +454,8 @@ exports[`generator generate 1`] = `
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
-
+  
+        }
       }
     }
     
@@ -416,7 +465,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        tagEndpoints: {
+          
   async createTag ( { args: {projectName, tagId},  } : { args: {projectName: string, tagId: string}, } ) {
     return axios({
       method: 'PUT',
@@ -430,13 +480,16 @@ exports[`generator generate 1`] = `
   },
 
 
-  async listTags ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listTags ( { args: {projectName}, params: {limit, skip, substring, regex}, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string},} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/tags/\`,
       auth,
       params: {
-        
+        n: limit,
+S: skip,
+m: substring,
+r: regex
       },
       
     }).then(({data}) => parseGerritResponse(data) as TTagInfo[])
@@ -480,7 +533,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -490,7 +544,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        commitEndpoints: {
+          
   async getCommit ( { args: {projectName, commitId},  } : { args: {projectName: string, commitId: string}, } ) {
     return axios({
       method: 'GET',
@@ -552,9 +607,10 @@ exports[`generator generate 1`] = `
         
       },
       
-    }).then(({data}) => parseGerritResponse(data) as TFileInfo)
+    }).then(({data}) => parseGerritResponse(data) as Record<string, TFileInfo>)
   },
-
+  
+        }
       }
     }
     
@@ -564,7 +620,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        dashboardEndpoints: {
+          
   async listDashboards ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -628,7 +685,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -638,7 +696,8 @@ exports[`generator generate 1`] = `
       password: string
     } }) {
       return {
-        
+        labelEndpoints: {
+          
   async listLabels ( { args: {projectName},  } : { args: {projectName: string}, } ) {
     return axios({
       method: 'GET',
@@ -648,7 +707,7 @@ exports[`generator generate 1`] = `
         
       },
       
-    }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo[])
+    }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
@@ -715,7 +774,8 @@ exports[`generator generate 1`] = `
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-
+  
+        }
       }
     }
     
@@ -1071,4 +1131,397 @@ revision?: any,
 message?: any,
     };
   "
+`;
+
+exports[`generator getSectionInfo with params 1`] = `
+Object {
+  "methods": Array [
+    Object {
+      "args": Array [],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "listProjects",
+      "opts": Array [
+        Array [
+          "branch",
+          "b",
+        ],
+        Array [
+          "description",
+          "d",
+        ],
+        Array [
+          "limit",
+          "n",
+        ],
+        Array [
+          "prefix",
+          "p",
+        ],
+        Array [
+          "regex",
+          "r",
+        ],
+        Array [
+          "skip",
+          "S",
+        ],
+        Array [
+          "substring",
+          "m",
+        ],
+        Array [
+          "tree",
+          "t",
+        ],
+        Array [
+          "type",
+          "type",
+        ],
+        Array [
+          "state",
+          "s",
+        ],
+      ],
+      "originalName": "List Projects",
+      "path": "/projects/",
+      "returnType": Object {
+        "type": "ProjectInfo",
+        "wrapper": "map",
+      },
+    },
+    Object {
+      "args": Array [],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "queryProjects",
+      "opts": Array [],
+      "originalName": "Query Projects",
+      "path": "/projects/",
+      "returnType": Object {
+        "type": "ProjectInfo",
+        "wrapper": "list",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getProject",
+      "opts": Array [],
+      "originalName": "Get Project",
+      "path": "/projects/\${projectName}",
+      "returnType": Object {
+        "type": "ProjectInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "createProject",
+      "opts": Array [],
+      "originalName": "Create Project",
+      "path": "/projects/\${projectName}",
+      "returnType": Object {
+        "type": "ProjectInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getProjectDescription",
+      "opts": Array [],
+      "originalName": "Get Project Description",
+      "path": "/projects/\${projectName}/description",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "ProjectDescriptionInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "setProjectDescription",
+      "opts": Array [],
+      "originalName": "Set Project Description",
+      "path": "/projects/\${projectName}/description",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "ProjectDescriptionInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "DELETE",
+      "methodName": "deleteProjectDescription",
+      "opts": Array [],
+      "originalName": "Delete Project Description",
+      "path": "/projects/\${projectName}/description",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getProjectParent",
+      "opts": Array [],
+      "originalName": "Get Project Parent",
+      "path": "/projects/\${projectName}/parent",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "ProjectParentInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "setProjectParent",
+      "opts": Array [],
+      "originalName": "Set Project Parent",
+      "path": "/projects/\${projectName}/parent",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getHEAD",
+      "opts": Array [],
+      "originalName": "Get HEAD",
+      "path": "/projects/\${projectName}/HEAD",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "HeadInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "setHEAD",
+      "opts": Array [],
+      "originalName": "Set HEAD",
+      "path": "/projects/\${projectName}/HEAD",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getRepositoryStatistics",
+      "opts": Array [],
+      "originalName": "Get Repository Statistics",
+      "path": "/projects/\${projectName}/statistics.git",
+      "returnType": Object {
+        "type": "RepositoryStatisticsInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "getConfig",
+      "opts": Array [],
+      "originalName": "Get Config",
+      "path": "/projects/\${projectName}/config",
+      "returnType": Object {
+        "type": "ConfigInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "ConfigInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "setConfig",
+      "opts": Array [],
+      "originalName": "Set Config",
+      "path": "/projects/\${projectName}/config",
+      "returnType": Object {
+        "type": "ConfigInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "GCInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "POST",
+      "methodName": "runGC",
+      "opts": Array [],
+      "originalName": "Run GC",
+      "path": "/projects/\${projectName}/gc",
+      "returnType": Object {
+        "type": "any",
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": Object {
+        "type": "BanInput",
+        "wrapper": undefined,
+      },
+      "isUnsupported": false,
+      "method": "PUT",
+      "methodName": "banCommit",
+      "opts": Array [],
+      "originalName": "Ban Commit",
+      "path": "/projects/\${projectName}/ban",
+      "returnType": Object {
+        "type": "BanResultInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "listAccessRightsforProject",
+      "opts": Array [],
+      "originalName": "List Access Rights for Project",
+      "path": "/projects/\${projectName}/access",
+      "returnType": Object {
+        "type": "ProjectAccessInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "args": Array [
+        "projectName",
+      ],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "POST",
+      "methodName": "addUpdateandDeleteAccessRightsforProject",
+      "opts": Array [],
+      "originalName": "Add, Update and Delete Access Rights for Project",
+      "path": "/projects/\${projectName}/access",
+      "returnType": Object {
+        "type": "ProjectAccessInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "isUnsupported": true,
+      "originalName": "Create Change for review.",
+    },
+    Object {
+      "isUnsupported": true,
+      "originalName": "Create Access Rights Change for review.",
+    },
+    Object {
+      "args": Array [],
+      "bodyType": undefined,
+      "isUnsupported": false,
+      "method": "GET",
+      "methodName": "checkAccess",
+      "opts": Array [
+        Array [
+          "account",
+          "account",
+        ],
+        Array [
+          "permission",
+          "perm",
+        ],
+        Array [
+          "ref",
+          "ref",
+        ],
+      ],
+      "originalName": "Check Access",
+      "path": "/projects/MyProject/check.access",
+      "returnType": Object {
+        "type": "AccessCheckInfo",
+        "wrapper": undefined,
+      },
+    },
+    Object {
+      "isUnsupported": true,
+      "originalName": "Index project",
+    },
+    Object {
+      "isUnsupported": true,
+      "originalName": "Index all changes in a project",
+    },
+    Object {
+      "isUnsupported": true,
+      "originalName": "Check project consistency",
+    },
+  ],
+  "titleSection": "projectEndpoints",
+}
 `;
