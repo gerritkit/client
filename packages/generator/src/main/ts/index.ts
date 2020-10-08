@@ -60,11 +60,12 @@ export async function generate(url: string) {
 export async function generates(urls: [string, string][], path: string) {
   await fs.mkdir(`${path}/api/`)
   await fs.mkdir(`${path}/types/`)
-  for await (const [name, url] of urls) {
-    const { code, types } = await generate(url)
-    await Promise.all([
-      fs.writeFile(`${path}/api/${name}.ts`, code),
-      fs.writeFile(`${path}/types/${name}.ts`, types),
-    ])
-  }
+  await Promise.all(
+    urls.map(async ([name, url])=>{
+      const { code, types } = await generate(url)
+      await Promise.all([
+        fs.writeFile(`${path}/api/${name}.ts`, code),
+        fs.writeFile(`${path}/types/${name}.ts`, types),
+      ])
+    }))
 }
