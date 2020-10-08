@@ -1,3 +1,18 @@
+# @gerritkit/core [1.2.0](https://github.com/gerritkit/client/compare/@gerritkit/core@1.1.0...@gerritkit/core@1.2.0) (2020-10-08)
+
+
+### Features
+
+* update generator, separate native and rest clients ([405ca66](https://github.com/gerritkit/client/commit/405ca66426fea60518cf1117e1817bfb8ee8b211))
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/infra:** upgraded to 1.2.0
+
 # @gerritkit/core [1.1.0](https://github.com/gerritkit/client/compare/@gerritkit/core@1.0.0...@gerritkit/core@1.1.0) (2020-09-28)
 
 
