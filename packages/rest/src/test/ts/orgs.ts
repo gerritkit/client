@@ -6,7 +6,7 @@ describe('orgs', () => {
   const mock = new MockAdapter(axios)
   const gerritKit = new GerritKit('https://baseurl/a', {
     username: 'username',
-    password: 'username',
+    password: 'password',
   })
 
   it('list', async () => {
