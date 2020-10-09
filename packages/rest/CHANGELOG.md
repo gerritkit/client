@@ -1,3 +1,10 @@
+# @gerritkit/rest [1.3.0](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.2.0...@gerritkit/rest@1.3.0) (2020-10-09)
+
+
+### Features
+
+* **rest:** update getCommit and getContent ([81d289e](https://github.com/gerritkit/client/commit/81d289e8d3497606f958c8a76f24b3ef7afae083))
+
 # @gerritkit/rest [1.2.0](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.1.0...@gerritkit/rest@1.2.0) (2020-10-08)
 
 
