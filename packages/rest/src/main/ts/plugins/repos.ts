@@ -3,27 +3,14 @@ import { GerritNativeInstance } from '@gerritkit/native'
 export function reposPlugin(native: GerritNativeInstance) {
   return {
     repos: {
-      listForOrg({ org }: { org: string }) {
+      listForOrg(data?: { org: string }) {
         return native.projectEndpoints
           .listProjects({
-            params: { prefix: org },
+            params: { prefix: data?.org },
           })
           .then((data) => Object.keys(data))
       },
-      getCommit({
-        owner,
-        repo,
-        ref,
-      }: {
-        owner: string
-        repo: string
-        ref: string
-      }) {
-        return native.commitEndpoints.getCommit({
-          args: { projectName: `${owner}%2F${repo}`, commitId: ref },
-        })
-      },
-      getContent({
+      async getContent({
         owner,
         repo,
         path,
@@ -32,15 +19,65 @@ export function reposPlugin(native: GerritNativeInstance) {
         owner: string
         repo: string
         path: string
-        ref: string
+        ref?: string
       }) {
+        const repoName = `${owner}%2F${repo}`
+        const revision =
+          !ref || ref === 'HEAD'
+            ? (
+                await native.branchEndpoints.getBranch({
+                  args: { projectName: repoName, branchId: 'HEAD' },
+                })
+              ).revision
+            : ref
+
         return native.branchEndpoints.getContent({
           args: {
             projectName: `${owner}%2F${repo}`,
-            branchId: ref || 'HEAD',
+            branchId: revision,
             fileId: path,
           },
         })
+      },
+
+      async getCommit({
+        owner,
+        repo,
+        ref,
+      }: {
+        owner: string
+        repo: string
+        ref: string
+      }) {
+        const repoName = `${owner}%2F${repo}`
+        const revision =
+          !ref || ref === 'HEAD'
+            ? (
+                await native.branchEndpoints.getBranch({
+                  args: {
+                    projectName: repoName,
+                    branchId: 'HEAD',
+                  },
+                })
+              ).revision.replace(/\//g, '%2F')
+            : ref
+
+        return native.branchEndpoints
+          .getBranch({
+            args: {
+              projectName: repoName,
+              branchId: revision,
+            },
+          })
+
+          .then((data) => {
+            return native.commitEndpoints.getCommit({
+              args: {
+                projectName: repoName,
+                commitId: data.revision,
+              },
+            })
+          })
       },
     },
   }
