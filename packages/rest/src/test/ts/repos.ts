@@ -10,10 +10,10 @@ describe('repos', () => {
   })
 
   it('getCommit', async () => {
-    const url =
-      'https://baseurl/a/projects/work%2Fmy-project/commits/a8a477efffbbf3b44169bb9a1d3a334cbbd9aa96'
+    const commitUrl =
+      'https://baseurl/a/projects/work%2Fmy-project/commits/67ebf73496383c6777035e374d2d664009e2aa5c'
 
-    const responce = `)]}'
+    const commitResponse = `)]}'
   {
     "commit": "184ebe53805e102605d11f6b143486d15c23a09c",
     "parents": [
@@ -38,7 +38,16 @@ describe('repos', () => {
     "message": "Use an EventBus to manage star icons\\n\\nImage widgets that need to ..."
   }`
 
-    mock.onGet(url).reply(200, responce)
+    const branchUrl =
+      'https://baseurl/a/projects/work%2Fmy-project/branches/a8a477efffbbf3b44169bb9a1d3a334cbbd9aa96'
+    const branchResponse = `)]}'
+      {
+        "ref": "refs/heads/master",
+        "revision": "67ebf73496383c6777035e374d2d664009e2aa5c" 
+      }`
+
+    mock.onGet(commitUrl).reply(200, commitResponse)
+    mock.onGet(branchUrl).reply(200, branchResponse)
     expect(
       await gerritKit.repos.getCommit({
         owner: 'work',
