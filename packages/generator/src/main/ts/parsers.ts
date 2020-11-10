@@ -1,7 +1,7 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
 
-import { TMethodInfo } from './types'
+import { TMethodInfo, TSectionInfo } from './types'
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -67,7 +67,14 @@ export function getBodyType(method: cheerio.Element) {
   return types[0]
 }
 
-export function getMethodInfo(method: cheerio.Element): TMethodInfo {
+export function getDescription(method: cheerio.Element) {
+  return cheerio.load(method)('.sect2 > .paragraph').text()
+}
+
+export function getMethodInfo(
+  method: cheerio.Element,
+): TMethodInfo | undefined {
+  const description = getDescription(method)
   const path = (cheerio
     .load(method)('.openblock')
     .first()
@@ -78,19 +85,13 @@ export function getMethodInfo(method: cheerio.Element): TMethodInfo {
   const methodName = normaliseName(originalName)
   const returnType = getReturnType(method)
   const bodyType = getBodyType(method)
-
   const opts: string[] = []
   cheerio
     .load(method)('.hdlist1')
     .each((_index, element) => opts.push(cheerio.load(method)(element).text()))
 
-  const isUnsupported = !path
-
-  if (isUnsupported) {
-    return {
-      originalName,
-      isUnsupported,
-    }
+  if (!path) {
+    return
   }
 
   const { method: parsedMethod, args, path: parsedPath } = parseApiString(path)
@@ -98,21 +99,28 @@ export function getMethodInfo(method: cheerio.Element): TMethodInfo {
   return {
     originalName,
     methodName,
-    args,
+    inputs: {
+      args,
+      body: bodyType,
+      params: parseOptions(opts),
+    },
     returnType,
-    bodyType,
+    description,
     method: parsedMethod,
     path: parsedPath,
-    opts: parseOptions(opts),
-    isUnsupported,
   }
 }
 
-export function getSectionInfo(section: cheerio.Element) {
+export function getSectionInfo(section: cheerio.Element): TSectionInfo {
   const $ = cheerio.load(section)
   const titleSection = normaliseName($('h2').text())
   const methods: TMethodInfo[] = []
-  $('div.sect2').each((_i, elem) => methods.push(getMethodInfo(elem)))
+  $('div.sect2').each((_i, elem) => {
+    const res = getMethodInfo(elem)
+    if (res) {
+      methods.push(res)
+    }
+  })
 
   return {
     titleSection,
@@ -159,7 +167,7 @@ export function getTypesInfo(elem: cheerio.Element) {
 }
 
 export function parseArg(arg: string) {
-  const trimmed = arg.slice(1, - 1)
+  const trimmed = arg.slice(1, -1)
   const parsed = trimmed.split('-')
   const first = parsed[0]
   const rest = parsed.slice(1).map(capitalize)
@@ -178,7 +186,7 @@ export function parseApiString(str: string) {
     }, {} as Record<string, any>)
   }
 
-  const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0]
+  const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0] || ''
 
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
 

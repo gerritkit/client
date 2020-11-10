@@ -4,11 +4,16 @@ import { promises as fs } from 'fs'
 
 import {
   addGlobalVariables,
+  formatType,
   generateFunction,
   generateSectionCode,
   generateType,
+  getDataType,
+  getParamsType,
+  getPathArgsTypes,
 } from './formatters'
-import { getSectionInfo, getSections,getTypes } from './parsers'
+import { getSectionInfo, getSections, getTypes } from './parsers'
+import { TMethodInfo } from './types'
 
 const unsupportedSections = ['iDs', 'jSONEntities']
 
@@ -24,8 +29,13 @@ export async function generate(url: string) {
     .map((el) => getTypes(el))
     .filter((el) => el)
     .flat()
-    .map(generateType)
-    .join('\n')
+
+  const formattedTypes = types.map(generateType).join('\n')
+
+  const typesForDocs = types.reduce((acc, el) => {
+    acc[el.typeName] = generateType(el).slice('export type'.length)
+    return acc
+  }, {})
 
   const code = sections
     .map(getSectionInfo)
@@ -33,7 +43,7 @@ export async function generate(url: string) {
 
   const importTypes = [
     ...new Set([
-      ...code.flatMap((el) => el.methods.map((q) => q.bodyType?.type)),
+      ...code.flatMap((el) => el.methods.map((q) => q.inputs.body?.type)),
       ...code.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
     ]),
   ]
@@ -41,15 +51,14 @@ export async function generate(url: string) {
     .map((type) => `T${type}`)
 
   return {
-    types,
+    types: formattedTypes,
+    docs: generateDocs(code, typesForDocs),
     code: addGlobalVariables(
       importTypes,
       code
         .map(({ titleSection, methods }) => ({
           titleSection,
-          methods: methods
-            .filter(({ isUnsupported }) => !isUnsupported)
-            .map(generateFunction),
+          methods: methods.map(generateFunction),
         }))
         .map(generateSectionCode)
         .join('\n'),
@@ -60,12 +69,49 @@ export async function generate(url: string) {
 export async function generates(urls: [string, string][], path: string) {
   await fs.mkdir(`${path}/api/`)
   await fs.mkdir(`${path}/types/`)
+  await fs.mkdir(`${path}/docs/`)
   await Promise.all(
-    urls.map(async ([name, url])=>{
-      const { code, types } = await generate(url)
+    urls.map(async ([name, url]) => {
+      const { code, types, docs } = await generate(url)
       await Promise.all([
         fs.writeFile(`${path}/api/${name}.ts`, code),
         fs.writeFile(`${path}/types/${name}.ts`, types),
+        fs.writeFile(`${path}/docs/${name}.md`, docs),
       ])
-    }))
+    }),
+  )
+}
+
+export function generateDocs(
+  data: { titleSection: string; methods: TMethodInfo[] }[],
+  types: Record<string, string>,
+) {
+  const a = data.map((data) => {
+    return `
+## ${data.titleSection}
+${data.methods.map(
+  ({ methodName, description, returnType, inputs: { body, params, args } }) => {
+    return `
+### native.${data.titleSection}.${methodName}(input: TInput)
+#### inputs:
+\`\`\`typescript
+type TInput = {
+  ${args ? getPathArgsTypes(args || []) : ''}
+  ${body ? types[getDataType(formatType(body))] : ''}
+  ${params ? getParamsType(params) : ''}
+}
+\`\`\`
+#### returns:
+\`\`\`typescript
+${types[returnType?.type] ? `${types[returnType?.type]}` : ''}
+\`\`\`
+${description || ''}
+`
+  },
+)}
+`
+  })
+  return `
+${a}
+`
 }

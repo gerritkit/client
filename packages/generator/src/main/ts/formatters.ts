@@ -32,52 +32,51 @@ export function generateType({
   `
 }
 
-function getPathArgsTypes(args: string[]) {
-  return args.length > 0
+export function getPathArgsTypes(args?: string[]) {
+  return args && args.length > 0
     ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
     : ''
 }
 
-function getParams(params: string[][]) {
-  return params.length > 0
+function getParams(params?: string[][]) {
+  return params && params.length > 0
     ? `params: {${params.map(([name]) => name).join(', ')}},`
     : ''
 }
 
-function getParamsType(params: string[][]) {
-  return params.length > 0
+export function getParamsType(params?: string[][]) {
+  return params && params.length > 0
     ? `params: {${params.map(([name]) => `${name}?: string`).join(', ')}},`
     : ''
 }
 
-function getData(bodyType?: string) {
+export function getData(bodyType?: string) {
   return bodyType ? 'data,' : ''
 }
 
-function getDataType(bodyType?: string) {
+export function getDataType(bodyType?: string) {
   return bodyType ? `data: ${bodyType},` : ''
 }
 
-function getPathArgs(args: string[]) {
-  return args.length > 0 ? `args: {${args.join(', ')}},` : ''
+export function getPathArgs(args?: string[]) {
+  return args && args.length > 0 ? `args: {${args.join(', ')}},` : ''
 }
 
 export function generateFunction({
   methodName,
   method,
-  args = [],
+  inputs,
   path = '',
-  opts = [],
   returnType,
-  bodyType,
 }: TMethodInfo) {
-  const data = getData(mygenerateFunc(bodyType))
-  const dataType = getDataType(mygenerateFunc(bodyType))
+  const { args, body, params } = inputs
+  const data = getData(formatType(body))
+  const dataType = getDataType(formatType(body))
   const pathArgs = getPathArgs(args)
   const pathArgsTypes = getPathArgsTypes(args)
 
-  const paramsInput = getParams(opts)
-  const paramsInputTypes = getParamsType(opts)
+  const paramsInput = getParams(params)
+  const paramsInputTypes = getParamsType(params)
 
   const empty = !data && !pathArgs && !paramsInput
   const argsStr = empty ? '' : `{${data} ${pathArgs} ${paramsInput} } :`
@@ -85,9 +84,9 @@ export function generateFunction({
     ? ''
     : `{${dataType} ${pathArgsTypes} ${paramsInputTypes}}`
 
-  const params = `${opts
-    .map(([name, filed]) => `${filed}: ${name}`)
-    .join(',\n')}`
+  const formattedParams = `${
+    params && params.map(([name, filed]) => `${filed}: ${name}`).join(',\n')
+  }`
 
   return `
   async ${methodName} ( ${argsStr} ${argsStrType} ) {
@@ -96,12 +95,10 @@ export function generateFunction({
       url: \`\${baseUrl}${path}\`,
       auth,
       params: {
-        ${params}
+        ${formattedParams}
       },
-      ${bodyType ? 'data,' : ''}
-    }).then(({data}) => parseGerritResponse(data) as ${mygenerateFunc(
-      returnType,
-    )})
+      ${body ? 'data,' : ''}
+    }).then(({data}) => parseGerritResponse(data) as ${formatType(returnType)})
   },
 `
 }
@@ -124,14 +121,16 @@ export function generateSectionCode({
     } }) {
       return {
         ${titleSection}: {
-          ${methods.join('\n')}  
+          ${methods.join('\n')}
         }
       }
     }
     `
 }
 
-function mygenerateFunc(data: { wrapper?: string; type: string } | undefined) {
+export function formatType(
+  data: { wrapper?: string; type: string } | undefined,
+) {
   if (!data) {
     return
   }

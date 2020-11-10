@@ -11,6 +11,7 @@ module.exports = {
     'camelcase': 'off',
     'no-template-curly-in-string': 'off',
     'unicorn/consistent-function-scoping': 'off',
-    'no-useless-escape': "off"
-  }
+    'no-useless-escape': 'off',
+    'sonarjs/no-duplicate-string': 'off'
+  },
 };
