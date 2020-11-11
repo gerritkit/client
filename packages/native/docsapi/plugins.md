@@ -1,8 +1,8 @@
 ## pluginEndpoints
 
-### native.pluginEndpoints.listPlugins(input: TInput)
+### nativeClient.pluginEndpoints.listPlugins(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -17,7 +17,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {
@@ -41,11 +41,9 @@ As result a map is returned that maps the plugin IDs to
 PluginInfo entries. The entries in the map are sorted
 by plugin ID.
 
-,
+### nativeClient.pluginEndpoints.installPlugin(input: TInput)
 
-### native.pluginEndpoints.installPlugin(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -53,7 +51,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {
@@ -83,11 +81,9 @@ describes the plugin.
 
 If an existing plugin was overwritten the response is “200 OK”.
 
-,
+### nativeClient.pluginEndpoints.getPluginStatus(input: TInput)
 
-### native.pluginEndpoints.getPluginStatus(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -95,7 +91,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {
@@ -113,11 +109,9 @@ Retrieves the status of a plugin on the Gerrit server.
 As response a PluginInfo entity is returned that
 describes the plugin.
 
-,
+### nativeClient.pluginEndpoints.enablePlugin(input: TInput)
 
-### native.pluginEndpoints.enablePlugin(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -125,7 +119,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {
@@ -143,11 +137,9 @@ Enables a plugin on the Gerrit server.
 As response a PluginInfo entity is returned that
 describes the plugin.
 
-,
+### nativeClient.pluginEndpoints.disablePlugin(input: TInput)
 
-### native.pluginEndpoints.disablePlugin(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -155,7 +147,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {
@@ -178,11 +170,9 @@ describes the plugin.
 Disabling of a mandatory plugin
 is rejected:
 
-,
+### nativeClient.pluginEndpoints.reloadPlugin(input: TInput)
 
-### native.pluginEndpoints.reloadPlugin(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -190,7 +180,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPluginInfo = {

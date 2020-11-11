@@ -1,32 +1,30 @@
 ## configEndpoints
 
-### native.configEndpoints.getVersion(input: TInput)
+### nativeClient.configEndpoints.getVersion(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns the version of the Gerrit server.
 
-,
+### nativeClient.configEndpoints.getServerInfo(input: TInput)
 
-### native.configEndpoints.getServerInfo(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TServerInfo = {
@@ -50,11 +48,9 @@ Returns the information about the Gerrit server configuration.
 
 As result a ServerInfo entity is returned.
 
-,
+### nativeClient.configEndpoints.checkConsistency(input: TInput)
 
-### native.configEndpoints.checkConsistency(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -62,7 +58,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TConsistencyCheckInfo = {
@@ -81,20 +77,18 @@ ConsistencyCheckInput entity.
 As result a ConsistencyCheckInfo entity
 is returned that contains detected consistency problems.
 
-,
+### nativeClient.configEndpoints.reloadConfig(input: TInput)
 
-### native.configEndpoints.reloadConfig(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Reloads the gerrit.config configuration.
@@ -112,11 +106,9 @@ no effect due to a matching default value, no output for this entry is shown.
 As result a ConfigUpdateInfo entity is returned that
 contains information about how the updated config entries were handled.
 
-,
+### nativeClient.configEndpoints.confirmEmail(input: TInput)
 
-### native.configEndpoints.confirmEmail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -124,10 +116,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Confirms that the user owns an email address.
@@ -140,17 +132,15 @@ The response is “204 No Content”.
 If the token is invalid or if it’s the token of another user the
 request fails and the response is “422 Unprocessable Entity”.
 
-,
+### nativeClient.configEndpoints.listCaches(input: TInput)
 
-### native.configEndpoints.listCaches(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCacheInfo = {
@@ -174,11 +164,9 @@ The entries in the map are sorted by cache name.
 It is possible to get different output formats by specifying the
 format option:
 
-,
+### nativeClient.configEndpoints.cacheOperations(input: TInput)
 
-### native.configEndpoints.cacheOperations(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -186,20 +174,18 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Executes a cache operation that is specified in the request body in a
 CacheOperationInput entity.
 
-,
+### nativeClient.configEndpoints.getCache(input: TInput)
 
-### native.configEndpoints.getCache(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -207,7 +193,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCacheInfo = {
@@ -226,11 +212,9 @@ following capabilities:
 
 As result a CacheInfo entity is returned.
 
-,
+### nativeClient.configEndpoints.flushCache(input: TInput)
 
-### native.configEndpoints.flushCache(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -238,10 +222,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Flushes a cache.
@@ -249,17 +233,15 @@ Flushes a cache.
 The caller must be a member of a group that is granted one of the
 following capabilities:
 
-,
+### nativeClient.configEndpoints.getSummary(input: TInput)
 
-### native.configEndpoints.getSummary(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSummaryInfo = {
@@ -280,17 +262,15 @@ The following options are supported:
 
 As result a SummaryInfo entity is returned.
 
-,
+### nativeClient.configEndpoints.listCapabilities(input: TInput)
 
-### native.configEndpoints.listCapabilities(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCapabilityInfo = {
@@ -307,17 +287,15 @@ returned.
 
 The entries in the map are sorted by capability ID.
 
-,
+### nativeClient.configEndpoints.listTasks(input: TInput)
 
-### native.configEndpoints.listTasks(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TTaskInfo = {
@@ -353,11 +331,9 @@ As result a list of TaskInfo entities is returned.
 The entries in the list are sorted by task state, remaining delay and
 command.
 
-,
+### nativeClient.configEndpoints.getTask(input: TInput)
 
-### native.configEndpoints.getTask(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -365,7 +341,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TTaskInfo = {
@@ -391,11 +367,9 @@ following capabilities:
 
 As result a TaskInfo entity is returned.
 
-,
+### nativeClient.configEndpoints.deleteTask(input: TInput)
 
-### native.configEndpoints.deleteTask(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -403,10 +377,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Kills a task from the background work queue that the Gerrit daemon
@@ -422,20 +396,18 @@ have a specific project, are hidden.
 Members of a group granted one of the following capabilities may view
 all tasks:
 
-,
+### nativeClient.configEndpoints.getTopMenus(input: TInput)
 
-### native.configEndpoints.getTopMenus(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns the list of additional top menu entries.
@@ -443,20 +415,18 @@ Returns the list of additional top menu entries.
 As response a list of the additional top menu entries as
 TopMenuEntryInfo entities is returned.
 
-,
+### nativeClient.configEndpoints.getDefaultUserPreferences(input: TInput)
 
-### native.configEndpoints.getDefaultUserPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns the default user preferences for the server.
@@ -464,11 +434,9 @@ Returns the default user preferences for the server.
 As response a
 PreferencesInfo is returned.
 
-,
+### nativeClient.configEndpoints.setDefaultUserPreferences(input: TInput)
 
-### native.configEndpoints.setDefaultUserPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -476,10 +444,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the default user preferences for the server.
@@ -496,20 +464,18 @@ Administrate Server capability.
 As response a
 PreferencesInfo is returned.
 
-,
+### nativeClient.configEndpoints.getDefaultDiffPreferences(input: TInput)
 
-### native.configEndpoints.getDefaultDiffPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns the default diff preferences for the server.
@@ -517,11 +483,9 @@ Returns the default diff preferences for the server.
 As response a
 DiffPreferencesInfo is returned.
 
-,
+### nativeClient.configEndpoints.setDefaultDiffPreferences(input: TInput)
 
-### native.configEndpoints.setDefaultDiffPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -529,10 +493,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the default diff preferences for the server.
@@ -549,20 +513,18 @@ Administrate Server capability.
 As response a
 DiffPreferencesInfo is returned.
 
-,
+### nativeClient.configEndpoints.getDefaultEditPreferences(input: TInput)
 
-### native.configEndpoints.getDefaultEditPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns the default edit preferences for the server.
@@ -570,11 +532,9 @@ Returns the default edit preferences for the server.
 As response a
 EditPreferencesInfo is returned.
 
-,
+### nativeClient.configEndpoints.setDefaultEditPreferences(input: TInput)
 
-### native.configEndpoints.setDefaultEditPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -582,10 +542,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the default edit preferences for the server.

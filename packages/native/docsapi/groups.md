@@ -1,8 +1,8 @@
 ## groupEndpoints
 
-### native.groupEndpoints.listGroups(input: TInput)
+### nativeClient.groupEndpoints.listGroups(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -10,7 +10,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -37,17 +37,15 @@ As result a map is returned that maps the group names to
 GroupInfo entries. The entries in the map are sorted
 by group name.
 
-,
+### nativeClient.groupEndpoints.queryGroups(input: TInput)
 
-### native.groupEndpoints.queryGroups(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -77,11 +75,9 @@ If the number of groups matching the query exceeds either the internal
 limit or a supplied limit query parameter, the last group object has
 a \_more_groups: true JSON field set.
 
-,
+### nativeClient.groupEndpoints.getGroup(input: TInput)
 
-### native.groupEndpoints.getGroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -89,7 +85,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -113,11 +109,9 @@ Retrieves a group.
 As response a GroupInfo entity is returned that
 describes the group.
 
-,
+### nativeClient.groupEndpoints.createGroup(input: TInput)
 
-### native.groupEndpoints.createGroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -125,7 +119,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -156,11 +150,9 @@ If the group creation fails because the name is already in use, or the
 UUID was specified and the UUID is already in use, the response is
 “409 Conflict”.
 
-,
+### nativeClient.groupEndpoints.getGroupDetail(input: TInput)
 
-### native.groupEndpoints.getGroupDetail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -168,7 +160,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -193,11 +185,9 @@ directly included groups.
 As response a GroupInfo entity is returned that
 describes the group.
 
-,
+### nativeClient.groupEndpoints.getGroupName(input: TInput)
 
-### native.groupEndpoints.getGroupName(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -205,19 +195,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the name of a group.
 
-,
+### nativeClient.groupEndpoints.renameGroup(input: TInput)
 
-### native.groupEndpoints.renameGroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -225,10 +213,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Renames a Gerrit internal group.
@@ -243,11 +231,9 @@ As response the new group name is returned.
 If renaming the group fails because the new name is already in use the
 response is “409 Conflict”.
 
-,
+### nativeClient.groupEndpoints.getGroupDescription(input: TInput)
 
-### native.groupEndpoints.getGroupDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -255,10 +241,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the description of a group.
@@ -268,11 +254,9 @@ non-internal group will return 405 Method Not Allowed.
 
 If the group does not have a description an empty string is returned.
 
-,
+### nativeClient.groupEndpoints.setGroupDescription(input: TInput)
 
-### native.groupEndpoints.setGroupDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -280,10 +264,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the description of a Gerrit internal group.
@@ -297,11 +281,9 @@ As response the new group description is returned.
 
 If the description was deleted the response is “204 No Content”.
 
-,
+### nativeClient.groupEndpoints.deleteGroupDescription(input: TInput)
 
-### native.groupEndpoints.deleteGroupDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -309,19 +291,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the description of a Gerrit internal group.
 
-,
+### nativeClient.groupEndpoints.getGroupOptions(input: TInput)
 
-### native.groupEndpoints.getGroupOptions(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -329,7 +309,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupOptionsInfo = {
@@ -342,11 +322,9 @@ Retrieves the options of a group.
 As response a GroupOptionsInfo entity is
 returned that describes the options of the group.
 
-,
+### nativeClient.groupEndpoints.setGroupOptions(input: TInput)
 
-### native.groupEndpoints.setGroupOptions(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -355,7 +333,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupOptionsInfo = {
@@ -374,11 +352,9 @@ non-internal group will return 405 Method Not Allowed.
 As response the new group options are returned as a
 GroupOptionsInfo entity.
 
-,
+### nativeClient.groupEndpoints.getGroupOwner(input: TInput)
 
-### native.groupEndpoints.getGroupOwner(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -386,7 +362,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -413,11 +389,9 @@ non-internal group will return 405 Method Not Allowed.
 As response a GroupInfo entity is returned that
 describes the owner group.
 
-,
+### nativeClient.groupEndpoints.setGroupOwner(input: TInput)
 
-### native.groupEndpoints.setGroupOwner(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -425,7 +399,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -457,11 +431,9 @@ non-internal group will return 405 Method Not Allowed.
 As response a GroupInfo entity is returned that
 describes the new owner group.
 
-,
+### nativeClient.groupEndpoints.getAuditLog(input: TInput)
 
-### native.groupEndpoints.getAuditLog(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -469,7 +441,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupAuditEventInfo = {
@@ -490,11 +462,9 @@ entities is returned that describes the audit events of the group. The
 returned audit events are sorted by date in reverse order so that the
 newest audit event comes first.
 
-,
+### nativeClient.groupEndpoints.indexGroup(input: TInput)
 
-### native.groupEndpoints.indexGroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -502,10 +472,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Adds or updates the internal group in the secondary index.
@@ -514,9 +484,9 @@ Adds or updates the internal group in the secondary index.
 
 ## groupMemberEndpoints
 
-### native.groupMemberEndpoints.listGroupMembers(input: TInput)
+### nativeClient.groupMemberEndpoints.listGroupMembers(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -524,10 +494,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the direct members of a Gerrit internal group.
@@ -545,11 +515,9 @@ members the parameter recursive can be set.
 Members from included external groups and from included groups which
 are not visible to the calling user are ignored.
 
-,
+### nativeClient.groupMemberEndpoints.getGroupMember(input: TInput)
 
-### native.groupMemberEndpoints.getGroupMember(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -557,10 +525,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves a group member.
@@ -568,11 +536,9 @@ Retrieves a group member.
 As response a detailed
 AccountInfo entity is returned that describes the group member.
 
-,
+### nativeClient.groupMemberEndpoints.addGroupMember(input: TInput)
 
-### native.groupMemberEndpoints.addGroupMember(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -580,10 +546,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Adds a user as member to a Gerrit internal group.
@@ -597,11 +563,9 @@ AccountInfo entity is returned that describes the group member.
 The request also succeeds if the user is already a member of this
 group, but then the HTTP response code is 200 OK.
 
-,
+### nativeClient.groupMemberEndpoints.addGroupMembers(input: TInput)
 
-### native.groupMemberEndpoints.addGroupMembers(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -610,10 +574,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 OR
@@ -631,11 +595,9 @@ is returned for each user specified in the input, independently of
 whether the user was newly added to the group or whether the user was
 already a member of the group.
 
-,
+### nativeClient.groupMemberEndpoints.removeGroupMember(input: TInput)
 
-### native.groupMemberEndpoints.removeGroupMember(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -643,10 +605,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Removes a user from a Gerrit internal group.
@@ -654,11 +616,9 @@ Removes a user from a Gerrit internal group.
 This endpoint is only allowed for Gerrit internal groups; attempting to call on a
 non-internal group will return 405 Method Not Allowed.
 
-,
+### nativeClient.groupMemberEndpoints.removeGroupMembers(input: TInput)
 
-### native.groupMemberEndpoints.removeGroupMembers(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -667,10 +627,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Removes one or several users from a Gerrit internal group.
@@ -682,9 +642,9 @@ body as a MembersInput entity.
 
 ## subgroupEndpoints
 
-### native.subgroupEndpoints.listSubgroups(input: TInput)
+### nativeClient.subgroupEndpoints.listSubgroups(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -692,7 +652,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -719,11 +679,9 @@ The entries in the list are sorted by group name and UUID.
 This endpoint is only allowed for Gerrit internal groups; attempting to call on a
 non-internal group will return 405 Method Not Allowed.
 
-,
+### nativeClient.subgroupEndpoints.getSubgroup(input: TInput)
 
-### native.subgroupEndpoints.getSubgroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -731,7 +689,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -755,11 +713,9 @@ Retrieves a subgroup.
 As response a GroupInfo entity is returned that
 describes the subgroup.
 
-,
+### nativeClient.subgroupEndpoints.addSubgroup(input: TInput)
 
-### native.subgroupEndpoints.addSubgroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -767,7 +723,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGroupInfo = {
@@ -798,11 +754,9 @@ describes the subgroup.
 The request also succeeds if the group is already a subgroup of this
 group.
 
-,
+### nativeClient.subgroupEndpoints.addSubgroups(input: TInput)
 
-### native.subgroupEndpoints.addSubgroups(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -811,10 +765,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 OR
@@ -831,11 +785,9 @@ is returned for each group specified in the input, independently of
 whether the group was newly added as subgroup or whether the
 group was already a subgroup of the group.
 
-,
+### nativeClient.subgroupEndpoints.removeSubgroup(input: TInput)
 
-### native.subgroupEndpoints.removeSubgroup(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -843,10 +795,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Removes a subgroup from a Gerrit internal group.
@@ -854,11 +806,9 @@ Removes a subgroup from a Gerrit internal group.
 This endpoint is only allowed for Gerrit internal groups; attempting to call on a
 non-internal group will return 405 Method Not Allowed.
 
-,
+### nativeClient.subgroupEndpoints.removeSubgroups(input: TInput)
 
-### native.subgroupEndpoints.removeSubgroups(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -867,10 +817,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Removes one or several subgroups from a Gerrit internal group.

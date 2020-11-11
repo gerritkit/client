@@ -4,16 +4,12 @@ import { promises as fs } from 'fs'
 
 import {
   addGlobalVariables,
-  formatType,
+  generateDocs,
   generateFunction,
   generateSectionCode,
   generateType,
-  getDataType,
-  getParamsType,
-  getPathArgsTypes,
 } from './formatters'
 import { getSectionInfo, getSections, getTypes } from './parsers'
-import { TMethodInfo } from './types'
 
 const unsupportedSections = ['iDs', 'jSONEntities']
 
@@ -80,38 +76,4 @@ export async function generates(urls: [string, string][], path: string) {
       ])
     }),
   )
-}
-
-export function generateDocs(
-  data: { titleSection: string; methods: TMethodInfo[] }[],
-  types: Record<string, string>,
-) {
-  const a = data.map((data) => {
-    return `
-## ${data.titleSection}
-${data.methods.map(
-  ({ methodName, description, returnType, inputs: { body, params, args } }) => {
-    return `
-### native.${data.titleSection}.${methodName}(input: TInput)
-#### inputs:
-\`\`\`typescript
-type TInput = {
-  ${args ? getPathArgsTypes(args || []) : ''}
-  ${body ? types[getDataType(formatType(body))] : ''}
-  ${params ? getParamsType(params) : ''}
-}
-\`\`\`
-#### returns:
-\`\`\`typescript
-${types[returnType?.type] ? `${types[returnType?.type]}` : ''}
-\`\`\`
-${description || ''}
-`
-  },
-)}
-`
-  })
-  return `
-${a}
-`
 }

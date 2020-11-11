@@ -1,8 +1,8 @@
 ## accessRightsEndpoints
 
-### native.accessRightsEndpoints.listAccessRights(input: TInput)
+### nativeClient.accessRightsEndpoints.listAccessRights(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -10,7 +10,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectAccessInfo = {

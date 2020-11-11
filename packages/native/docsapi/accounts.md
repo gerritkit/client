@@ -1,14 +1,14 @@
 ## accountEndpoints
 
-### native.accountEndpoints.queryAccount(input: TInput)
+### nativeClient.accountEndpoints.queryAccount(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TAccountInfo = {
@@ -55,11 +55,9 @@ Secondary emails are only included if the calling user has the
 Modify Account
 capability.
 
-,
+### nativeClient.accountEndpoints.getAccount(input: TInput)
 
-### native.accountEndpoints.getAccount(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -67,19 +65,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns an account as an AccountInfo entity.
 
-,
+### nativeClient.accountEndpoints.createAccount(input: TInput)
 
-### native.accountEndpoints.createAccount(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -87,7 +83,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TAccountInfo = {
@@ -112,11 +108,9 @@ AccountInput.
 As response a detailed AccountInfo entity is
 returned that describes the created account.
 
-,
+### nativeClient.accountEndpoints.getAccountDetails(input: TInput)
 
-### native.accountEndpoints.getAccountDetails(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -124,20 +118,18 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the details of an account as an
 AccountDetailInfo entity.
 
-,
+### nativeClient.accountEndpoints.getAccountName(input: TInput)
 
-### native.accountEndpoints.getAccountName(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -145,21 +137,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the full name of an account.
 
 If the account does not have a name an empty string is returned.
 
-,
+### nativeClient.accountEndpoints.setAccountName(input: TInput)
 
-### native.accountEndpoints.setAccountName(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -168,10 +158,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the full name of an account.
@@ -186,11 +176,9 @@ If the name was deleted the response is “204 No Content”.
 Some realms may not allow to modify the account name. In this case the
 request is rejected with “405 Method Not Allowed”.
 
-,
+### nativeClient.accountEndpoints.deleteAccountName(input: TInput)
 
-### native.accountEndpoints.deleteAccountName(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -198,19 +186,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the name of an account.
 
-,
+### nativeClient.accountEndpoints.getAccountStatus(input: TInput)
 
-### native.accountEndpoints.getAccountStatus(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -218,21 +204,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the status of an account.
 
 If the account does not have a status an empty string is returned.
 
-,
+### nativeClient.accountEndpoints.setAccountStatus(input: TInput)
 
-### native.accountEndpoints.setAccountStatus(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -241,10 +225,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the status of an account.
@@ -256,11 +240,9 @@ As response the new account status is returned.
 
 If the name was deleted the response is “204 No Content”.
 
-,
+### nativeClient.accountEndpoints.getUsername(input: TInput)
 
-### native.accountEndpoints.getUsername(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -268,21 +250,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the username of an account.
 
 If the account does not have a username the response is “404 Not Found”.
 
-,
+### nativeClient.accountEndpoints.setUsername(input: TInput)
 
-### native.accountEndpoints.setUsername(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -291,10 +271,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 The new username must be provided in the request body inside
@@ -305,11 +285,9 @@ fails with “405 Method Not Allowed”.
 
 As response the new username is returned.
 
-,
+### nativeClient.accountEndpoints.setDisplayName(input: TInput)
 
-### native.accountEndpoints.setDisplayName(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -318,10 +296,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 The new display name must be provided in the request body inside
@@ -329,11 +307,9 @@ a DisplayNameInput entity.
 
 As response the new display name is returned.
 
-,
+### nativeClient.accountEndpoints.getActive(input: TInput)
 
-### native.accountEndpoints.getActive(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -341,10 +317,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Checks if an account is active.
@@ -353,11 +329,9 @@ If the account is active the string ok is returned.
 
 If the account is inactive the response is “204 No Content”.
 
-,
+### nativeClient.accountEndpoints.setActive(input: TInput)
 
-### native.accountEndpoints.setActive(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -365,21 +339,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the account state to active.
 
 If the account was already active the response is “200 OK”.
 
-,
+### nativeClient.accountEndpoints.deleteActive(input: TInput)
 
-### native.accountEndpoints.deleteActive(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -387,21 +359,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the account state to inactive.
 
 If the account was already inactive the response is “409 Conflict”.
 
-,
+### nativeClient.accountEndpoints.setGenerateHTTPPassword(input: TInput)
 
-### native.accountEndpoints.setGenerateHTTPPassword(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -410,10 +380,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets/Generates the HTTP password of an account.
@@ -428,11 +398,9 @@ As response the new HTTP password is returned.
 
 If the HTTP password was deleted the response is “204 No Content”.
 
-,
+### nativeClient.accountEndpoints.deleteHTTPPassword(input: TInput)
 
-### native.accountEndpoints.deleteHTTPPassword(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -440,19 +408,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the HTTP password of an account.
 
-,
+### nativeClient.accountEndpoints.getOAuthAccessToken(input: TInput)
 
-### native.accountEndpoints.getOAuthAccessToken(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -460,7 +426,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TOAuthTokenInfo = {
@@ -482,11 +448,9 @@ If there is no token available, or the token has already expired,
 “404 Not Found” is returned as response. Requests to obtain an access
 token of another user are rejected with “403 Forbidden”.
 
-,
+### nativeClient.accountEndpoints.listAccountEmails(input: TInput)
 
-### native.accountEndpoints.listAccountEmails(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -494,7 +458,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TEmailInfo = {
@@ -512,11 +476,9 @@ capability is required to view emails of other users.
 As response the email addresses of the user are returned as a list of
 EmailInfo entities.
 
-,
+### nativeClient.accountEndpoints.getAccountEmail(input: TInput)
 
-### native.accountEndpoints.getAccountEmail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -524,7 +486,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TEmailInfo = {
@@ -539,11 +501,9 @@ Retrieves an email address of a user.
 As response an EmailInfo entity is returned that
 describes the email address.
 
-,
+### nativeClient.accountEndpoints.createAccountEmail(input: TInput)
 
-### native.accountEndpoints.createAccountEmail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -551,7 +511,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TEmailInfo = {
@@ -581,11 +541,9 @@ contain additional options for the email address.
 As response the new email address is returned as
 EmailInfo entity.
 
-,
+### nativeClient.accountEndpoints.deleteAccountEmail(input: TInput)
 
-### native.accountEndpoints.deleteAccountEmail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -593,19 +551,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes an email address of an account.
 
-,
+### nativeClient.accountEndpoints.setPreferredEmail(input: TInput)
 
-### native.accountEndpoints.setPreferredEmail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -613,10 +569,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets an email address as preferred email address for an account.
@@ -624,11 +580,9 @@ Sets an email address as preferred email address for an account.
 If the email address was already the preferred email address of the
 account the response is “200 OK”.
 
-,
+### nativeClient.accountEndpoints.listSSHKeys(input: TInput)
 
-### native.accountEndpoints.listSSHKeys(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -636,7 +590,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSshKeyInfo = {
@@ -654,11 +608,9 @@ Returns the SSH keys of an account.
 As response the SSH keys of the account are returned as a list of
 SshKeyInfo entities.
 
-,
+### nativeClient.accountEndpoints.getSSHKey(input: TInput)
 
-### native.accountEndpoints.getSSHKey(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -666,7 +618,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSshKeyInfo = {
@@ -684,11 +636,9 @@ Retrieves an SSH key of a user.
 As response an SshKeyInfo entity is returned that
 describes the SSH key.
 
-,
+### nativeClient.accountEndpoints.addSSHKey(input: TInput)
 
-### native.accountEndpoints.addSSHKey(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -696,7 +646,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSshKeyInfo = {
@@ -719,11 +669,9 @@ key is persisted.
 As response an SshKeyInfo entity is returned that
 describes the new SSH key.
 
-,
+### nativeClient.accountEndpoints.deleteSSHKey(input: TInput)
 
-### native.accountEndpoints.deleteSSHKey(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -731,19 +679,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes an SSH key of a user.
 
-,
+### nativeClient.accountEndpoints.listGPGKeys(input: TInput)
 
-### native.accountEndpoints.listGPGKeys(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -751,7 +697,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGpgKeyInfo = {
@@ -769,11 +715,9 @@ Returns the GPG keys of an account.
 As a response, the GPG keys of the account are returned as a map of
 GpgKeyInfo entities, keyed by ID.
 
-,
+### nativeClient.accountEndpoints.getGPGKey(input: TInput)
 
-### native.accountEndpoints.getGPGKey(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -781,7 +725,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGpgKeyInfo = {
@@ -799,11 +743,9 @@ Retrieves a GPG key of a user.
 As a response, a GpgKeyInfo entity is returned that
 describes the GPG key.
 
-,
+### nativeClient.accountEndpoints.addDeleteGPGKeys(input: TInput)
 
-### native.accountEndpoints.addDeleteGPGKeys(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -812,7 +754,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TGpgKeyInfo = {
@@ -836,11 +778,9 @@ As a response, the modified GPG keys are returned as a map of
 GpgKeyInfo entities, keyed by ID. Deleted keys are
 represented by an empty object.
 
-,
+### nativeClient.accountEndpoints.deleteGPGKey(input: TInput)
 
-### native.accountEndpoints.deleteGPGKey(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -848,19 +788,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a GPG key of a user.
 
-,
+### nativeClient.accountEndpoints.listAccountCapabilities(input: TInput)
 
-### native.accountEndpoints.listAccountCapabilities(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -868,7 +806,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCapabilityInfo = {
@@ -911,11 +849,9 @@ To filter the set of global capabilities the q parameter can be used.
 Filtering may decrease the response time by avoiding looking at every
 possible alternative for the caller.
 
-,
+### nativeClient.accountEndpoints.checkAccountCapability(input: TInput)
 
-### native.accountEndpoints.checkAccountCapability(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -923,10 +859,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Checks if a user has a certain global capability.
@@ -936,11 +872,9 @@ If the user has the global capability the string ok is returned.
 If the user doesn’t have the global capability the response is
 “404 Not Found”.
 
-,
+### nativeClient.accountEndpoints.listGroups(input: TInput)
 
-### native.accountEndpoints.listGroups(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -948,10 +882,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists all groups that contain the specified user as a member.
@@ -959,11 +893,9 @@ Lists all groups that contain the specified user as a member.
 As result a list of GroupInfo
 entries is returned.
 
-,
+### nativeClient.accountEndpoints.getAvatar(input: TInput)
 
-### native.accountEndpoints.getAvatar(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -971,10 +903,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the avatar image of the user.
@@ -984,11 +916,9 @@ in pixels (height and width).
 
 The response redirects to the URL of the avatar image.
 
-,
+### nativeClient.accountEndpoints.getAvatarChangeURL(input: TInput)
 
-### native.accountEndpoints.getAvatarChangeURL(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -996,19 +926,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the URL where the user can change the avatar image.
 
-,
+### nativeClient.accountEndpoints.getUserPreferences(input: TInput)
 
-### native.accountEndpoints.getUserPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1016,7 +944,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPreferencesInfo = {
@@ -1053,11 +981,9 @@ ModifyAccount
 capability, in which case they can retrieve the preferences for
 any account.
 
-,
+### nativeClient.accountEndpoints.setUserPreferences(input: TInput)
 
-### native.accountEndpoints.setUserPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1066,7 +992,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPreferencesInfo = {
@@ -1098,11 +1024,9 @@ PreferencesInput entity.
 As result the new preferences of the user are returned as a
 PreferencesInfo entity.
 
-,
+### nativeClient.accountEndpoints.getDiffPreferences(input: TInput)
 
-### native.accountEndpoints.getDiffPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1110,7 +1034,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDiffPreferencesInfo = {
@@ -1144,11 +1068,9 @@ Retrieves the diff preferences of a user.
 As result the diff preferences of the user are returned as a
 DiffPreferencesInfo entity.
 
-,
+### nativeClient.accountEndpoints.setDiffPreferences(input: TInput)
 
-### native.accountEndpoints.setDiffPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1157,7 +1079,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDiffPreferencesInfo = {
@@ -1194,11 +1116,9 @@ DiffPreferencesInput entity.
 As result the new diff preferences of the user are returned as a
 DiffPreferencesInfo entity.
 
-,
+### nativeClient.accountEndpoints.getEditPreferences(input: TInput)
 
-### native.accountEndpoints.getEditPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1206,7 +1126,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TEditPreferencesInfo = {
@@ -1232,11 +1152,9 @@ Retrieves the edit preferences of a user.
 As result the edit preferences of the user are returned as a
 EditPreferencesInfo entity.
 
-,
+### nativeClient.accountEndpoints.setEditPreferences(input: TInput)
 
-### native.accountEndpoints.setEditPreferences(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1245,7 +1163,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TEditPreferencesInfo = {
@@ -1274,11 +1192,9 @@ EditPreferencesInfo entity.
 As result the new edit preferences of the user are returned as a
 EditPreferencesInfo entity.
 
-,
+### nativeClient.accountEndpoints.getWatchedProjects(input: TInput)
 
-### native.accountEndpoints.getWatchedProjects(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1286,7 +1202,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectWatchInfo = {
@@ -1306,11 +1222,9 @@ As result the watched projects of the user are returned as a list of
 ProjectWatchInfo entities.
 The result is sorted by project name in ascending order.
 
-,
+### nativeClient.accountEndpoints.addUpdateaListofWatchedProjectEntities(input: TInput)
 
-### native.accountEndpoints.addUpdateaListofWatchedProjectEntities(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1319,7 +1233,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectWatchInfo = {
@@ -1344,11 +1258,9 @@ As result the watched projects of the user are returned as a list of
 ProjectWatchInfo entities.
 The result is sorted by project name in ascending order.
 
-,
+### nativeClient.accountEndpoints.deleteWatchedProjects(input: TInput)
 
-### native.accountEndpoints.deleteWatchedProjects(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1357,20 +1269,18 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Projects posted to this endpoint will no longer be watched. The posted body
 can contain a list of ProjectWatchInfo entities.
 
-,
+### nativeClient.accountEndpoints.getAccountExternalIDs(input: TInput)
 
-### native.accountEndpoints.getAccountExternalIDs(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1378,7 +1288,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TAccountExternalIdInfo = {
@@ -1398,11 +1308,9 @@ external ids that belong to other accounts.
 As result the external ids of the user are returned as a list of
 AccountExternalIdInfo entities.
 
-,
+### nativeClient.accountEndpoints.deleteAccountExternalIDs(input: TInput)
 
-### native.accountEndpoints.deleteAccountExternalIDs(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1410,10 +1318,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Delete a list of external ids for a user account. The target external ids must
@@ -1423,11 +1331,9 @@ Only external ids belonging to the caller may be deleted. Users that have
 Modify Account can delete
 external ids that belong to other accounts.
 
-,
+### nativeClient.accountEndpoints.listContributorAgreements(input: TInput)
 
-### native.accountEndpoints.listContributorAgreements(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1435,7 +1341,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TContributorAgreementInfo = {
@@ -1451,11 +1357,9 @@ Gets a list of the user’s signed contributor agreements.
 As response the user’s signed agreements are returned as a list
 of ContributorAgreementInfo entities.
 
-,
+### nativeClient.accountEndpoints.deleteDraftComments(input: TInput)
 
-### native.accountEndpoints.deleteDraftComments(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1463,7 +1367,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDeletedDraftCommentInfo = {
@@ -1481,11 +1385,9 @@ Only drafts belonging to the caller may be deleted.
 As a response, a list of
 DeletedDraftCommentInfo entities is returned.
 
-,
+### nativeClient.accountEndpoints.signContributorAgreement(input: TInput)
 
-### native.accountEndpoints.signContributorAgreement(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1493,10 +1395,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Signs a contributor agreement.
@@ -1506,11 +1408,9 @@ a ContributorAgreementInput.
 
 As response the contributor agreement name is returned.
 
-,
+### nativeClient.accountEndpoints.indexAccount(input: TInput)
 
-### native.accountEndpoints.indexAccount(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1518,10 +1418,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Adds or updates the account in the secondary index.
@@ -1530,9 +1430,9 @@ Adds or updates the account in the secondary index.
 
 ## defaultStarEndpoints
 
-### native.defaultStarEndpoints.getChangesWithDefaultStar(input: TInput)
+### nativeClient.defaultStarEndpoints.getChangesWithDefaultStar(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1540,10 +1440,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the changes that were starred with the default star by the
@@ -1551,11 +1451,9 @@ identified user account. This URL endpoint is functionally identical
 to the changes query GET /changes/?q=is:starred. The result is a list
 of ChangeInfo entities.
 
-,
+### nativeClient.defaultStarEndpoints.putDefaultStarOnChange(input: TInput)
 
-### native.defaultStarEndpoints.putDefaultStarOnChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1563,10 +1461,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Star a change with the default label. Changes starred with the default
@@ -1574,11 +1472,9 @@ label are returned for the search query is:starred or starredby:USER
 and automatically notify the user whenever updates are made to the
 change.
 
-,
+### nativeClient.defaultStarEndpoints.removeDefaultStarFromChange(input: TInput)
 
-### native.defaultStarEndpoints.removeDefaultStarFromChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1586,10 +1482,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Remove the default star label from a change. This stops notifications.
@@ -1598,9 +1494,9 @@ Remove the default star label from a change. This stops notifications.
 
 ## starEndpoints
 
-### native.starEndpoints.getStarredChanges(input: TInput)
+### nativeClient.starEndpoints.getStarredChanges(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1608,10 +1504,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the changes that were starred with any label by the identified
@@ -1619,11 +1515,9 @@ user account. This URL endpoint is functionally identical to the
 changes query GET /changes/?q=has:stars. The result is a list of
 ChangeInfo entities.
 
-,
+### nativeClient.starEndpoints.getStarLabelsFromChange(input: TInput)
 
-### native.starEndpoints.getStarLabelsFromChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1631,10 +1525,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Get star labels from a change.
@@ -1642,11 +1536,9 @@ Get star labels from a change.
 As response the star labels that the user applied on the change are
 returned. The labels are lexicographically sorted.
 
-,
+### nativeClient.starEndpoints.updateStarLabelsOnChange(input: TInput)
 
-### native.starEndpoints.updateStarLabelsOnChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1655,10 +1547,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Update star labels on a change. The star labels to be added/removed

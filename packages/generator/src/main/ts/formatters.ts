@@ -141,3 +141,58 @@ export function formatType(
   if (wrapper === 'list') return `T${type}[]`
   return `T${type}`
 }
+
+export function generateDocs(
+  data: { titleSection: string; methods: TMethodInfo[] }[],
+  types: Record<string, string>,
+) {
+  return `
+${data.map((data) => {
+  return `
+## ${data.titleSection}
+${data.methods
+  .map(
+    ({
+      methodName,
+      description,
+      returnType,
+      inputs: { body, params, args },
+    }) => {
+      return `
+### nativeClient.${data.titleSection}.${methodName}(${
+        !args && !body && !params ? `` : 'input: TInput'
+      })
+
+${
+  !args && !body && !params
+    ? ''
+    : `
+#### Arguments:
+\`\`\`typescript
+type TInput = {
+  ${args ? getPathArgsTypes(args || []) : ''}
+  ${body ? types[getDataType(formatType(body))] : ''}
+  ${params ? getParamsType(params) : ''}
+}
+\`\`\`
+`
+}
+
+
+#### Returns:
+\`\`\`typescript
+${
+  types[returnType?.type]
+    ? `${types[returnType?.type]}`
+    : 'type TReturnType = any'
+}
+\`\`\`
+${description ? description.toString() : ''}
+`
+    },
+  )
+  .join('')}
+`
+})}
+`
+}

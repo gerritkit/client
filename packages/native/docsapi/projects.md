@@ -1,8 +1,8 @@
 ## projectEndpoints
 
-### native.projectEndpoints.listProjects(input: TInput)
+### nativeClient.projectEndpoints.listProjects(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -21,7 +21,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -44,17 +44,15 @@ As result a map is returned that maps the project names to
 ProjectInfo entries. The entries in the map are sorted
 by project name.
 
-,
+### nativeClient.projectEndpoints.queryProjects(input: TInput)
 
-### native.projectEndpoints.queryProjects(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -76,11 +74,9 @@ can be used to skip/limit results.
 
 As result a list of ProjectInfo entities is returned.
 
-,
+### nativeClient.projectEndpoints.getProject(input: TInput)
 
-### native.projectEndpoints.getProject(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -88,7 +84,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -108,11 +104,9 @@ Retrieves a project.
 As response a ProjectInfo entity is returned that
 describes the project.
 
-,
+### nativeClient.projectEndpoints.createProject(input: TInput)
 
-### native.projectEndpoints.createProject(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -120,7 +114,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -143,11 +137,9 @@ ProjectInput.
 As response the ProjectInfo entity is returned that
 describes the created project.
 
-,
+### nativeClient.projectEndpoints.getProjectDescription(input: TInput)
 
-### native.projectEndpoints.getProjectDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -155,21 +147,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the description of a project.
 
 If the project does not have a description an empty string is returned.
 
-,
+### nativeClient.projectEndpoints.setProjectDescription(input: TInput)
 
-### native.projectEndpoints.setProjectDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -178,10 +168,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the description of a project.
@@ -193,11 +183,9 @@ As response the new project description is returned.
 
 If the description was deleted the response is “204 No Content”.
 
-,
+### nativeClient.projectEndpoints.deleteProjectDescription(input: TInput)
 
-### native.projectEndpoints.deleteProjectDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -206,10 +194,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the description of a project.
@@ -220,11 +208,9 @@ Historically, this method allowed a body in the DELETE, but that behavior is
 deprecated.
 In this case, use PUT instead.
 
-,
+### nativeClient.projectEndpoints.getProjectParent(input: TInput)
 
-### native.projectEndpoints.getProjectParent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -232,20 +218,18 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the name of a project’s parent project. For the
 All-Projects root project an empty string is returned.
 
-,
+### nativeClient.projectEndpoints.setProjectParent(input: TInput)
 
-### native.projectEndpoints.setProjectParent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -254,10 +238,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the parent project for a project.
@@ -267,11 +251,9 @@ inside a ProjectParentInput entity.
 
 As response the new parent project name is returned.
 
-,
+### nativeClient.projectEndpoints.getHEAD(input: TInput)
 
-### native.projectEndpoints.getHEAD(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -279,19 +261,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves for a project the name of the branch to which HEAD points.
 
-,
+### nativeClient.projectEndpoints.setHEAD(input: TInput)
 
-### native.projectEndpoints.setHEAD(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -300,10 +280,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets HEAD for a project.
@@ -313,11 +293,9 @@ request body inside a HeadInput entity.
 
 As response the new ref to which HEAD points is returned.
 
-,
+### nativeClient.projectEndpoints.getRepositoryStatistics(input: TInput)
 
-### native.projectEndpoints.getRepositoryStatistics(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -325,7 +303,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TRepositoryStatisticsInfo = {
@@ -344,11 +322,9 @@ Return statistics for the repository of a project.
 The repository statistics are returned as a
 RepositoryStatisticsInfo entity.
 
-,
+### nativeClient.projectEndpoints.getConfig(input: TInput)
 
-### native.projectEndpoints.getConfig(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -356,7 +332,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TConfigInfo = {
@@ -391,11 +367,9 @@ A ConfigInfo entity is returned that describes the
 project configuration. Some fields are only visible to users that have
 read access to refs/meta/config.
 
-,
+### nativeClient.projectEndpoints.setConfig(input: TInput)
 
-### native.projectEndpoints.setConfig(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -404,7 +378,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TConfigInfo = {
@@ -439,11 +413,9 @@ ConfigInput entity.
 As response the new configuration is returned as a
 ConfigInfo entity.
 
-,
+### nativeClient.projectEndpoints.runGC(input: TInput)
 
-### native.projectEndpoints.runGC(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -452,10 +424,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Run the Git garbage collection for the repository of a project.
@@ -465,11 +437,9 @@ request body as a GCInput entity.
 
 The response is the streamed output of the garbage collection.
 
-,
+### nativeClient.projectEndpoints.banCommit(input: TInput)
 
-### native.projectEndpoints.banCommit(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -478,7 +448,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TBanResultInfo = {
@@ -499,11 +469,9 @@ The caller must be project owner.
 
 As response a BanResultInfo entity is returned.
 
-,
+### nativeClient.projectEndpoints.listAccessRightsforProject(input: TInput)
 
-### native.projectEndpoints.listAccessRightsforProject(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -511,10 +479,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the access rights for a single project.
@@ -523,11 +491,9 @@ As result a
 ProjectAccessInfo
 entity is returned.
 
-,
+### nativeClient.projectEndpoints.addUpdateandDeleteAccessRightsforProject(input: TInput)
 
-### native.projectEndpoints.addUpdateandDeleteAccessRightsforProject(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -535,10 +501,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets access rights for the project using the diff schema provided by
@@ -559,11 +525,9 @@ As result a
 ProjectAccessInfo
 entity is returned.
 
-,
+### nativeClient.projectEndpoints.checkAccess(input: TInput)
 
-### native.projectEndpoints.checkAccess(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -571,7 +535,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TAccessCheckInfo = {
@@ -592,9 +556,9 @@ project-ref, or project-permission-ref combination.
 
 ## branchEndpoints
 
-### native.branchEndpoints.listBranches(input: TInput)
+### nativeClient.branchEndpoints.listBranches(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -604,7 +568,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TBranchInfo = {
@@ -620,11 +584,9 @@ List the branches of a project.
 As result a list of BranchInfo entries is
 returned.
 
-,
+### nativeClient.branchEndpoints.getBranch(input: TInput)
 
-### native.branchEndpoints.getBranch(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -632,7 +594,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TBranchInfo = {
@@ -648,11 +610,9 @@ Retrieves a branch of a project.
 As response a BranchInfo entity is returned that
 describes the branch.
 
-,
+### nativeClient.branchEndpoints.createBranch(input: TInput)
 
-### native.branchEndpoints.createBranch(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -660,7 +620,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TBranchInfo = {
@@ -679,11 +639,9 @@ BranchInput.
 As response a BranchInfo entity is returned that
 describes the created branch.
 
-,
+### nativeClient.branchEndpoints.deleteBranch(input: TInput)
 
-### native.branchEndpoints.deleteBranch(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -691,19 +649,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a branch.
 
-,
+### nativeClient.branchEndpoints.deleteBranches(input: TInput)
 
-### native.branchEndpoints.deleteBranches(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -712,10 +668,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Delete one or more branches.
@@ -726,11 +682,9 @@ DeleteBranchesInput entity.
 If some branches could not be deleted, the response is “409 Conflict” and the
 error message is contained in the response body.
 
-,
+### nativeClient.branchEndpoints.getContent(input: TInput)
 
-### native.branchEndpoints.getContent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -738,21 +692,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the content of a file from the HEAD revision of a certain branch.
 
 The content is returned as base64 encoded string.
 
-,
+### nativeClient.branchEndpoints.getMergeableInformation(input: TInput)
 
-### native.branchEndpoints.getMergeableInformation(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -760,10 +712,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets whether the source is mergeable with the target branch.
@@ -783,11 +735,9 @@ or when the 'testbranch' has been already merged.
 
 or when only the content of 'testbranch' has been merged.
 
-,
+### nativeClient.branchEndpoints.getReflog(input: TInput)
 
-### native.branchEndpoints.getReflog(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -795,10 +745,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the reflog of a certain branch.
@@ -822,9 +772,9 @@ UTC in the following format: yyyyMMdd_HHmm.
 
 ## childProjectEndpoints
 
-### native.childProjectEndpoints.listChildProjects(input: TInput)
+### nativeClient.childProjectEndpoints.listChildProjects(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -832,7 +782,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -858,11 +808,9 @@ recursive can be set.
 Child projects that are not visible to the calling user are ignored and
 are not resolved further.
 
-,
+### nativeClient.childProjectEndpoints.getChildProject(input: TInput)
 
-### native.childProjectEndpoints.getChildProject(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -870,7 +818,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TProjectInfo = {
@@ -895,9 +843,9 @@ describes the child project.
 
 ## tagEndpoints
 
-### native.tagEndpoints.createTag(input: TInput)
+### nativeClient.tagEndpoints.createTag(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -905,7 +853,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TTagInfo = {
@@ -932,11 +880,9 @@ supported.
 As response a TagInfo entity is returned that describes
 the created tag.
 
-,
+### nativeClient.tagEndpoints.listTags(input: TInput)
 
-### native.tagEndpoints.listTags(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -946,7 +892,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TTagInfo = {
@@ -967,11 +913,9 @@ As result a list of TagInfo entries is returned.
 
 Only includes tags under the refs/tags/ namespace.
 
-,
+### nativeClient.tagEndpoints.getTag(input: TInput)
 
-### native.tagEndpoints.getTag(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -979,7 +923,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TTagInfo = {
@@ -998,11 +942,9 @@ Retrieves a tag of a project.
 
 As response a TagInfo entity is returned that describes the tag.
 
-,
+### nativeClient.tagEndpoints.deleteTag(input: TInput)
 
-### native.tagEndpoints.deleteTag(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1010,19 +952,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a tag.
 
-,
+### nativeClient.tagEndpoints.deleteTags(input: TInput)
 
-### native.tagEndpoints.deleteTags(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1031,10 +971,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Delete one or more tags.
@@ -1049,9 +989,9 @@ error message is contained in the response body.
 
 ## commitEndpoints
 
-### native.commitEndpoints.getCommit(input: TInput)
+### nativeClient.commitEndpoints.getCommit(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1059,10 +999,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves a commit of a project.
@@ -1072,11 +1012,9 @@ The commit must be visible to the caller.
 As response a CommitInfo entity
 is returned that describes the commit.
 
-,
+### nativeClient.commitEndpoints.getIncludedIn(input: TInput)
 
-### native.commitEndpoints.getIncludedIn(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1084,20 +1022,18 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the branches and tags in which a change is included. As result
 an IncludedInInfo entity is returned.
 
-,
+### nativeClient.commitEndpoints.getContent(input: TInput)
 
-### native.commitEndpoints.getContent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1105,21 +1041,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the content of a file from a certain commit.
 
 The content is returned as base64 encoded string.
 
-,
+### nativeClient.commitEndpoints.cherryPickCommit(input: TInput)
 
-### native.commitEndpoints.cherryPickCommit(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1128,10 +1062,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Cherry-picks a commit of a project to a destination branch.
@@ -1146,11 +1080,9 @@ commit will be used.
 As response a ChangeInfo entity
 is returned that describes the resulting cherry-picked change.
 
-,
+### nativeClient.commitEndpoints.listFiles(input: TInput)
 
-### native.commitEndpoints.listFiles(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1158,10 +1090,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the files that were modified, added or deleted in a commit.
@@ -1179,9 +1111,9 @@ is the 1-based index of the parent’s position in the commit object.
 
 ## dashboardEndpoints
 
-### native.dashboardEndpoints.listDashboards(input: TInput)
+### nativeClient.dashboardEndpoints.listDashboards(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1189,7 +1121,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDashboardInfo = {
@@ -1214,11 +1146,9 @@ returned.
 
 List all dashboards for the work/my-project project:
 
-,
+### nativeClient.dashboardEndpoints.getDashboard(input: TInput)
 
-### native.dashboardEndpoints.getDashboard(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1226,7 +1156,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDashboardInfo = {
@@ -1253,11 +1183,9 @@ that describes the dashboard.
 To retrieve the default dashboard of a project use default as
 dashboard-id.
 
-,
+### nativeClient.dashboardEndpoints.createDashboard(input: TInput)
 
-### native.dashboardEndpoints.createDashboard(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1266,7 +1194,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDashboardInfo = {
@@ -1295,11 +1223,9 @@ the request body as a DashboardInput entity.
 As response the new dashboard is returned as a
 DashboardInfo entity.
 
-,
+### nativeClient.dashboardEndpoints.updateDashboard(input: TInput)
 
-### native.dashboardEndpoints.updateDashboard(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1308,7 +1234,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDashboardInfo = {
@@ -1337,11 +1263,9 @@ the request body as a DashboardInput entity.
 As response the updated dashboard is returned as a
 DashboardInfo entity.
 
-,
+### nativeClient.dashboardEndpoints.deleteDashboard(input: TInput)
 
-### native.dashboardEndpoints.deleteDashboard(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1350,10 +1274,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a project dashboard.
@@ -1370,9 +1294,9 @@ requests.
 
 ## labelEndpoints
 
-### native.labelEndpoints.listLabels(input: TInput)
+### nativeClient.labelEndpoints.listLabels(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1380,10 +1304,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the labels that are defined in this project.
@@ -1409,11 +1333,9 @@ all its parent projects. The returned labels are sorted by parent projects
 in-order from All-Projects through the project hierarchy to this project.
 Labels that belong to the same project are sorted by label name.
 
-,
+### nativeClient.labelEndpoints.getLabel(input: TInput)
 
-### native.labelEndpoints.getLabel(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1421,7 +1343,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TLabelDefinitionInfo = {
@@ -1453,11 +1375,9 @@ project.
 As response a LabelDefinitionInfo entity is
 returned that describes the label.
 
-,
+### nativeClient.labelEndpoints.createLabel(input: TInput)
 
-### native.labelEndpoints.createLabel(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1465,7 +1385,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TLabelDefinitionInfo = {
@@ -1500,11 +1420,9 @@ definition is updated (see Set Label).
 As response a LabelDefinitionInfo entity is
 returned that describes the created label.
 
-,
+### nativeClient.labelEndpoints.setLabel(input: TInput)
 
-### native.labelEndpoints.setLabel(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1512,7 +1430,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TLabelDefinitionInfo = {
@@ -1546,11 +1464,9 @@ Properties which are not set in the input entity are not modified.
 As response a LabelDefinitionInfo entity is
 returned that describes the updated label.
 
-,
+### nativeClient.labelEndpoints.deleteLabel(input: TInput)
 
-### native.labelEndpoints.deleteLabel(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1559,10 +1475,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the definition of a label that is defined in this project.
@@ -1575,11 +1491,9 @@ DeleteLabelInput entity if no commit message is specified.
 
 If a label was deleted the response is “204 No Content”.
 
-,
+### nativeClient.labelEndpoints.batchUpdateLabels(input: TInput)
 
-### native.labelEndpoints.batchUpdateLabels(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1588,10 +1502,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Creates/updates/deletes multiple label definitions in this project at once.

@@ -1,14 +1,14 @@
 ## documentationSearchEndpoints
 
-### native.documentationSearchEndpoints.searchDocumentation(input: TInput)
+### nativeClient.documentationSearchEndpoints.searchDocumentation(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDocResult = {

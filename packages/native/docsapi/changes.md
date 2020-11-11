@@ -1,8 +1,8 @@
 ## changeEndpoints
 
-### native.changeEndpoints.createChange(input: TInput)
+### nativeClient.changeEndpoints.createChange(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -10,7 +10,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -73,17 +73,15 @@ upload to code review.
 As response a ChangeInfo entity is returned that describes
 the resulting change.
 
-,
+### nativeClient.changeEndpoints.queryChanges(input: TInput)
 
-### native.changeEndpoints.queryChanges(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {}
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -168,11 +166,9 @@ option requires more database lookups and slows down the query
 response time to the client so they are generally disabled by
 default. Optional fields are:
 
-,
+### nativeClient.changeEndpoints.getChange(input: TInput)
 
-### native.changeEndpoints.getChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -180,7 +176,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -244,11 +240,9 @@ default. Fields are described in Query Changes.
 As response a ChangeInfo entity is returned that
 describes the change.
 
-,
+### nativeClient.changeEndpoints.getChangeDetail(input: TInput)
 
-### native.changeEndpoints.getChangeDetail(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -256,7 +250,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -325,11 +319,9 @@ label and include one combined vote. The combined label vote is
 calculated in the following order (from highest to lowest):
 REJECTED > APPROVED > DISLIKED > RECOMMENDED.
 
-,
+### nativeClient.changeEndpoints.createMergePatchSetForChange(input: TInput)
 
-### native.changeEndpoints.createMergePatchSetForChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -337,7 +329,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -401,11 +393,9 @@ to the new merge commit.
 As response a ChangeInfo entity with current revision is
 returned that describes the resulting change.
 
-,
+### nativeClient.changeEndpoints.setCommitMessage(input: TInput)
 
-### native.changeEndpoints.setCommitMessage(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -414,10 +404,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Creates a new patch set with a new commit message.
@@ -431,11 +421,9 @@ message.
 Notifications
 An email will be sent using the "newpatchset" template.
 
-,
+### nativeClient.changeEndpoints.getTopic(input: TInput)
 
-### native.changeEndpoints.getTopic(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -443,21 +431,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the topic of a change.
 
 If the change does not have a topic an empty string is returned.
 
-,
+### nativeClient.changeEndpoints.setTopic(input: TInput)
 
-### native.changeEndpoints.setTopic(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -466,10 +452,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the topic of a change.
@@ -482,11 +468,9 @@ As response the new topic is returned.
 
 If the topic was deleted the response is “204 No Content”.
 
-,
+### nativeClient.changeEndpoints.deleteTopic(input: TInput)
 
-### native.changeEndpoints.deleteTopic(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -494,19 +478,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the topic of a change.
 
-,
+### nativeClient.changeEndpoints.getAssignee(input: TInput)
 
-### native.changeEndpoints.getAssignee(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -514,10 +496,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the account of the user assigned to a change.
@@ -527,11 +509,9 @@ describing the assigned account is returned.
 
 If the change has no assignee the response is “204 No Content”.
 
-,
+### nativeClient.changeEndpoints.getPastAssignees(input: TInput)
 
-### native.changeEndpoints.getPastAssignees(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -539,10 +519,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Returns a list of every user ever assigned to a change, in the order in which
@@ -551,11 +531,9 @@ they were first assigned.
 As a response a list of AccountInfo
 entities is returned.
 
-,
+### nativeClient.changeEndpoints.setAssignee(input: TInput)
 
-### native.changeEndpoints.setAssignee(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -564,10 +542,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the assignee of a change.
@@ -578,11 +556,9 @@ AssigneeInput entity.
 As a response an AccountInfo entity
 describing the assigned account is returned.
 
-,
+### nativeClient.changeEndpoints.deleteAssignee(input: TInput)
 
-### native.changeEndpoints.deleteAssignee(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -590,10 +566,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the assignee of a change.
@@ -603,11 +579,9 @@ describing the account of the deleted assignee is returned.
 
 If the change had no assignee the response is “204 No Content”.
 
-,
+### nativeClient.changeEndpoints.getPureRevert(input: TInput)
 
-### native.changeEndpoints.getPureRevert(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -615,7 +589,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TPureRevertInfo = {
@@ -630,11 +604,9 @@ If the change has no reference in revertOf, the parameter is mandatory.
 
 As response a PureRevertInfo entity is returned.
 
-,
+### nativeClient.changeEndpoints.abandonChange(input: TInput)
 
-### native.changeEndpoints.abandonChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -643,7 +615,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -713,11 +685,9 @@ Notifications
 An email will be sent using the "abandon" template. The notify handling is ALL.
 Notifications are suppressed on WIP changes that have never started review.
 
-,
+### nativeClient.changeEndpoints.restoreChange(input: TInput)
 
-### native.changeEndpoints.restoreChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -726,7 +696,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -792,11 +762,9 @@ If the change cannot be restored because the change state doesn’t
 allow restoring the change, the response is “409 Conflict” and
 the error message is contained in the response body.
 
-,
+### nativeClient.changeEndpoints.rebaseChange(input: TInput)
 
-### native.changeEndpoints.rebaseChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -804,7 +772,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -871,11 +839,9 @@ If the change cannot be rebased, e.g. due to conflicts, the response is
 “409 Conflict” and the error message is contained in the response
 body.
 
-,
+### nativeClient.changeEndpoints.moveChange(input: TInput)
 
-### native.changeEndpoints.moveChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -884,7 +850,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -958,11 +924,9 @@ abandon permission on the change or upload permission on the destination,
 the response is “409 Conflict” and the error message is contained in the
 response body.
 
-,
+### nativeClient.changeEndpoints.revertChange(input: TInput)
 
-### native.changeEndpoints.revertChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -971,7 +935,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -1045,11 +1009,9 @@ If the change cannot be reverted because the change state doesn’t
 allow reverting the change the response is “409 Conflict”, and the error
 message is contained in the response body.
 
-,
+### nativeClient.changeEndpoints.revertSubmission(input: TInput)
 
-### native.changeEndpoints.revertSubmission(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1057,7 +1019,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TRevertSubmissionInfo = {
@@ -1110,11 +1072,9 @@ If the change cannot be reverted because the change state doesn’t
 allow reverting the change the response is “409 Conflict”, and the error
 message is contained in the response body.
 
-,
+### nativeClient.changeEndpoints.submitChange(input: TInput)
 
-### native.changeEndpoints.submitChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1123,7 +1083,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -1189,11 +1149,9 @@ If the change cannot be submitted because the submit rule doesn’t allow
 submitting the change, the response is “409 Conflict” and the error
 message is contained in the response body.
 
-,
+### nativeClient.changeEndpoints.changesSubmittedTogether(input: TInput)
 
-### native.changeEndpoints.changesSubmittedTogether(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1201,7 +1159,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSubmittedTogetherInfo = {
@@ -1241,11 +1199,9 @@ entity, the response is a list of changes, or a 403 response with a
 message if the set of changes to be submitted with this change
 includes changes the caller cannot read.
 
-,
+### nativeClient.changeEndpoints.deleteChange(input: TInput)
 
-### native.changeEndpoints.deleteChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1253,10 +1209,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a change.
@@ -1265,11 +1221,9 @@ New or abandoned changes can be deleted by their owner if the user is granted
 the Delete Own Changes permission,
 otherwise only by administrators.
 
-,
+### nativeClient.changeEndpoints.getIncludedIn(input: TInput)
 
-### native.changeEndpoints.getIncludedIn(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1277,7 +1231,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TIncludedInInfo = {
@@ -1290,11 +1244,9 @@ type TIncludedInInfo = {
 Retrieves the branches and tags in which a change is included. As result
 an IncludedInInfo entity is returned.
 
-,
+### nativeClient.changeEndpoints.indexChange(input: TInput)
 
-### native.changeEndpoints.indexChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1302,19 +1254,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Adds or updates the change in the secondary index.
 
-,
+### nativeClient.changeEndpoints.listChangeComments(input: TInput)
 
-### native.changeEndpoints.listChangeComments(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1322,10 +1272,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the published comments of all revisions of the change.
@@ -1335,11 +1285,9 @@ entries. The entries in the map are sorted by file path, and the
 comments for each path are sorted by patch set number. Each comment has
 the patch_set and author fields set.
 
-,
+### nativeClient.changeEndpoints.listChangeRobotComments(input: TInput)
 
-### native.changeEndpoints.listChangeRobotComments(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1347,10 +1295,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the robot comments of all revisions of the change.
@@ -1359,11 +1307,9 @@ Return a map that maps the file path to a list of
 RobotCommentInfo entries. The entries in the
 map are sorted by file path.
 
-,
+### nativeClient.changeEndpoints.listChangeDrafts(input: TInput)
 
-### native.changeEndpoints.listChangeDrafts(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1371,10 +1317,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the draft comments of all revisions of the change that belong to
@@ -1385,11 +1331,9 @@ entries. The entries in the map are sorted by file path, and the
 comments for each path are sorted by patch set number. Each comment has
 the patch_set field set, and no author.
 
-,
+### nativeClient.changeEndpoints.checkChange(input: TInput)
 
-### native.changeEndpoints.checkChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1397,10 +1341,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Performs consistency checks on the change, and returns a
@@ -1411,11 +1355,9 @@ Depending on the type of problem, some fields not marked optional may be
 missing from the result. At least id, project, branch, and
 \_number will be present.
 
-,
+### nativeClient.changeEndpoints.fixChange(input: TInput)
 
-### native.changeEndpoints.fixChange(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1424,10 +1366,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Performs consistency checks on the change as with GET
@@ -1439,11 +1381,9 @@ FixInput entity body.
 
 Only the change owner, a project owner, or an administrator may fix changes.
 
-,
+### nativeClient.changeEndpoints.setWorkInProgress(input: TInput)
 
-### native.changeEndpoints.setWorkInProgress(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1452,10 +1392,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks the change as not ready for review yet. Changes may only be marked not
@@ -1466,11 +1406,9 @@ WorkInProgressInput entity if no review comment
 is added. Actions that create a new patch set in a WIP change default to
 notifying OWNER instead of ALL.
 
-,
+### nativeClient.changeEndpoints.setReadyForReview(input: TInput)
 
-### native.changeEndpoints.setReadyForReview(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1479,10 +1417,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks the change as ready for review (set WIP property to false). Changes may
@@ -1492,11 +1430,9 @@ Activates notifications of reviewer. The request body does not need
 to include a WorkInProgressInput entity
 if no review comment is added.
 
-,
+### nativeClient.changeEndpoints.markPrivate(input: TInput)
 
-### native.changeEndpoints.markPrivate(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1505,10 +1441,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks the change to be private. Only open changes can be marked private.
@@ -1519,11 +1455,9 @@ PrivateInput entity.
 
 If the change was already private the response is “200 OK”.
 
-,
+### nativeClient.changeEndpoints.unmarkPrivate(input: TInput)
 
-### native.changeEndpoints.unmarkPrivate(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1532,10 +1466,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks the change to be non-private. Note users can only unmark own private
@@ -1549,11 +1483,9 @@ a body in the DELETE, but that behavior is
 deprecated.
 In this case, use a POST request instead:
 
-,
+### nativeClient.changeEndpoints.ignore(input: TInput)
 
-### native.changeEndpoints.ignore(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1561,10 +1493,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks a change as ignored. The change will not be shown in the incoming
@@ -1572,11 +1504,9 @@ reviews dashboard, and email notifications will be suppressed. Ignoring
 a change does not cause the change’s "updated" timestamp to be modified,
 and the owner is not notified.
 
-,
+### nativeClient.changeEndpoints.unignore(input: TInput)
 
-### native.changeEndpoints.unignore(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1584,19 +1514,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Un-marks a change as ignored.
 
-,
+### nativeClient.changeEndpoints.markasReviewed(input: TInput)
 
-### native.changeEndpoints.markasReviewed(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1604,10 +1532,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks a change as reviewed.
@@ -1619,11 +1547,9 @@ This differs from the ignore endpoint, which will mute
 emails and hide the change from dashboard completely until it is
 unignored again.
 
-,
+### nativeClient.changeEndpoints.markasUnreviewed(input: TInput)
 
-### native.changeEndpoints.markasUnreviewed(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1631,21 +1557,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks a change as unreviewed.
 
 This allows users to "highlight" changes in their dashboard
 
-,
+### nativeClient.changeEndpoints.getHashtags(input: TInput)
 
-### native.changeEndpoints.getHashtags(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1653,21 +1577,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the hashtags associated with a change.
 
 As response the change’s hashtags are returned as a list of strings.
 
-,
+### nativeClient.changeEndpoints.setHashtags(input: TInput)
 
-### native.changeEndpoints.setHashtags(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1676,10 +1598,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Adds and/or removes hashtags from a change.
@@ -1689,11 +1611,9 @@ HashtagsInput entity.
 
 As response the change’s hashtags are returned as a list of strings.
 
-,
+### nativeClient.changeEndpoints.listChangeMessages(input: TInput)
 
-### native.changeEndpoints.listChangeMessages(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1701,7 +1621,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeMessageInfo = {
@@ -1719,11 +1639,9 @@ Lists all the messages of a change including detailed account information.
 
 As response a list of ChangeMessageInfo entities is returned.
 
-,
+### nativeClient.changeEndpoints.getChangeMessage(input: TInput)
 
-### native.changeEndpoints.getChangeMessage(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1731,7 +1649,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeMessageInfo = {
@@ -1749,11 +1667,9 @@ Retrieves a change message including detailed account information.
 
 As response a ChangeMessageInfo entity is returned.
 
-,
+### nativeClient.changeEndpoints.deleteChangeMessage(input: TInput)
 
-### native.changeEndpoints.deleteChangeMessage(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1762,7 +1678,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeMessageInfo = {
@@ -1796,9 +1712,9 @@ describes the updated change message.
 
 ## changeEditEndpoints
 
-### native.changeEditEndpoints.deletefileinChangeEdit(input: TInput)
+### nativeClient.changeEditEndpoints.deletefileinChangeEdit(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1806,10 +1722,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a file from a change edit. This deletes the file from the repository
@@ -1818,11 +1734,9 @@ previous contents.
 
 When change edit doesn’t exist for this change yet it is created.
 
-,
+### nativeClient.changeEditEndpoints.deleteChangeEdit(input: TInput)
 
-### native.changeEditEndpoints.deleteChangeEdit(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1830,10 +1744,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes change edit.
@@ -1844,9 +1758,9 @@ As response “204 No Content” is returned.
 
 ## reviewerEndpoints
 
-### native.reviewerEndpoints.listReviewers(input: TInput)
+### nativeClient.reviewerEndpoints.listReviewers(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1854,7 +1768,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TReviewerInfo = {
@@ -1867,11 +1781,9 @@ Lists the reviewers of a change.
 
 As result a list of ReviewerInfo entries is returned.
 
-,
+### nativeClient.reviewerEndpoints.suggestReviewers(input: TInput)
 
-### native.reviewerEndpoints.suggestReviewers(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1879,7 +1791,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSuggestedReviewerInfo = {
@@ -1904,11 +1816,9 @@ To suggest CCs reviewer-state=CC can be specified as additional URL
 parameter. This includes existing reviewers in the result, but excludes
 existing CCs.
 
-,
+### nativeClient.reviewerEndpoints.getReviewer(input: TInput)
 
-### native.reviewerEndpoints.getReviewer(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1916,7 +1826,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TReviewerInfo = {
@@ -1930,11 +1840,9 @@ Retrieves a reviewer of a change.
 As response a ReviewerInfo entity is returned that
 describes the reviewer.
 
-,
+### nativeClient.reviewerEndpoints.addReviewer(input: TInput)
 
-### native.reviewerEndpoints.addReviewer(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -1943,7 +1851,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TAddReviewerResult = {
@@ -2001,11 +1909,9 @@ Reviewers without Gerrit accounts can only be added on changes visible to anonym
 Notifications
 An email will be sent using the "newchange" template.
 
-,
+### nativeClient.reviewerEndpoints.deleteReviewer(input: TInput)
 
-### native.reviewerEndpoints.deleteReviewer(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2014,10 +1920,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a reviewer from a change.
@@ -2033,11 +1939,9 @@ An email will be sent using the "deleteReviewer" template. If deleting the
 reviewer resulted in one or more approvals being removed, then the deleted
 reviewer will also receive a notification (unless notify=NONE).
 
-,
+### nativeClient.reviewerEndpoints.listVotes(input: TInput)
 
-### native.reviewerEndpoints.listVotes(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2045,10 +1949,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the votes for a specific reviewer of the change.
@@ -2056,11 +1960,9 @@ Lists the votes for a specific reviewer of the change.
 As result a map is returned that maps the label name to the label value.
 The entries in the map are sorted by label name.
 
-,
+### nativeClient.reviewerEndpoints.deleteVote(input: TInput)
 
-### native.reviewerEndpoints.deleteVote(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2069,10 +1971,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a single vote from a change. Note, that even when the last vote of
@@ -2088,9 +1990,9 @@ In this case, use a POST request instead:
 
 ## revisionEndpoints
 
-### native.revisionEndpoints.getCommit(input: TInput)
+### nativeClient.revisionEndpoints.getCommit(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2098,7 +2000,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommitInfo = {
@@ -2120,11 +2022,9 @@ describes the revision.
 Adding query parameter links (for example /changes/…​/commit?links)
 returns a CommitInfo with the additional field web_links.
 
-,
+### nativeClient.revisionEndpoints.getDescription(input: TInput)
 
-### native.revisionEndpoints.getDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2132,21 +2032,19 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves the description of a patch set.
 
 If the patch set does not have a description an empty string is returned.
 
-,
+### nativeClient.revisionEndpoints.setDescription(input: TInput)
 
-### native.revisionEndpoints.setDescription(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2155,10 +2053,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Sets the description of a patch set.
@@ -2168,11 +2066,9 @@ DescriptionInput entity.
 
 As response the new description is returned.
 
-,
+### nativeClient.revisionEndpoints.getMergeList(input: TInput)
 
-### native.revisionEndpoints.getMergeList(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2180,7 +2076,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommitInfo = {
@@ -2203,11 +2099,9 @@ The list of commits is returned as a list of
 CommitInfo entities. Web links are only included if
 the links option was set.
 
-,
+### nativeClient.revisionEndpoints.getRevisionActions(input: TInput)
 
-### native.revisionEndpoints.getRevisionActions(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2215,10 +2109,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Retrieves revision actions of the revision of a change.
@@ -2226,11 +2120,9 @@ Retrieves revision actions of the revision of a change.
 The response is a flat map of possible revision actions mapped to their
 ActionInfo.
 
-,
+### nativeClient.revisionEndpoints.getReview(input: TInput)
 
-### native.revisionEndpoints.getReview(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2238,7 +2130,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -2303,11 +2195,9 @@ set if the revision for which the review is retrieved is the current
 revision of the change. Please note that the returned labels are always
 for the current patch set.
 
-,
+### nativeClient.revisionEndpoints.getRelatedChanges(input: TInput)
 
-### native.revisionEndpoints.getRelatedChanges(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2315,7 +2205,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TRelatedChangesInfo = {
@@ -2329,11 +2219,9 @@ depend on, or are dependencies of the revision.
 As result a RelatedChangesInfo entity is returned
 describing the related changes.
 
-,
+### nativeClient.revisionEndpoints.setReview(input: TInput)
 
-### native.revisionEndpoints.setReview(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2342,7 +2230,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TReviewResult = {
@@ -2398,11 +2286,9 @@ If reviewers are added, then a second email will be sent using the "newchange"
 template. The notification logic for this email is the same as for
 Add Reviewer.
 
-,
+### nativeClient.revisionEndpoints.rebaseRevision(input: TInput)
 
-### native.revisionEndpoints.rebaseRevision(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2410,7 +2296,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -2477,11 +2363,9 @@ If the revision cannot be rebased, e.g. due to conflicts, the response is
 “409 Conflict” and the error message is contained in the response
 body.
 
-,
+### nativeClient.revisionEndpoints.submitRevision(input: TInput)
 
-### native.revisionEndpoints.submitRevision(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2489,7 +2373,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TSubmitInfo = {
@@ -2508,11 +2392,9 @@ doesn’t allow submitting the revision or the revision is not the
 current revision, the response is “409 Conflict” and the error
 message is contained in the response body.
 
-,
+### nativeClient.revisionEndpoints.getPatch(input: TInput)
 
-### native.revisionEndpoints.getPatch(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2520,10 +2402,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the formatted patch for one revision.
@@ -2542,11 +2424,9 @@ for later processing by command line tools.
 If the path parameter is set, the returned content is a diff of the single
 file that the path refers to.
 
-,
+### nativeClient.revisionEndpoints.submitPreview(input: TInput)
 
-### native.revisionEndpoints.submitPreview(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2554,10 +2434,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets a file containing thin bundles of all modified projects if this
@@ -2577,11 +2457,9 @@ To make good use of this call, you would roughly need code as found at:
 In case of an error, the response is not a zip file but a regular json response,
 containing only the error message:
 
-,
+### nativeClient.revisionEndpoints.getMergeable(input: TInput)
 
-### native.revisionEndpoints.getMergeable(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2589,7 +2467,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TMergeableInfo = {
@@ -2616,11 +2494,9 @@ project.config file.
 The response will then contain a list of all other branches where this changes
 could merge cleanly.
 
-,
+### nativeClient.revisionEndpoints.getSubmitType(input: TInput)
 
-### native.revisionEndpoints.getSubmitType(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2628,19 +2504,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the method the server will use to submit (merge) the change.
 
-,
+### nativeClient.revisionEndpoints.testSubmitType(input: TInput)
 
-### native.revisionEndpoints.testSubmitType(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2648,10 +2522,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Tests the submit_type Prolog rule in the project, or the one given.
@@ -2661,11 +2535,9 @@ RuleInput object. The query parameter filters
 may be set to SKIP to bypass parent project filters while testing
 a project-specific rule.
 
-,
+### nativeClient.revisionEndpoints.testSubmitRule(input: TInput)
 
-### native.revisionEndpoints.testSubmitRule(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2673,10 +2545,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Tests the submit_rule Prolog rule in the project, or the one given.
@@ -2695,11 +2567,9 @@ When testing with the curl command line client the
 --data-binary @rules.pl flag should be used to ensure
 all LFs are included in the Prolog code:
 
-,
+### nativeClient.revisionEndpoints.listRevisionDrafts(input: TInput)
 
-### native.revisionEndpoints.listRevisionDrafts(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2707,10 +2577,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the draft comments of a revision that belong to the calling
@@ -2719,11 +2589,9 @@ user.
 Returns a map of file paths to lists of CommentInfo
 entries. The entries in the map are sorted by file path.
 
-,
+### nativeClient.revisionEndpoints.createDraft(input: TInput)
 
-### native.revisionEndpoints.createDraft(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2732,7 +2600,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2761,11 +2629,9 @@ CommentInput entity.
 As response a CommentInfo entity is returned that
 describes the draft comment.
 
-,
+### nativeClient.revisionEndpoints.getDraft(input: TInput)
 
-### native.revisionEndpoints.getDraft(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2773,7 +2639,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2800,11 +2666,9 @@ user.
 As response a CommentInfo entity is returned that
 describes the draft comment.
 
-,
+### nativeClient.revisionEndpoints.updateDraft(input: TInput)
 
-### native.revisionEndpoints.updateDraft(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2813,7 +2677,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2842,11 +2706,9 @@ CommentInput entity.
 As response a CommentInfo entity is returned that
 describes the draft comment.
 
-,
+### nativeClient.revisionEndpoints.deleteDraft(input: TInput)
 
-### native.revisionEndpoints.deleteDraft(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2854,19 +2716,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes a draft comment from a revision.
 
-,
+### nativeClient.revisionEndpoints.listRevisionComments(input: TInput)
 
-### native.revisionEndpoints.listRevisionComments(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2874,7 +2734,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2903,11 +2763,9 @@ sorted by file path and only include file (or inline) comments. Use
 the Get Change Detail endpoint to retrieve
 the general change message (or comment).
 
-,
+### nativeClient.revisionEndpoints.getComment(input: TInput)
 
-### native.revisionEndpoints.getComment(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2915,7 +2773,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2941,11 +2799,9 @@ Retrieves a published comment of a revision.
 As response a CommentInfo entity is returned that
 describes the published comment.
 
-,
+### nativeClient.revisionEndpoints.deleteComment(input: TInput)
 
-### native.revisionEndpoints.deleteComment(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -2954,7 +2810,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TCommentInfo = {
@@ -2993,11 +2849,9 @@ In this case, use a POST request instead:
 As response a CommentInfo entity is returned that
 describes the updated comment.
 
-,
+### nativeClient.revisionEndpoints.listRobotComments(input: TInput)
 
-### native.revisionEndpoints.listRobotComments(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3005,7 +2859,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TRobotCommentInfo = {
@@ -3024,11 +2878,9 @@ As result a map is returned that maps the file path to a list of
 RobotCommentInfo entries. The entries in the
 map are sorted by file path.
 
-,
+### nativeClient.revisionEndpoints.getRobotComment(input: TInput)
 
-### native.revisionEndpoints.getRobotComment(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3036,7 +2888,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TRobotCommentInfo = {
@@ -3054,11 +2906,9 @@ revision.
 As response a RobotCommentInfo entity is
 returned that describes the robot comment.
 
-,
+### nativeClient.revisionEndpoints.applyFix(input: TInput)
 
-### native.revisionEndpoints.applyFix(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3066,10 +2916,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Applies a suggested fix by creating a change edit which includes the
@@ -3085,11 +2935,9 @@ If the application failed e.g. due to conflicts with an existing change edit,
 the response “409 Conflict” including an error message in the response body
 is returned.
 
-,
+### nativeClient.revisionEndpoints.listFiles(input: TInput)
 
-### native.revisionEndpoints.listFiles(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3097,7 +2945,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TFileInfo = {
@@ -3142,11 +2990,9 @@ revision must correspond to a patch set in the change.
 The reviewed, q, parent, and base options are mutually exclusive.
 That is, only one of them may be used at a time.
 
-,
+### nativeClient.revisionEndpoints.getContent(input: TInput)
 
-### native.revisionEndpoints.getContent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3154,10 +3000,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Gets the content of a file from a certain revision.
@@ -3179,11 +3025,9 @@ Alternatively, if the only value of the Accept request header is
 application/json the content is returned as JSON string and
 X-FYI-Content-Encoding is set to json.
 
-,
+### nativeClient.revisionEndpoints.downloadContent(input: TInput)
 
-### native.revisionEndpoints.downloadContent(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3191,10 +3035,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Downloads the content of a file from a certain revision, in a safe format
@@ -3220,11 +3064,9 @@ parameter is omitted or the value non-positive, the patch set is referenced.
 Filenames are decorated with a suffix of \_new for the current patch,
 \_old for the only parent, or \_oldN for the Nth parent of many.
 
-,
+### nativeClient.revisionEndpoints.getDiff(input: TInput)
 
-### native.revisionEndpoints.getDiff(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3232,7 +3074,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDiffInfo = {
@@ -3268,11 +3110,9 @@ IGNORE_TRAILING, IGNORE_LEADING_AND_TRAILING or IGNORE_ALL.
 The context parameter can be specified to control the number of lines of surrounding context
 in the diff. Valid values are ALL or number of lines.
 
-,
+### nativeClient.revisionEndpoints.previewfix(input: TInput)
 
-### native.revisionEndpoints.previewfix(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3280,7 +3120,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TDiffInfo = {
@@ -3300,11 +3140,9 @@ As response, a map of DiffInfo entities is returned that describes the diffs.
 
 Each DiffInfo is the differences between the patch set indicated by revision-id and a virtual patch set with the applied fix.
 
-,
+### nativeClient.revisionEndpoints.getBlame(input: TInput)
 
-### native.revisionEndpoints.getBlame(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3312,7 +3150,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TBlameInfo = {
@@ -3332,11 +3170,9 @@ blame.
 The base parameter can be specified to control the base patch set from which
 the blame should be generated.
 
-,
+### nativeClient.revisionEndpoints.setReviewed(input: TInput)
 
-### native.revisionEndpoints.setReviewed(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3344,10 +3180,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Marks a file of a revision as reviewed by the calling user.
@@ -3355,11 +3191,9 @@ Marks a file of a revision as reviewed by the calling user.
 If the file was already marked as reviewed by the calling user the
 response is “200 OK”.
 
-,
+### nativeClient.revisionEndpoints.deleteReviewed(input: TInput)
 
-### native.revisionEndpoints.deleteReviewed(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3367,19 +3201,17 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Deletes the reviewed flag of the calling user from a file of a revision.
 
-,
+### nativeClient.revisionEndpoints.cherryPickRevision(input: TInput)
 
-### native.revisionEndpoints.cherryPickRevision(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3388,7 +3220,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TChangeInfo = {
@@ -3458,9 +3290,9 @@ describes the resulting cherry-pick change.
 
 ## revisionReviewerEndpoints
 
-### native.revisionReviewerEndpoints.listRevisionReviewers(input: TInput)
+### nativeClient.revisionReviewerEndpoints.listRevisionReviewers(input: TInput)
 
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3468,7 +3300,7 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
 type TReviewerInfo = {
@@ -3483,11 +3315,9 @@ Please note that only the current revision is supported.
 
 As result a list of ReviewerInfo entries is returned.
 
-,
+### nativeClient.revisionReviewerEndpoints.listRevisionVotes(input: TInput)
 
-### native.revisionReviewerEndpoints.listRevisionVotes(input: TInput)
-
-#### inputs:
+#### Arguments:
 
 ```typescript
 type TInput = {
@@ -3495,10 +3325,10 @@ type TInput = {
 }
 ```
 
-#### returns:
+#### Returns:
 
 ```typescript
-
+type TReturnType = any
 ```
 
 Lists the votes for a specific reviewer of the revision.

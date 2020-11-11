@@ -299,7 +299,7 @@ ref: ref
       
     }).then(({data}) => parseGerritResponse(data) as TAccessCheckInfo)
   },
-  
+
         }
       }
     }
@@ -417,7 +417,7 @@ r: regex
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-  
+
         }
       }
     }
@@ -454,7 +454,7 @@ r: regex
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
-  
+
         }
       }
     }
@@ -533,7 +533,7 @@ r: regex
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-  
+
         }
       }
     }
@@ -609,7 +609,7 @@ r: regex
       
     }).then(({data}) => parseGerritResponse(data) as Record<string, TFileInfo>)
   },
-  
+
         }
       }
     }
@@ -685,7 +685,7 @@ r: regex
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-  
+
         }
       }
     }
@@ -774,7 +774,7 @@ r: regex
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
-  
+
         }
       }
     }
@@ -1131,397 +1131,4 @@ revision?: any,
 message?: any,
     };
   "
-`;
-
-exports[`generator getSectionInfo with params 1`] = `
-Object {
-  "methods": Array [
-    Object {
-      "args": Array [],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "listProjects",
-      "opts": Array [
-        Array [
-          "branch",
-          "b",
-        ],
-        Array [
-          "description",
-          "d",
-        ],
-        Array [
-          "limit",
-          "n",
-        ],
-        Array [
-          "prefix",
-          "p",
-        ],
-        Array [
-          "regex",
-          "r",
-        ],
-        Array [
-          "skip",
-          "S",
-        ],
-        Array [
-          "substring",
-          "m",
-        ],
-        Array [
-          "tree",
-          "t",
-        ],
-        Array [
-          "type",
-          "type",
-        ],
-        Array [
-          "state",
-          "s",
-        ],
-      ],
-      "originalName": "List Projects",
-      "path": "/projects/",
-      "returnType": Object {
-        "type": "ProjectInfo",
-        "wrapper": "map",
-      },
-    },
-    Object {
-      "args": Array [],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "queryProjects",
-      "opts": Array [],
-      "originalName": "Query Projects",
-      "path": "/projects/",
-      "returnType": Object {
-        "type": "ProjectInfo",
-        "wrapper": "list",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getProject",
-      "opts": Array [],
-      "originalName": "Get Project",
-      "path": "/projects/\${projectName}",
-      "returnType": Object {
-        "type": "ProjectInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "createProject",
-      "opts": Array [],
-      "originalName": "Create Project",
-      "path": "/projects/\${projectName}",
-      "returnType": Object {
-        "type": "ProjectInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getProjectDescription",
-      "opts": Array [],
-      "originalName": "Get Project Description",
-      "path": "/projects/\${projectName}/description",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "ProjectDescriptionInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "setProjectDescription",
-      "opts": Array [],
-      "originalName": "Set Project Description",
-      "path": "/projects/\${projectName}/description",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "ProjectDescriptionInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "DELETE",
-      "methodName": "deleteProjectDescription",
-      "opts": Array [],
-      "originalName": "Delete Project Description",
-      "path": "/projects/\${projectName}/description",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getProjectParent",
-      "opts": Array [],
-      "originalName": "Get Project Parent",
-      "path": "/projects/\${projectName}/parent",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "ProjectParentInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "setProjectParent",
-      "opts": Array [],
-      "originalName": "Set Project Parent",
-      "path": "/projects/\${projectName}/parent",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getHEAD",
-      "opts": Array [],
-      "originalName": "Get HEAD",
-      "path": "/projects/\${projectName}/HEAD",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "HeadInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "setHEAD",
-      "opts": Array [],
-      "originalName": "Set HEAD",
-      "path": "/projects/\${projectName}/HEAD",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getRepositoryStatistics",
-      "opts": Array [],
-      "originalName": "Get Repository Statistics",
-      "path": "/projects/\${projectName}/statistics.git",
-      "returnType": Object {
-        "type": "RepositoryStatisticsInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "getConfig",
-      "opts": Array [],
-      "originalName": "Get Config",
-      "path": "/projects/\${projectName}/config",
-      "returnType": Object {
-        "type": "ConfigInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "ConfigInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "setConfig",
-      "opts": Array [],
-      "originalName": "Set Config",
-      "path": "/projects/\${projectName}/config",
-      "returnType": Object {
-        "type": "ConfigInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "GCInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "POST",
-      "methodName": "runGC",
-      "opts": Array [],
-      "originalName": "Run GC",
-      "path": "/projects/\${projectName}/gc",
-      "returnType": Object {
-        "type": "any",
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": Object {
-        "type": "BanInput",
-        "wrapper": undefined,
-      },
-      "isUnsupported": false,
-      "method": "PUT",
-      "methodName": "banCommit",
-      "opts": Array [],
-      "originalName": "Ban Commit",
-      "path": "/projects/\${projectName}/ban",
-      "returnType": Object {
-        "type": "BanResultInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "listAccessRightsforProject",
-      "opts": Array [],
-      "originalName": "List Access Rights for Project",
-      "path": "/projects/\${projectName}/access",
-      "returnType": Object {
-        "type": "ProjectAccessInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "args": Array [
-        "projectName",
-      ],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "POST",
-      "methodName": "addUpdateandDeleteAccessRightsforProject",
-      "opts": Array [],
-      "originalName": "Add, Update and Delete Access Rights for Project",
-      "path": "/projects/\${projectName}/access",
-      "returnType": Object {
-        "type": "ProjectAccessInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "isUnsupported": true,
-      "originalName": "Create Change for review.",
-    },
-    Object {
-      "isUnsupported": true,
-      "originalName": "Create Access Rights Change for review.",
-    },
-    Object {
-      "args": Array [],
-      "bodyType": undefined,
-      "isUnsupported": false,
-      "method": "GET",
-      "methodName": "checkAccess",
-      "opts": Array [
-        Array [
-          "account",
-          "account",
-        ],
-        Array [
-          "permission",
-          "perm",
-        ],
-        Array [
-          "ref",
-          "ref",
-        ],
-      ],
-      "originalName": "Check Access",
-      "path": "/projects/MyProject/check.access",
-      "returnType": Object {
-        "type": "AccessCheckInfo",
-        "wrapper": undefined,
-      },
-    },
-    Object {
-      "isUnsupported": true,
-      "originalName": "Index project",
-    },
-    Object {
-      "isUnsupported": true,
-      "originalName": "Index all changes in a project",
-    },
-    Object {
-      "isUnsupported": true,
-      "originalName": "Check project consistency",
-    },
-  ],
-  "titleSection": "projectEndpoints",
-}
 `;
