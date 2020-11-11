@@ -23,7 +23,7 @@ export async function generate(url: string) {
   const sections = await getSections(url)
   const types = sections
     .map((el) => getTypes(el))
-    .filter((el) => el)
+    .filter(Boolean)
     .flat()
 
   const formattedTypes = types.map(generateType).join('\n')
@@ -39,8 +39,12 @@ export async function generate(url: string) {
 
   const importTypes = [
     ...new Set([
-      ...sectionInfos.flatMap((el) => el.methods.map((q) => q.inputs.body?.type)),
-      ...sectionInfos.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
+      ...sectionInfos.flatMap((el) =>
+        el.methods.map((q) => q.inputs.body?.type),
+      ),
+      ...sectionInfos.flatMap((el) =>
+        el.methods.map((q) => q.returnType?.type),
+      ),
     ]),
   ]
     .filter((el) => el && el !== 'any')

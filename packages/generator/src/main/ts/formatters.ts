@@ -33,7 +33,7 @@ export function generateType({
 }
 
 export function getPathArgsTypes(args?: string[]) {
-  return args && args.length > 0
+  return args && args?.length > 0
     ? `args: {${args.map((el) => `${el}: string`).join(', ')}},`
     : ''
 }

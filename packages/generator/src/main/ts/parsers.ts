@@ -186,6 +186,7 @@ export function parseApiString(str: string) {
     }, {} as Record<string, any>)
   }
 
+  // example: 'POST /projects/{project-name}/access' -> POST
   const method = str.trim().replace(/["'`]/g, '').match(/^\S+/g)?.[0] || ''
 
   const args = (str.match(/{.*?}/g) || []).map(parseArg)
@@ -231,7 +232,7 @@ export function parseOptions(optsSection: string[]) {
       parsed[1] = parsed[1].slice(0, -1)
       return parsed
     })
-    .filter((el) => el) as string[][]
+    .filter(Boolean) as string[][]
 }
 
 function parseTypes(sentence: string, regexp: RegExp) {
