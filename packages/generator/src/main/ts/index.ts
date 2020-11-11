@@ -33,14 +33,14 @@ export async function generate(url: string) {
     return acc
   }, {})
 
-  const code = sections
+  const sectionInfos = sections
     .map(getSectionInfo)
     .filter((section) => !unsupportedSections.includes(section.titleSection))
 
   const importTypes = [
     ...new Set([
-      ...code.flatMap((el) => el.methods.map((q) => q.inputs.body?.type)),
-      ...code.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
+      ...sectionInfos.flatMap((el) => el.methods.map((q) => q.inputs.body?.type)),
+      ...sectionInfos.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
     ]),
   ]
     .filter((el) => el && el !== 'any')
@@ -48,10 +48,10 @@ export async function generate(url: string) {
 
   return {
     types: formattedTypes,
-    docs: generateDocs(code, typesForDocs),
+    docs: generateDocs(sectionInfos, typesForDocs),
     code: addGlobalVariables(
       importTypes,
-      code
+      sectionInfos
         .map(({ titleSection, methods }) => ({
           titleSection,
           methods: methods.map(generateFunction),

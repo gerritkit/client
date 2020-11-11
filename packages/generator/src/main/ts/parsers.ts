@@ -226,7 +226,7 @@ export function parseOptions(optsSection: string[]) {
       const parsed = (el[0].toLowerCase() + el.slice(1)).split('(')
       if (!parsed[1]) {
         console.log('unsupported options:', el)
-        return
+        return // eslint-disable-line array-callback-return
       }
       parsed[1] = parsed[1].slice(0, -1)
       return parsed
