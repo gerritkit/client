@@ -30,6 +30,7 @@ target
 # Docs
 docs
 doc
+packages/native/docsnative/
 
 # Deps
 node_modules/
