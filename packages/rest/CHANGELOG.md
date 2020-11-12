@@ -1,3 +1,13 @@
+## @gerritkit/rest [1.3.1](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.3.0...@gerritkit/rest@1.3.1) (2020-11-12)
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/native:** upgraded to 1.1.0
+
 # @gerritkit/rest [1.3.0](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.2.0...@gerritkit/rest@1.3.0) (2020-10-09)
 
 
