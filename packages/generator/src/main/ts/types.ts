@@ -1,17 +1,25 @@
+export type TObjectType = {
+  type: string
+  wrapper?: string
+}
+
 export type TMethodInfo = {
   originalName: string
-  isUnsupported: boolean
-  methodName?: string
-  bodyType?: {
-    wrapper?: string
-    type: string
+  methodName: string
+  description: string
+  method: string
+  path: string
+  inputs: {
+    body?: TObjectType
+    params?: string[][]
+    args?: string[]
   }
-  returnType?: {
-    wrapper?: string
-    type: string
-  }
-  opts?: string[][]
-  method?: string
-  args?: string[]
-  path?: string
+  returnType: TObjectType
 }
+
+export type TSectionInfo = {
+  titleSection: string
+  methods: TMethodInfo[]
+}
+
+export type TType = Record<string, string[]>

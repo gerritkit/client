@@ -19,4 +19,3 @@ export type ReturnTypeOf<
   : T extends IFunction[]
   ? UnionToIntersection<ReturnType<T[number]>>
   : never
-

@@ -24,7 +24,7 @@
     "test": "yarn lint && yarn test:spec",
     "test:spec": "yarn jest",
     "jest": "jest -w=1 --config=jest.config.json",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.{ts,js,md}\"",
     "lint": "eslint src/main/ts/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "clean": "rimraf target typings flow-typed buildcache",
@@ -41,7 +41,8 @@
     "@types/cheerio": "^0.22.22",
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
-    "tslib": "^2.0.2"
+    "docsify-tools": "^1.0.20",
+    "tslib": "^2.0.3"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
@@ -56,6 +57,7 @@
   },
   "homepage": "https://github.com/gerritkit/client/#readme",
   "devDependencies": {
-    "axios-mock-adapter": "^1.18.2"
+    "axios-mock-adapter": "^1.19.0",
+    "docsify-cli": "^4.4.1"
   }
 }

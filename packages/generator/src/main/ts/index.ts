@@ -4,11 +4,12 @@ import { promises as fs } from 'fs'
 
 import {
   addGlobalVariables,
+  generateDocs,
   generateFunction,
   generateSectionCode,
   generateType,
 } from './formatters'
-import { getSectionInfo, getSections,getTypes } from './parsers'
+import { getSectionInfo, getSections, getTypes } from './parsers'
 
 const unsupportedSections = ['iDs', 'jSONEntities']
 
@@ -22,34 +23,42 @@ export async function generate(url: string) {
   const sections = await getSections(url)
   const types = sections
     .map((el) => getTypes(el))
-    .filter((el) => el)
+    .filter(Boolean)
     .flat()
-    .map(generateType)
-    .join('\n')
 
-  const code = sections
+  const formattedTypes = types.map(generateType).join('\n')
+
+  const typesForDocs = types.reduce((acc, el) => {
+    acc[el.typeName] = generateType(el).slice('export type'.length)
+    return acc
+  }, {})
+
+  const sectionInfos = sections
     .map(getSectionInfo)
     .filter((section) => !unsupportedSections.includes(section.titleSection))
 
   const importTypes = [
     ...new Set([
-      ...code.flatMap((el) => el.methods.map((q) => q.bodyType?.type)),
-      ...code.flatMap((el) => el.methods.map((q) => q.returnType?.type)),
+      ...sectionInfos.flatMap((el) =>
+        el.methods.map((q) => q.inputs.body?.type),
+      ),
+      ...sectionInfos.flatMap((el) =>
+        el.methods.map((q) => q.returnType?.type),
+      ),
     ]),
   ]
     .filter((el) => el && el !== 'any')
     .map((type) => `T${type}`)
 
   return {
-    types,
+    types: formattedTypes,
+    docs: generateDocs(sectionInfos, typesForDocs),
     code: addGlobalVariables(
       importTypes,
-      code
+      sectionInfos
         .map(({ titleSection, methods }) => ({
           titleSection,
-          methods: methods
-            .filter(({ isUnsupported }) => !isUnsupported)
-            .map(generateFunction),
+          methods: methods.map(generateFunction),
         }))
         .map(generateSectionCode)
         .join('\n'),
@@ -60,12 +69,15 @@ export async function generate(url: string) {
 export async function generates(urls: [string, string][], path: string) {
   await fs.mkdir(`${path}/api/`)
   await fs.mkdir(`${path}/types/`)
+  await fs.mkdir(`${path}/docs/`)
   await Promise.all(
-    urls.map(async ([name, url])=>{
-      const { code, types } = await generate(url)
+    urls.map(async ([name, url]) => {
+      const { code, types, docs } = await generate(url)
       await Promise.all([
         fs.writeFile(`${path}/api/${name}.ts`, code),
         fs.writeFile(`${path}/types/${name}.ts`, types),
+        fs.writeFile(`${path}/docs/${name}.md`, docs),
       ])
-    }))
+    }),
+  )
 }
