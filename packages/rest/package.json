@@ -39,9 +39,9 @@
   },
   "dependencies": {
     "@gerritkit/native": "1.1.0",
-    "@qiwi/substrate": "^1.19.1",
+    "@qiwi/substrate": "^1.19.4",
     "axios": "^0.20.0",
-    "tslib": "^2.0.2"
+    "tslib": "^2.0.3"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.18.2"
