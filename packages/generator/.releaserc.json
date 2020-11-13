@@ -12,6 +12,16 @@
         "failComment": false
       }
     ],
-    "@semantic-release/git"
+    "@semantic-release/git",
+    [
+      "@qiwi/semantic-release-gh-pages-plugin",
+      {
+        "branch": "gh-pages",
+        "msg": "docs updated <%= nextRelease.gitTag %>",
+        "src": "packages/generator/docs",
+        "dst": "./docs/generator",
+        "pullTagsBranch": ""
+      }
+    ]
   ]
 }
