@@ -1,6 +1,6 @@
 {
   "name": "@gerritkit/core",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -41,7 +41,7 @@
     "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@gerritkit/infra": "1.2.1"
+    "@gerritkit/infra": "1.2.2"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
