@@ -1,3 +1,10 @@
+## @gerritkit/generator [1.2.1](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.2.0...@gerritkit/generator@1.2.1) (2020-11-23)
+
+
+### Performance Improvements
+
+* update ts version, refactor docs script ([#12](https://github.com/gerritkit/client/issues/12)) ([8e30951](https://github.com/gerritkit/client/commit/8e309517c6d8abfc91ff14477184ce341c1c4473))
+
 # @gerritkit/generator [1.2.0](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.1.0...@gerritkit/generator@1.2.0) (2020-11-12)
 
 
