@@ -1,3 +1,18 @@
+# @gerritkit/rest [1.4.0](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.3.3...@gerritkit/rest@1.4.0) (2021-04-06)
+
+
+### Features
+
+* update generator, make params more flexible ([4e55d0c](https://github.com/gerritkit/client/commit/4e55d0c55e03e2d4d1ab0063d531c4724b3b37ef)), closes [#19](https://github.com/gerritkit/client/issues/19)
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/native:** upgraded to 1.2.0
+
 ## @gerritkit/rest [1.3.3](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.3.2...@gerritkit/rest@1.3.3) (2020-11-23)
 
 
