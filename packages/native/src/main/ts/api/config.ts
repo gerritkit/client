@@ -1,15 +1,16 @@
 import axios from 'axios'
+
 import {
-  TConsistencyCheckInput,
-  TEmailConfirmationInput,
-  TCacheOperationInput,
-  TPreferencesInput,
-  TDiffPreferencesInput,
-  TServerInfo,
-  TConsistencyCheckInfo,
   TCacheInfo,
-  TSummaryInfo,
+  TCacheOperationInput,
   TCapabilityInfo,
+  TConsistencyCheckInfo,
+  TConsistencyCheckInput,
+  TDiffPreferencesInput,
+  TEmailConfirmationInput,
+  TPreferencesInput,
+  TServerInfo,
+  TSummaryInfo,
   TTaskInfo,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
@@ -29,212 +30,276 @@ export function configEndpoints({
 }) {
   return {
     configEndpoints: {
-      async getVersion() {
+      async getVersion({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/version`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getServerInfo() {
+      async getServerInfo({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/info`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TServerInfo)
       },
 
-      async checkConsistency({ data }: { data: TConsistencyCheckInput }) {
+      async checkConsistency({
+        data,
+        params,
+      }: {
+        data: TConsistencyCheckInput
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/config/server/check.consistency`,
           auth,
-          params: {},
+          params,
           data,
         }).then(
           ({ data }) => parseGerritResponse(data) as TConsistencyCheckInfo,
         )
       },
 
-      async reloadConfig() {
+      async reloadConfig({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/config/server/reload`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async confirmEmail({ data }: { data: TEmailConfirmationInput }) {
+      async confirmEmail({
+        data,
+        params,
+      }: {
+        data: TEmailConfirmationInput
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/email.confirm`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async listCaches() {
+      async listCaches({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/caches/`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as Record<string, TCacheInfo>,
         )
       },
 
-      async cacheOperations({ data }: { data: TCacheOperationInput }) {
+      async cacheOperations({
+        data,
+        params,
+      }: {
+        data: TCacheOperationInput
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/config/server/caches/`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getCache({ args: { cacheName } }: { args: { cacheName: string } }) {
+      async getCache({
+        args: { cacheName },
+        params,
+      }: {
+        args: { cacheName: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/caches/${cacheName}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCacheInfo)
       },
 
       async flushCache({
         args: { cacheName },
+        params,
       }: {
         args: { cacheName: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/config/server/caches/${cacheName}/flush`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getSummary() {
+      async getSummary({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/summary`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TSummaryInfo)
       },
 
-      async listCapabilities() {
+      async listCapabilities({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/capabilities`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) =>
             parseGerritResponse(data) as Record<string, TCapabilityInfo>,
         )
       },
 
-      async listTasks() {
+      async listTasks({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/tasks/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TTaskInfo[])
       },
 
-      async getTask({ args: { taskId } }: { args: { taskId: string } }) {
+      async getTask({
+        args: { taskId },
+        params,
+      }: {
+        args: { taskId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/tasks/${taskId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TTaskInfo)
       },
 
-      async deleteTask({ args: { taskId } }: { args: { taskId: string } }) {
+      async deleteTask({
+        args: { taskId },
+        params,
+      }: {
+        args: { taskId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/config/server/tasks/${taskId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getTopMenus() {
+      async getTopMenus({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/top-menus`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getDefaultUserPreferences() {
+      async getDefaultUserPreferences({
+        params,
+      }: {
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/preferences`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async setDefaultUserPreferences({ data }: { data: TPreferencesInput }) {
+      async setDefaultUserPreferences({
+        data,
+        params,
+      }: {
+        data: TPreferencesInput
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/preferences`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getDefaultDiffPreferences() {
+      async getDefaultDiffPreferences({
+        params,
+      }: {
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/preferences.diff`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async setDefaultDiffPreferences({
         data,
+        params,
       }: {
         data: TDiffPreferencesInput
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/preferences.diff`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getDefaultEditPreferences() {
+      async getDefaultEditPreferences({
+        params,
+      }: {
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/config/server/preferences.edit`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async setDefaultEditPreferences({ data }: { data: any }) {
+      async setDefaultEditPreferences({
+        data,
+        params,
+      }: {
+        data: any
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/config/server/preferences.edit`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },

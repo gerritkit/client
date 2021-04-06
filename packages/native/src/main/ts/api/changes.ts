@@ -1,49 +1,48 @@
 import axios from 'axios'
+
 import {
-  TChangeInput,
-  TCommitMessageInput,
-  TTopicInput,
-  TAssigneeInput,
   TAbandonInput,
-  TRestoreInput,
-  TMoveInput,
-  TRevertInput,
-  TSubmitInput,
-  TFixInput,
-  TWorkInProgressInput,
-  TPrivateInput,
-  THashtagsInput,
+  TAccountInfo,
+  TAddReviewerResult,
+  TAssigneeInput,
+  TBlameInfo,
+  TChangeInfo,
+  TChangeInput,
+  TChangeMessageInfo,
+  TCherryPickInput,
+  TCommentInfo,
+  TCommentInput,
+  TCommitInfo,
+  TCommitMessageInput,
   TDeleteChangeMessageInput,
-  TReviewerInput,
+  TDeleteCommentInput,
   TDeleteReviewerInput,
   TDeleteVoteInput,
   TDescriptionInput,
-  TReviewInput,
-  TCommentInput,
-  TDeleteCommentInput,
-  TCherryPickInput,
-  TAttentionSetInput,
-  TChangeInfo,
-  TAccountInfo,
-  TPureRevertInfo,
-  TRevertSubmissionInfo,
-  TSubmittedTogetherInfo,
-  TIncludedInInfo,
-  TChangeMessageInfo,
-  TReviewerInfo,
-  TSuggestedReviewerInfo,
-  TAddReviewerResult,
-  TCommitInfo,
-  TRelatedChangesInfo,
-  TReviewResult,
-  TSubmitInfo,
-  TMergeableInfo,
-  TCommentInfo,
-  TRobotCommentInfo,
-  TFileInfo,
   TDiffInfo,
-  TBlameInfo,
-  TAttentionSetInfo,
+  TFileInfo,
+  TFixInput,
+  THashtagsInput,
+  TIncludedInInfo,
+  TMergeableInfo,
+  TMoveInput,
+  TPrivateInput,
+  TPureRevertInfo,
+  TRelatedChangesInfo,
+  TRestoreInput,
+  TRevertInput,
+  TRevertSubmissionInfo,
+  TReviewerInfo,
+  TReviewerInput,
+  TReviewInput,
+  TReviewResult,
+  TRobotCommentInfo,
+  TSubmitInfo,
+  TSubmitInput,
+  TSubmittedTogetherInfo,
+  TSuggestedReviewerInfo,
+  TTopicInput,
+  TWorkInProgressInput,
 } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -62,194 +61,234 @@ export function changeEndpoints({
 }) {
   return {
     changeEndpoints: {
-      async createChange({ data }: { data: TChangeInput }) {
+      async createChange({
+        data,
+        params,
+      }: {
+        data: TChangeInput
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
-      async queryChanges() {
+      async queryChanges({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo[])
       },
 
-      async getChange({ args: { changeId } }: { args: { changeId: string } }) {
+      async getChange({
+        args: { changeId },
+        params,
+      }: {
+        args: { changeId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async getChangeDetail({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/detail`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async createMergePatchSetForChange({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/merge`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async setCommitMessage({
         data,
         args: { changeId },
+        params,
       }: {
         data: TCommitMessageInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/message`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async getTopic({ args: { changeId } }: { args: { changeId: string } }) {
+      async getTopic({
+        args: { changeId },
+        params,
+      }: {
+        args: { changeId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/topic`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async setTopic({
         data,
         args: { changeId },
+        params,
       }: {
         data: TTopicInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/topic`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async deleteTopic({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/topic`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getAssignee({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/assignee`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TAccountInfo)
       },
 
       async getPastAssignees({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/past_assignees`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TAccountInfo[])
       },
 
       async setAssignee({
         data,
         args: { changeId },
+        params,
       }: {
         data: TAssigneeInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/assignee`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TAccountInfo)
       },
 
       async deleteAssignee({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/assignee`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TAccountInfo)
       },
 
       async getPureRevert({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/pure_revert`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TPureRevertInfo)
       },
 
       async abandonChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TAbandonInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/abandon`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
@@ -257,44 +296,50 @@ export function changeEndpoints({
       async restoreChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TRestoreInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/restore`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async rebaseChange({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/rebase`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async moveChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TMoveInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/move`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
@@ -302,29 +347,33 @@ export function changeEndpoints({
       async revertChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TRevertInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revert`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async revertSubmission({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revert_submission`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as TRevertSubmissionInfo,
         )
@@ -333,29 +382,33 @@ export function changeEndpoints({
       async submitChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TSubmitInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/submit`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async changesSubmittedTogether({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/submitted_together`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as TSubmittedTogetherInfo,
         )
@@ -363,107 +416,123 @@ export function changeEndpoints({
 
       async deleteChange({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getIncludedIn({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/in`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TIncludedInInfo)
       },
 
       async indexChange({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/index`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listChangeComments({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/comments`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listChangeRobotComments({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/robotcomments`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listChangeDrafts({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/drafts`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async checkChange({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/check`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async fixChange({
         data,
         args: { changeId },
+        params,
       }: {
         data: TFixInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/check`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
@@ -471,15 +540,17 @@ export function changeEndpoints({
       async setWorkInProgress({
         data,
         args: { changeId },
+        params,
       }: {
         data: TWorkInProgressInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/wip`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
@@ -487,15 +558,17 @@ export function changeEndpoints({
       async setReadyForReview({
         data,
         args: { changeId },
+        params,
       }: {
         data: TWorkInProgressInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/ready`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
@@ -503,15 +576,17 @@ export function changeEndpoints({
       async markPrivate({
         data,
         args: { changeId },
+        params,
       }: {
         data: TPrivateInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/private`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
@@ -519,130 +594,158 @@ export function changeEndpoints({
       async unmarkPrivate({
         data,
         args: { changeId },
+        params,
       }: {
         data: TPrivateInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/private`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async ignore({ args: { changeId } }: { args: { changeId: string } }) {
+      async ignore({
+        args: { changeId },
+        params,
+      }: {
+        args: { changeId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/ignore`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
-      async unignore({ args: { changeId } }: { args: { changeId: string } }) {
+      async unignore({
+        args: { changeId },
+        params,
+      }: {
+        args: { changeId: string }
+        params?: Record<string, any>
+      }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/unignore`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async markasReviewed({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/reviewed`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async markasUnreviewed({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/unreviewed`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getHashtags({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/hashtags`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async setHashtags({
         data,
         args: { changeId },
+        params,
       }: {
         data: THashtagsInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/hashtags`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listChangeMessages({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/messages`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeMessageInfo[])
       },
 
       async getChangeMessage({
         args: { changeId, changeMessageId },
+        params,
       }: {
         args: { changeId: string; changeMessageId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/messages/${changeMessageId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeMessageInfo)
       },
 
       async deleteChangeMessage({
         data,
         args: { changeId, changeMessageId },
+        params,
       }: {
         data: TDeleteChangeMessageInput
         args: { changeId: string; changeMessageId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/messages/${changeMessageId}`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeMessageInfo)
       },
@@ -664,27 +767,31 @@ export function changeEditEndpoints({
     changeEditEndpoints: {
       async deletefileinChangeEdit({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/edit/path%2fto%2ffile`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async deleteChangeEdit({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/edit`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
     },
@@ -705,27 +812,31 @@ export function reviewerEndpoints({
     reviewerEndpoints: {
       async listReviewers({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/reviewers/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TReviewerInfo[])
       },
 
       async suggestReviewers({
         args: { changeId },
+        params,
       }: {
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/suggest_reviewers`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as TSuggestedReviewerInfo[],
         )
@@ -733,29 +844,33 @@ export function reviewerEndpoints({
 
       async getReviewer({
         args: { changeId, accountId },
+        params,
       }: {
         args: { changeId: string; accountId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/reviewers/${accountId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TReviewerInfo)
       },
 
       async addReviewer({
         data,
         args: { changeId },
+        params,
       }: {
         data: TReviewerInput
         args: { changeId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/reviewers`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TAddReviewerResult)
       },
@@ -763,44 +878,50 @@ export function reviewerEndpoints({
       async deleteReviewer({
         data,
         args: { changeId, accountId },
+        params,
       }: {
         data: TDeleteReviewerInput
         args: { changeId: string; accountId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/reviewers/${accountId}`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listVotes({
         args: { changeId, accountId },
+        params,
       }: {
         args: { changeId: string; accountId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/reviewers/${accountId}/votes/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async deleteVote({
         data,
         args: { changeId, accountId, labelId },
+        params,
       }: {
         data: TDeleteVoteInput
         args: { changeId: string; accountId: string; labelId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/reviewers/${accountId}/votes/${labelId}`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
@@ -822,406 +943,436 @@ export function revisionEndpoints({
     revisionEndpoints: {
       async getCommit({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/commit`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCommitInfo)
       },
 
       async getDescription({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/description`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async setDescription({
         data,
         args: { changeId, revisionId },
+        params,
       }: {
         data: TDescriptionInput
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/description`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getMergeList({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/mergelist`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCommitInfo[])
       },
 
       async getRevisionActions({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/actions`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getReview({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/review`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async getRelatedChanges({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/related`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TRelatedChangesInfo)
       },
 
       async setReview({
         data,
         args: { changeId, revisionId },
+        params,
       }: {
         data: TReviewInput
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/review`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TReviewResult)
       },
 
       async rebaseRevision({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/rebase`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
 
       async submitRevision({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/submit`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TSubmitInfo)
       },
 
       async getPatch({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/patch`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async submitPreview({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/preview_submit`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getMergeable({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/mergeable`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TMergeableInfo)
       },
 
       async getSubmitType({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/submit_type`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async testSubmitType({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/test.submit_type`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async testSubmitRule({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/test.submit_rule`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listRevisionDrafts({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/drafts/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async createDraft({
         data,
         args: { changeId, revisionId },
+        params,
       }: {
         data: TCommentInput
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/drafts`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo)
       },
 
       async getDraft({
         args: { changeId, revisionId, draftId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; draftId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/drafts/${draftId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo)
       },
 
       async updateDraft({
         data,
         args: { changeId, revisionId, draftId },
+        params,
       }: {
         data: TCommentInput
         args: { changeId: string; revisionId: string; draftId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/drafts/${draftId}`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo)
       },
 
       async deleteDraft({
         args: { changeId, revisionId, draftId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; draftId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/drafts/${draftId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listRevisionComments({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/comments/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo[])
       },
 
       async getComment({
         args: { changeId, revisionId, commentId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; commentId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/comments/${commentId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo)
       },
 
       async deleteComment({
         data,
         args: { changeId, revisionId, commentId },
+        params,
       }: {
         data: TDeleteCommentInput
         args: { changeId: string; revisionId: string; commentId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/comments/${commentId}`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TCommentInfo)
       },
 
       async listRobotComments({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/robotcomments/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TRobotCommentInfo[])
       },
 
       async getRobotComment({
         args: { changeId, revisionId, commentId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; commentId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/robotcomments/${commentId}`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TRobotCommentInfo)
-      },
-
-      async getPortedComments({
-        args: { changeId, revisionId },
-      }: {
-        args: { changeId: string; revisionId: string }
-      }) {
-        return axios({
-          method: 'GET',
-          url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/ported_comments`,
-          auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as any)
-      },
-
-      async getPortedDrafts({
-        args: { changeId, revisionId },
-      }: {
-        args: { changeId: string; revisionId: string }
-      }) {
-        return axios({
-          method: 'GET',
-          url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/ported_drafts`,
-          auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async applyFix({
         args: { changeId, revisionId, fixId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fixId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/fixes/${fixId}/apply`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async listFiles({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as Record<string, TFileInfo>,
         )
@@ -1229,53 +1380,61 @@ export function revisionEndpoints({
 
       async getContent({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/content`,
           auth,
-          params: {},
-        }).then(({ data }) => data as any)
+          params,
+        }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async downloadContent({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/download`,
           auth,
-          params: {},
-        }).then(({ data }) => data as any)
+          params,
+        }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async getDiff({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/diff`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TDiffInfo)
       },
 
       async previewfix({
         args: { changeId, revisionId, fixId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fixId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/fixes/${fixId}/preview`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) => parseGerritResponse(data) as Record<string, TDiffInfo>,
         )
@@ -1283,55 +1442,63 @@ export function revisionEndpoints({
 
       async getBlame({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/blame`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TBlameInfo)
       },
 
       async setReviewed({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'PUT',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/reviewed`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async deleteReviewed({
         args: { changeId, revisionId, fileId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; fileId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'DELETE',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/files/${fileId}/reviewed`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
 
       async cherryPickRevision({
         data,
         args: { changeId, revisionId },
+        params,
       }: {
         data: TCherryPickInput
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'POST',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/cherrypick`,
           auth,
-          params: {},
+          params,
           data,
         }).then(({ data }) => parseGerritResponse(data) as TChangeInfo)
       },
@@ -1353,87 +1520,31 @@ export function revisionReviewerEndpoints({
     revisionReviewerEndpoints: {
       async listRevisionReviewers({
         args: { changeId, revisionId },
+        params,
       }: {
         args: { changeId: string; revisionId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/reviewers/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TReviewerInfo[])
       },
 
       async listRevisionVotes({
         args: { changeId, revisionId, accountId },
+        params,
       }: {
         args: { changeId: string; revisionId: string; accountId: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/changes/${changeId}/revisions/${revisionId}/reviewers/${accountId}/votes/`,
           auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as any)
-      },
-    },
-  }
-}
-
-export function attentionSetEndpoints({
-  baseUrl,
-  auth,
-}: {
-  baseUrl: string
-  auth: {
-    username: string
-    password: string
-  }
-}) {
-  return {
-    attentionSetEndpoints: {
-      async getAttentionSet({
-        args: { changeId },
-      }: {
-        args: { changeId: string }
-      }) {
-        return axios({
-          method: 'GET',
-          url: `${baseUrl}/changes/${changeId}/attention`,
-          auth,
-          params: {},
-        }).then(({ data }) => parseGerritResponse(data) as TAttentionSetInfo[])
-      },
-
-      async addToAttentionSet({
-        data,
-        args: { changeId },
-      }: {
-        data: TAttentionSetInput
-        args: { changeId: string }
-      }) {
-        return axios({
-          method: 'POST',
-          url: `${baseUrl}/changes/${changeId}/attention`,
-          auth,
-          params: {},
-          data,
-        }).then(({ data }) => parseGerritResponse(data) as any)
-      },
-
-      async removefromAttentionSet({
-        data,
-        args: { changeId, accountId },
-      }: {
-        data: TAttentionSetInput
-        args: { changeId: string; accountId: string }
-      }) {
-        return axios({
-          method: 'DELETE',
-          url: `${baseUrl}/changes/${changeId}/attention/${accountId}`,
-          auth,
-          params: {},
-          data,
+          params,
         }).then(({ data }) => parseGerritResponse(data) as any)
       },
     },

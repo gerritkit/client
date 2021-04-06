@@ -86,16 +86,17 @@ describe('repos', () => {
     const response = `responsefile`
 
     mock.onGet(url).reply(200, response)
-    expect(
-      await gerritKit.repos
-        .getContent({
-          owner: 'work',
-          repo: 'my-project',
-          path: 'src%2Ffile.js',
-          ref: 'a8a477efffbbf3b44169bb9a1d3a334cbbd9aa96',
-        })
-        .catch(console.log),
-    ).toMatch('responsefile')
+    try {
+      const data = await gerritKit.repos.getContent({
+        owner: 'work',
+        repo: 'my-project',
+        path: 'src%2Ffile.js',
+        ref: 'a8a477efffbbf3b44169bb9a1d3a334cbbd9aa96',
+      })
+      expect(data).toMatch('responsefile')
+    } catch (e) {
+      console.log('ee', e)
+    }
   })
 
   it('listForOrg', async () => {

@@ -3,7 +3,6 @@ import { UnionToIntersection } from '@qiwi/substrate'
 import {
   accessRightsEndpoints,
   accountEndpoints,
-  attentionSetEndpoints,
   branchEndpoints,
   changeEditEndpoints,
   changeEndpoints,
@@ -40,7 +39,6 @@ export const plugins = [
   groupEndpoints,
   documentationSearchEndpoints,
   configEndpoints,
-  attentionSetEndpoints,
   revisionReviewerEndpoints,
   revisionEndpoints,
   changeEditEndpoints,
