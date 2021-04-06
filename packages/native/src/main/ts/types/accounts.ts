@@ -20,7 +20,6 @@ export type TAccountInfo = {
   _more_accounts: any
   status?: any
   inactive: any
-  tags: any
 }
 
 export type TAccountInput = {
@@ -196,7 +195,6 @@ export type TOAuthTokenInfo = {
 
 export type TPreferencesInfo = {
   changes_per_page: any
-  theme: any
   expand_inline_diffs: any
   download_scheme?: any
   date_format: any
@@ -217,7 +215,6 @@ export type TPreferencesInfo = {
 
 export type TPreferencesInput = {
   changes_per_page?: any
-  theme?: any
   expand_inline_diffs: any
   download_scheme?: any
   date_format?: any

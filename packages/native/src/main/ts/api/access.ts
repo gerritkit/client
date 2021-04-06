@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { TProjectAccessInfo } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -19,14 +20,16 @@ export function accessRightsEndpoints({
     accessRightsEndpoints: {
       async listAccessRights({
         args: { projectName },
+        params,
       }: {
         args: { projectName: string }
+        params?: Record<string, any>
       }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/access/${projectName}`,
           auth,
-          params: {},
+          params,
         }).then(
           ({ data }) =>
             parseGerritResponse(data) as Record<string, TProjectAccessInfo>,

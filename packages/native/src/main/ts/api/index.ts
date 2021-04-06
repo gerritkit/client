@@ -6,7 +6,6 @@ export {
   changeEditEndpoints,
   revisionEndpoints,
   revisionReviewerEndpoints,
-  attentionSetEndpoints,
 } from './changes'
 export { configEndpoints } from './config'
 export { documentationSearchEndpoints } from './documentation'

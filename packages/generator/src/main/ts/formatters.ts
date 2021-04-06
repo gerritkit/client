@@ -3,6 +3,7 @@ import { TMethodInfo } from './types'
 export function addGlobalVariables(types: string[], code: string) {
   return `
   import axios from 'axios'
+  import omit from 'lodash.omit'
   import {
     ${types.join(', \n')}
      } from '../types/index'
@@ -38,16 +39,16 @@ export function getPathArgsTypes(args?: string[]) {
     : ''
 }
 
-function getParams(params?: string[][]) {
-  return params && params.length > 0
-    ? `params: {${params.map(([name]) => name).join(', ')}},`
-    : ''
+function getParams() {
+  return `params,`
 }
 
 export function getParamsType(params?: string[][]) {
   return params && params.length > 0
-    ? `params: {${params.map(([name]) => `${name}?: string`).join(', ')}},`
-    : ''
+    ? `params: {${params
+        .map(([name]) => `${name}?: string`)
+        .join(', ')}} & Record<string, any>,`
+    : 'params?: Record<string, any>'
 }
 
 export function getData(bodyType?: string) {
@@ -75,7 +76,7 @@ export function generateFunction({
   const pathArgs = getPathArgs(args)
   const pathArgsTypes = getPathArgsTypes(args)
 
-  const paramsInput = getParams(params)
+  const paramsInput = getParams()
   const paramsInputTypes = getParamsType(params)
 
   const empty = !data && !pathArgs && !paramsInput
@@ -84,9 +85,14 @@ export function generateFunction({
     ? ''
     : `{${dataType} ${pathArgsTypes} ${paramsInputTypes}}`
 
-  const formattedParams = `${
-    params && params.map(([name, filed]) => `${filed}: ${name}`).join(',\n')
+  const formattedParams =
+    params && params.length > 0
+      ? `params: { ${params
+          .map(([name, filed]) => `${filed}: params.${name}`)
+          .join(',\n')},
+...omit(params, [${params.map(([name]) => `'${name}'`).join(', ')}])
   }`
+      : `params`
 
   return `
   async ${methodName} ( ${argsStr} ${argsStrType} ) {
@@ -94,9 +100,7 @@ export function generateFunction({
       method: '${method}',
       url: \`\${baseUrl}${path}\`,
       auth,
-      params: {
-        ${formattedParams}
-      },
+      ${formattedParams},
       ${body ? 'data,' : ''}
     }).then(({data}) => parseGerritResponse(data) as ${formatType(returnType)})
   },

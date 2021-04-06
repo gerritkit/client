@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { TDocResult } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
@@ -17,12 +18,12 @@ export function documentationSearchEndpoints({
 }) {
   return {
     documentationSearchEndpoints: {
-      async searchDocumentation() {
+      async searchDocumentation({ params }: { params?: Record<string, any> }) {
         return axios({
           method: 'GET',
           url: `${baseUrl}/Documentation/`,
           auth,
-          params: {},
+          params,
         }).then(({ data }) => parseGerritResponse(data) as TDocResult[])
       },
     },

@@ -15,14 +15,12 @@ describe('formatter', () => {
     })
     expect(res).toBe(
       `
-  async listChildProjects ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listChildProjects ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/children/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
   },
@@ -57,23 +55,23 @@ describe('formatter', () => {
       },
     })
     expect(res).toBe(`
-  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string},} ) {
+  async listProjects ( {  params, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string} & Record<string, any>,} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,
       auth,
-      params: {
-        b: branch,
-d: description,
-n: limit,
-p: prefix,
-r: regex,
-s: skip,
-m: substring,
-t: tree,
-type: type,
-s: state
-      },
+      params: { b: params.branch,
+d: params.description,
+n: params.limit,
+p: params.prefix,
+r: params.regex,
+s: params.skip,
+m: params.substring,
+t: params.tree,
+type: params.type,
+s: params.state,
+...omit(params, ['branch', 'description', 'limit', 'prefix', 'regex', 'skip', 'substring', 'tree', 'type', 'state'])
+  },
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },

@@ -31,19 +31,6 @@ export type TAssigneeInput = {
   assignee: any
 }
 
-export type TAttentionSetInfo = {
-  account: any
-  last_update: any
-  reason: any
-}
-
-export type TAttentionSetInput = {
-  user?: any
-  reason: any
-  notify?: any
-  notify_details?: any
-}
-
 export type TBlameInfo = {
   author: any
   id: any
@@ -67,7 +54,6 @@ export type TChangeInfo = {
   project: any
   branch: any
   topic?: any
-  attention_set?: any
   assignee?: any
   hashtags?: any
   change_id: any
@@ -168,8 +154,6 @@ export type TCommentInfo = {
   tag?: any
   unresolved?: any
   change_message_id?: any
-  commit_id?: any
-  context_lines?: any
 }
 
 export type TCommentInput = {
@@ -190,11 +174,6 @@ export type TCommentRange = {
   start_character: any
   end_line: any
   end_character: any
-}
-
-export type TContextLine = {
-  line_number: any
-  context_line: any
 }
 
 export type TCommitInfo = {
@@ -265,6 +244,7 @@ export type TDiffInfo = {
   binary: any
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type TDiffIntralineInfo = {}
 
 export type TDiffWebLinkInfo = {
@@ -443,7 +423,6 @@ export type TRevertInput = {
   notify?: any
   notify_details?: any
   topic?: any
-  work_in_progress?: any
 }
 
 export type TRevertSubmissionInfo = {
@@ -475,9 +454,6 @@ export type TReviewInput = {
   reviewers?: any
   ready?: any
   work_in_progress?: any
-  add_to_attention_set?: any
-  remove_from_attention_set?: any
-  ignore_automatic_attention_set_rules?: any
 }
 
 export type TReviewResult = {
@@ -523,6 +499,7 @@ export type TRobotCommentInfo = {
   fix_suggestions?: any
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type TRobotCommentInput = {}
 
 export type TRuleInput = {

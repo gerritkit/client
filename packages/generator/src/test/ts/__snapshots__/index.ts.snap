@@ -3,6 +3,7 @@
 exports[`generator generate 1`] = `
 "
   import axios from 'axios'
+  import omit from 'lodash.omit'
   import {
     TProjectDescriptionInput, 
 TProjectParentInput, 
@@ -43,259 +44,225 @@ TLabelDefinitionInfo
       return {
         projectEndpoints: {
           
-  async listProjects ( {  params: {branch, description, limit, prefix, regex, skip, substring, tree, type, state}, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string},} ) {
+  async listProjects ( {  params, } : {  params: {branch?: string, description?: string, limit?: string, prefix?: string, regex?: string, skip?: string, substring?: string, tree?: string, type?: string, state?: string} & Record<string, any>,} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,
       auth,
-      params: {
-        b: branch,
-d: description,
-n: limit,
-p: prefix,
-r: regex,
-S: skip,
-m: substring,
-t: tree,
-type: type,
-s: state
-      },
+      params: { b: params.branch,
+d: params.description,
+n: params.limit,
+p: params.prefix,
+r: params.regex,
+S: params.skip,
+m: params.substring,
+t: params.tree,
+type: params.type,
+s: params.state,
+...omit(params, ['branch', 'description', 'limit', 'prefix', 'regex', 'skip', 'substring', 'tree', 'type', 'state'])
+  },
       
     }).then(({data}) => parseGerritResponse(data) as Record<string, TProjectInfo>)
   },
 
 
-  async queryProjects (   ) {
+  async queryProjects ( {  params, } : {  params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
   },
 
 
-  async getProject ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getProject ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
 
 
-  async createProject ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async createProject ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
 
 
-  async getProjectDescription ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getProjectDescription ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/description\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async setProjectDescription ( {data, args: {projectName},  } : {data: TProjectDescriptionInput, args: {projectName: string}, } ) {
+  async setProjectDescription ( {data, args: {projectName}, params, } : {data: TProjectDescriptionInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/description\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async deleteProjectDescription ( {data, args: {projectName},  } : {data: TProjectDescriptionInput, args: {projectName: string}, } ) {
+  async deleteProjectDescription ( {data, args: {projectName}, params, } : {data: TProjectDescriptionInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'DELETE',
       url: \`\${baseUrl}/projects/\${projectName}/description\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getProjectParent ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getProjectParent ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/parent\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async setProjectParent ( {data, args: {projectName},  } : {data: TProjectParentInput, args: {projectName: string}, } ) {
+  async setProjectParent ( {data, args: {projectName}, params, } : {data: TProjectParentInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/parent\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getHEAD ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getHEAD ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/HEAD\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async setHEAD ( {data, args: {projectName},  } : {data: THeadInput, args: {projectName: string}, } ) {
+  async setHEAD ( {data, args: {projectName}, params, } : {data: THeadInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/HEAD\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getRepositoryStatistics ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getRepositoryStatistics ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/statistics.git\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TRepositoryStatisticsInfo)
   },
 
 
-  async getConfig ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async getConfig ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/config\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TConfigInfo)
   },
 
 
-  async setConfig ( {data, args: {projectName},  } : {data: TConfigInput, args: {projectName: string}, } ) {
+  async setConfig ( {data, args: {projectName}, params, } : {data: TConfigInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/config\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as TConfigInfo)
   },
 
 
-  async runGC ( {data, args: {projectName},  } : {data: TGCInput, args: {projectName: string}, } ) {
+  async runGC ( {data, args: {projectName}, params, } : {data: TGCInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/gc\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async banCommit ( {data, args: {projectName},  } : {data: TBanInput, args: {projectName: string}, } ) {
+  async banCommit ( {data, args: {projectName}, params, } : {data: TBanInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/ban\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as TBanResultInfo)
   },
 
 
-  async listAccessRightsforProject ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listAccessRightsforProject ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/access\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectAccessInfo)
   },
 
 
-  async addUpdateandDeleteAccessRightsforProject ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async addUpdateandDeleteAccessRightsforProject ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/access\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectAccessInfo)
   },
 
 
-  async checkAccess ( {  params: {account, permission, ref}, } : {  params: {account?: string, permission?: string, ref?: string},} ) {
+  async checkAccess ( {  params, } : {  params: {account?: string, permission?: string, ref?: string} & Record<string, any>,} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/MyProject/check.access\`,
       auth,
-      params: {
-        account: account,
-perm: permission,
-ref: ref
-      },
+      params: { account: params.account,
+perm: params.permission,
+ref: params.ref,
+...omit(params, ['account', 'permission', 'ref'])
+  },
       
     }).then(({data}) => parseGerritResponse(data) as TAccessCheckInfo)
   },
@@ -312,108 +279,94 @@ ref: ref
       return {
         branchEndpoints: {
           
-  async listBranches ( { args: {projectName}, params: {limit, skip, substring, regex}, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string},} ) {
+  async listBranches ( { args: {projectName}, params, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string} & Record<string, any>,} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\`,
       auth,
-      params: {
-        n: limit,
-S: skip,
-m: substring,
-r: regex
-      },
+      params: { n: params.limit,
+S: params.skip,
+m: params.substring,
+r: params.regex,
+...omit(params, ['limit', 'skip', 'substring', 'regex'])
+  },
       
     }).then(({data}) => parseGerritResponse(data) as TBranchInfo[])
   },
 
 
-  async getBranch ( { args: {projectName, branchId},  } : { args: {projectName: string, branchId: string}, } ) {
+  async getBranch ( { args: {projectName, branchId}, params, } : { args: {projectName: string, branchId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TBranchInfo)
   },
 
 
-  async createBranch ( { args: {projectName, branchId},  } : { args: {projectName: string, branchId: string}, } ) {
+  async createBranch ( { args: {projectName, branchId}, params, } : { args: {projectName: string, branchId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TBranchInfo)
   },
 
 
-  async deleteBranch ( { args: {projectName, branchId},  } : { args: {projectName: string, branchId: string}, } ) {
+  async deleteBranch ( { args: {projectName, branchId}, params, } : { args: {projectName: string, branchId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'DELETE',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async deleteBranches ( {data, args: {projectName},  } : {data: TDeleteBranchesInput, args: {projectName: string}, } ) {
+  async deleteBranches ( {data, args: {projectName}, params, } : {data: TDeleteBranchesInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/branches:delete\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getContent ( { args: {projectName, branchId, fileId},  } : { args: {projectName: string, branchId: string, fileId: string}, } ) {
+  async getContent ( { args: {projectName, branchId, fileId}, params, } : { args: {projectName: string, branchId: string, fileId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/files/\${fileId}/content\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getMergeableInformation ( { args: {projectName, branchId},  } : { args: {projectName: string, branchId: string}, } ) {
+  async getMergeableInformation ( { args: {projectName, branchId}, params, } : { args: {projectName: string, branchId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/mergeable\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TMergeableInfo)
   },
 
 
-  async getReflog ( { args: {projectName, branchId},  } : { args: {projectName: string, branchId: string}, } ) {
+  async getReflog ( { args: {projectName, branchId}, params, } : { args: {projectName: string, branchId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/branches/\${branchId}/reflog\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
@@ -430,27 +383,23 @@ r: regex
       return {
         childProjectEndpoints: {
           
-  async listChildProjects ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listChildProjects ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/children/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo[])
   },
 
 
-  async getChildProject ( { args: {projectName, projectName1},  } : { args: {projectName: string, projectName1: string}, } ) {
+  async getChildProject ( { args: {projectName, projectName1}, params, } : { args: {projectName: string, projectName1: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/children/\${projectName1}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TProjectInfo)
   },
@@ -467,69 +416,61 @@ r: regex
       return {
         tagEndpoints: {
           
-  async createTag ( { args: {projectName, tagId},  } : { args: {projectName: string, tagId: string}, } ) {
+  async createTag ( { args: {projectName, tagId}, params, } : { args: {projectName: string, tagId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TTagInfo)
   },
 
 
-  async listTags ( { args: {projectName}, params: {limit, skip, substring, regex}, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string},} ) {
+  async listTags ( { args: {projectName}, params, } : { args: {projectName: string}, params: {limit?: string, skip?: string, substring?: string, regex?: string} & Record<string, any>,} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/tags/\`,
       auth,
-      params: {
-        n: limit,
-S: skip,
-m: substring,
-r: regex
-      },
+      params: { n: params.limit,
+S: params.skip,
+m: params.substring,
+r: params.regex,
+...omit(params, ['limit', 'skip', 'substring', 'regex'])
+  },
       
     }).then(({data}) => parseGerritResponse(data) as TTagInfo[])
   },
 
 
-  async getTag ( { args: {projectName, tagId},  } : { args: {projectName: string, tagId: string}, } ) {
+  async getTag ( { args: {projectName, tagId}, params, } : { args: {projectName: string, tagId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TTagInfo)
   },
 
 
-  async deleteTag ( { args: {projectName, tagId},  } : { args: {projectName: string, tagId: string}, } ) {
+  async deleteTag ( { args: {projectName, tagId}, params, } : { args: {projectName: string, tagId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'DELETE',
       url: \`\${baseUrl}/projects/\${projectName}/tags/\${tagId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async deleteTags ( {data, args: {projectName},  } : {data: TDeleteTagsInput, args: {projectName: string}, } ) {
+  async deleteTags ( {data, args: {projectName}, params, } : {data: TDeleteTagsInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/tags:delete\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
@@ -546,66 +487,56 @@ r: regex
       return {
         commitEndpoints: {
           
-  async getCommit ( { args: {projectName, commitId},  } : { args: {projectName: string, commitId: string}, } ) {
+  async getCommit ( { args: {projectName, commitId}, params, } : { args: {projectName: string, commitId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TCommitInfo)
   },
 
 
-  async getIncludedIn ( { args: {projectName, commitId},  } : { args: {projectName: string, commitId: string}, } ) {
+  async getIncludedIn ( { args: {projectName, commitId}, params, } : { args: {projectName: string, commitId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/in\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TIncludedInInfo)
   },
 
 
-  async getContent ( { args: {projectName, commitId, fileId},  } : { args: {projectName: string, commitId: string, fileId: string}, } ) {
+  async getContent ( { args: {projectName, commitId, fileId}, params, } : { args: {projectName: string, commitId: string, fileId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/files/\${fileId}/content\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async cherryPickCommit ( {data, args: {projectName, commitId},  } : {data: TCherryPickInput, args: {projectName: string, commitId: string}, } ) {
+  async cherryPickCommit ( {data, args: {projectName, commitId}, params, } : {data: TCherryPickInput, args: {projectName: string, commitId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/cherrypick\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as TChangeInfo)
   },
 
 
-  async listFiles ( { args: {projectName, commitId},  } : { args: {projectName: string, commitId: string}, } ) {
+  async listFiles ( { args: {projectName, commitId}, params, } : { args: {projectName: string, commitId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/commits/\${commitId}/files/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as Record<string, TFileInfo>)
   },
@@ -622,66 +553,56 @@ r: regex
       return {
         dashboardEndpoints: {
           
-  async listDashboards ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listDashboards ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/dashboards/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TDashboardInfo[])
   },
 
 
-  async getDashboard ( { args: {projectName, dashboardId},  } : { args: {projectName: string, dashboardId: string}, } ) {
+  async getDashboard ( { args: {projectName, dashboardId}, params, } : { args: {projectName: string, dashboardId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
   },
 
 
-  async createDashboard ( {data, args: {projectName, dashboardId},  } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, } ) {
+  async createDashboard ( {data, args: {projectName, dashboardId}, params, } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
   },
 
 
-  async updateDashboard ( {data, args: {projectName, dashboardId},  } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, } ) {
+  async updateDashboard ( {data, args: {projectName, dashboardId}, params, } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as TDashboardInfo)
   },
 
 
-  async deleteDashboard ( {data, args: {projectName, dashboardId},  } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, } ) {
+  async deleteDashboard ( {data, args: {projectName, dashboardId}, params, } : {data: TDashboardInput, args: {projectName: string, dashboardId: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'DELETE',
       url: \`\${baseUrl}/projects/\${projectName}/dashboards/\${dashboardId}\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
@@ -698,79 +619,67 @@ r: regex
       return {
         labelEndpoints: {
           
-  async listLabels ( { args: {projectName},  } : { args: {projectName: string}, } ) {
+  async listLabels ( { args: {projectName}, params, } : { args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async getLabel ( { args: {projectName, labelName},  } : { args: {projectName: string, labelName: string}, } ) {
+  async getLabel ( { args: {projectName, labelName}, params, } : { args: {projectName: string, labelName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'GET',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
   },
 
 
-  async createLabel ( { args: {projectName, labelName},  } : { args: {projectName: string, labelName: string}, } ) {
+  async createLabel ( { args: {projectName, labelName}, params, } : { args: {projectName: string, labelName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
   },
 
 
-  async setLabel ( { args: {projectName, labelName},  } : { args: {projectName: string, labelName: string}, } ) {
+  async setLabel ( { args: {projectName, labelName}, params, } : { args: {projectName: string, labelName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'PUT',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       
     }).then(({data}) => parseGerritResponse(data) as TLabelDefinitionInfo)
   },
 
 
-  async deleteLabel ( {data, args: {projectName, labelName},  } : {data: TDeleteLabelInput, args: {projectName: string, labelName: string}, } ) {
+  async deleteLabel ( {data, args: {projectName, labelName}, params, } : {data: TDeleteLabelInput, args: {projectName: string, labelName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'DELETE',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\${labelName}\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
 
 
-  async batchUpdateLabels ( {data, args: {projectName},  } : {data: TBatchLabelInput, args: {projectName: string}, } ) {
+  async batchUpdateLabels ( {data, args: {projectName}, params, } : {data: TBatchLabelInput, args: {projectName: string}, params?: Record<string, any>} ) {
     return axios({
       method: 'POST',
       url: \`\${baseUrl}/projects/\${projectName}/labels/\`,
       auth,
-      params: {
-        
-      },
+      params,
       data,
     }).then(({data}) => parseGerritResponse(data) as any)
   },
