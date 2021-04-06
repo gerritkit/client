@@ -38,10 +38,10 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@gerritkit/native": "1.2.0",
-    "@qiwi/substrate": "^1.19.4",
-    "axios": "^0.20.0",
-    "tslib": "^2.0.3"
+    "@gerritkit/native": "^1.2.0",
+    "@qiwi/substrate": "1.20.6",
+    "axios": "0.20.0",
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.18.2"

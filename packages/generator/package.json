@@ -38,11 +38,12 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@types/cheerio": "^0.22.22",
-    "axios": "^0.20.0",
-    "cheerio": "^1.0.0-rc.3",
+    "@qiwi/substrate": "^1.20.6",
+    "@types/cheerio": "0.22.22",
+    "axios": "0.20.0",
+    "cheerio": "1.0.0-rc.3",
     "docsify-tools": "^1.0.20",
-    "tslib": "^2.0.3"
+    "tslib": "^2.2.0"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
@@ -58,6 +59,6 @@
   "homepage": "https://github.com/gerritkit/client/#readme",
   "devDependencies": {
     "axios-mock-adapter": "^1.19.0",
-    "docsify-cli": "^4.4.1"
+    "docsify-cli": "^4.4.3"
   }
 }
