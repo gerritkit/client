@@ -1,3 +1,18 @@
+## @gerritkit/rest [1.4.1](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.4.0...@gerritkit/rest@1.4.1) (2021-04-06)
+
+
+### Performance Improvements
+
+* up deps ([e97010e](https://github.com/gerritkit/client/commit/e97010e040cd69cbb957e65b6f13432876a17ca3))
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/native:** upgraded to 1.2.1
+
 # @gerritkit/rest [1.4.0](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.3.3...@gerritkit/rest@1.4.0) (2021-04-06)
 
 
