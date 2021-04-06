@@ -1,8 +1,7 @@
 module.exports = {
   extends: [
     'eslint-config-qiwi',
-    'prettier',
-    'prettier/@typescript-eslint',
+    'prettier'
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
