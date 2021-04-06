@@ -1,3 +1,10 @@
+# @gerritkit/native [1.2.0](https://github.com/gerritkit/client/compare/@gerritkit/native@1.1.2...@gerritkit/native@1.2.0) (2021-04-06)
+
+
+### Features
+
+* update generator, make params more flexible ([4e55d0c](https://github.com/gerritkit/client/commit/4e55d0c55e03e2d4d1ab0063d531c4724b3b37ef)), closes [#19](https://github.com/gerritkit/client/issues/19)
+
 ## @gerritkit/native [1.1.2](https://github.com/gerritkit/client/compare/@gerritkit/native@1.1.1...@gerritkit/native@1.1.2) (2020-11-23)
 
 
