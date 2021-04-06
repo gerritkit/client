@@ -1,3 +1,18 @@
+## @gerritkit/core [1.2.3](https://github.com/gerritkit/client/compare/@gerritkit/core@1.2.2...@gerritkit/core@1.2.3) (2021-04-06)
+
+
+### Performance Improvements
+
+* up deps ([e97010e](https://github.com/gerritkit/client/commit/e97010e040cd69cbb957e65b6f13432876a17ca3))
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/infra:** upgraded to 1.2.3
+
 ## @gerritkit/core [1.2.2](https://github.com/gerritkit/client/compare/@gerritkit/core@1.2.1...@gerritkit/core@1.2.2) (2020-11-23)
 
 
