@@ -1,3 +1,10 @@
+## @gerritkit/generator [1.3.1](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.3.0...@gerritkit/generator@1.3.1) (2021-04-06)
+
+
+### Performance Improvements
+
+* up deps ([e97010e](https://github.com/gerritkit/client/commit/e97010e040cd69cbb957e65b6f13432876a17ca3))
+
 # @gerritkit/generator [1.3.0](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.2.1...@gerritkit/generator@1.3.0) (2021-04-06)
 
 
