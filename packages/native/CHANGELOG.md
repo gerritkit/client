@@ -1,3 +1,10 @@
+## @gerritkit/native [1.2.1](https://github.com/gerritkit/client/compare/@gerritkit/native@1.2.0...@gerritkit/native@1.2.1) (2021-04-06)
+
+
+### Performance Improvements
+
+* up deps ([e97010e](https://github.com/gerritkit/client/commit/e97010e040cd69cbb957e65b6f13432876a17ca3))
+
 # @gerritkit/native [1.2.0](https://github.com/gerritkit/client/compare/@gerritkit/native@1.1.2...@gerritkit/native@1.2.0) (2021-04-06)
 
 
