@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { omit } from 'lodash'
+import omit from 'lodash.omit'
 
 import { TPluginInfo } from '../types/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output

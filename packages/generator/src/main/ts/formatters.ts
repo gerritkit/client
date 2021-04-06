@@ -3,7 +3,7 @@ import { TMethodInfo } from './types'
 export function addGlobalVariables(types: string[], code: string) {
   return `
   import axios from 'axios'
-  import { omit } from 'lodash'
+  import omit from 'lodash.omit'
   import {
     ${types.join(', \n')}
      } from '../types/index'

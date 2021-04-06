@@ -3,7 +3,7 @@
 exports[`generator generate 1`] = `
 "
   import axios from 'axios'
-  import { omit } from 'lodash'
+  import omit from 'lodash.omit'
   import {
     TProjectDescriptionInput, 
 TProjectParentInput, 
