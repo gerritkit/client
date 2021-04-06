@@ -39,9 +39,9 @@
   },
   "dependencies": {
     "@qiwi/substrate": "^1.20.6",
-    "@types/cheerio": "^0.22.22",
-    "axios": "^0.20.0",
-    "cheerio": "^1.0.0-rc.3",
+    "@types/cheerio": "0.22.22",
+    "axios": "0.20.0",
+    "cheerio": "1.0.0-rc.3",
     "lodash.omit": "^4.5.0",
     "tslib": "^2.2.0"
   },
