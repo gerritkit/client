@@ -1,3 +1,10 @@
+# @gerritkit/generator [1.3.0](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.2.1...@gerritkit/generator@1.3.0) (2021-04-06)
+
+
+### Features
+
+* update generator, make params more flexible ([4e55d0c](https://github.com/gerritkit/client/commit/4e55d0c55e03e2d4d1ab0063d531c4724b3b37ef)), closes [#19](https://github.com/gerritkit/client/issues/19)
+
 ## @gerritkit/generator [1.2.1](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.2.0...@gerritkit/generator@1.2.1) (2020-11-23)
 
 
