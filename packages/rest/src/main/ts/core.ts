@@ -11,7 +11,10 @@ export class Core {
   >(this: S, ...newPlugins: T) {
     const currentPlugins = this.plugins
     const NewGerritKit = class extends this {
-      static plugins = [...currentPlugins, ...newPlugins.filter((plugin) => !currentPlugins.includes(plugin))]
+      static plugins = [
+        ...currentPlugins,
+        ...newPlugins.filter((plugin) => !currentPlugins.includes(plugin)),
+      ]
     }
 
     return NewGerritKit as typeof NewGerritKit &
