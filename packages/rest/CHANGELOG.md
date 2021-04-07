@@ -1,3 +1,18 @@
+## @gerritkit/rest [1.4.3](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.4.2...@gerritkit/rest@1.4.3) (2021-04-07)
+
+
+### Bug Fixes
+
+* fix types name collision ([7dd6b0f](https://github.com/gerritkit/client/commit/7dd6b0f73865e0ebcd00ba25b09b92026fcc4a8d))
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/native:** upgraded to 1.2.3
+
 ## @gerritkit/rest [1.4.2](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.4.1...@gerritkit/rest@1.4.2) (2021-04-07)
 
 
