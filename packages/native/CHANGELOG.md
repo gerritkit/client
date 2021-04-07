@@ -1,3 +1,10 @@
+## @gerritkit/native [1.2.3](https://github.com/gerritkit/client/compare/@gerritkit/native@1.2.2...@gerritkit/native@1.2.3) (2021-04-07)
+
+
+### Bug Fixes
+
+* fix types name collision ([7dd6b0f](https://github.com/gerritkit/client/commit/7dd6b0f73865e0ebcd00ba25b09b92026fcc4a8d))
+
 ## @gerritkit/native [1.2.2](https://github.com/gerritkit/client/compare/@gerritkit/native@1.2.1...@gerritkit/native@1.2.2) (2021-04-07)
 
 
