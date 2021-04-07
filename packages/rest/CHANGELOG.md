@@ -1,3 +1,18 @@
+## @gerritkit/rest [1.4.2](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.4.1...@gerritkit/rest@1.4.2) (2021-04-07)
+
+
+### Bug Fixes
+
+* bump axios from 0.20.0 to 0.21.1 ([1c2b5d7](https://github.com/gerritkit/client/commit/1c2b5d74ff63513a455a778f74da4b4f88f5e2c4))
+
+
+
+
+
+### Dependencies
+
+* **@gerritkit/native:** upgraded to 1.2.2
+
 ## @gerritkit/rest [1.4.1](https://github.com/gerritkit/client/compare/@gerritkit/rest@1.4.0...@gerritkit/rest@1.4.1) (2021-04-06)
 
 
