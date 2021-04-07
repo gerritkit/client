@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { TProjectAccessInfo } from '../types/index'
+import { TProjectAccessInfo } from '../typings/index'
 // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
 const xssiPrefix = ")]}'"
 const parseGerritResponse = (data: string) =>
