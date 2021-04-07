@@ -40,7 +40,7 @@
   "dependencies": {
     "@qiwi/substrate": "^1.20.6",
     "@types/cheerio": "0.22.22",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "cheerio": "1.0.0-rc.3",
     "docsify-tools": "^1.0.20",
     "tslib": "^2.2.0"
