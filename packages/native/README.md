@@ -8,6 +8,21 @@ yarn add @gerritkit/native
 
 ## Usage
 ```javascript
-const nativeClient = new GerritNative(baseUrl, auth)
+import { GerritNative } from "@gerritkit/native";
+
+(async () => {
+  const gerrit = new GerritNative("https://review.gerrithub.io", {
+    username: "username",
+    password: "<your password>"
+  })
+
+  const changes = await gerrit.changeEndpoints.queryChanges({
+    params: {
+      q: "owner:your_name"
+    }
+  })
+
+  changes.forEach(change => console.log(change.project))
+})();
 
 ```
