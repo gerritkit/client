@@ -1,12 +1,13 @@
 {
-  "extends": "./packages/infra/tsconfig.compiler.json",
   "compilerOptions": {
-    "baseUrl": "./packages",
-    "paths": {
-      "@gerritkit/core": ["./core/src/main/ts"],
-      "@gerritkit/generator": ["./generator/src/main/ts"],
-      "@gerritkit/rest": ["./rest/src/main/ts"],
-      "@gerritkit/native": ["./native/src/main/ts"]
-    }
-  }
+    "outDir": "temp/prebuild",
+    "emitDeclarationOnly": true,
+    "declaration": true
+  },
+  "references": [
+    { "path": "./packages/core/tsconfig.es5.json" },
+    { "path": "./packages/generator/tsconfig.es5.json" },
+    { "path": "./packages/rest/tsconfig.es5.json" },
+    { "path": "./packages/native/tsconfig.es5.json" }
+  ]
 }

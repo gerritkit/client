@@ -26,7 +26,7 @@
     "format": "yarn infra:prettier --write 'src/**/*.ts'",
     "lint": "yarn infra:eslint src/main/ts/**/*.ts",
     "lint:fix": "yarn lint --fix",
-    "clean": "infra:rimraf target typings flow-typed buildcache",
+    "clean": "yarn infra:rimraf target typings flow-typed buildcache coverage docs buildstamp.json",
     "test:depcheck": "yarn infra:depcheck --ignores='typedoc,tslib,earljs,eslint-*,prettier-*,**/*-infra' --ignore-patterns='typings'",
     "prebuild": "yarn infra:buildstamp --git --out.path buildstamp.json",
     "build": "yarn infra:npm-run-all -p -l build:es5 build:es6 build:ts build:libdef docs uglify",
@@ -34,7 +34,7 @@
     "build:es6": "yarn infra:mkdirp target/es6 && yarn infra:tsc -p tsconfig.es6.json",
     "build:ts": "cpy src/main/ts/ target/ts/",
     "build:libdef": "yarn infra:libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json",
-    "docs": "run -T typedoc",
+    "docs": "typedoc --out docs/typedoc ./ --readme README.md --tsconfig tsconfig.es5.json src/main",
     "uglify": "yarn infra:uglify",
     "postupdate": "yarn && yarn build && yarn test"
   },

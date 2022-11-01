@@ -20,16 +20,16 @@
     "build": "yarn workspaces foreach -pt run build",
     "coverage:merge": "node scripts/js/coverage-merge.js",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls || echo 'coveralls push failed :(' && exit 0",
-    "docs": "typedoc packages/*/src/main",
+    "docs": "typedoc --out docs/typedoc ./ --readme README.md --tsconfig tsconfig.es5.json src/main",
     "postupdate": "yarn && yarn clean && yarn build && yarn test",
     "updeps": "npm_config_yes=true npx npm-upgrade-monorepo"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
-    "@types/node": "^14.14.37",
-    "coveralls": "^3.1.0",
+    "@types/jest": "^29.2.1",
+    "@types/node": "^18.11.9",
+    "coveralls": "^3.1.1",
     "find-git-root": "^1.0.4",
-    "jest": "^26.6.3",
+    "jest": "^29.2.2",
     "snazzy": "^9.0.0",
     "tsm": "^2.2.2",
     "typedoc": "^0.23.19"
