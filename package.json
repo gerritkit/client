@@ -8,20 +8,21 @@
   ],
   "private": true,
   "scripts": {
-    "clean": "lerna clean --yes && lerna run clean",
-    "build": "lerna run build --stream --concurrency 2",
-    "bootstrap": "lerna bootstrap",
+    "clean": "yarn workspaces foreach --parallel --topological-dev --no-private run clean && yarn infra:rimraf temp coverage",
+    "lint": "yarn infra:eslint packages/*/src/**/*.ts",
+    "test": "yarn jest",
     "jest": "jest",
     "test:report": "yarn test && yarn coveralls:push",
-    "pretest": "yarn lint",
-    "test": "yarn jest",
-    "lint": "lerna run lint",
-    "format": "lerna run format",
-    "test:concurrent": "lerna run test --concurrency 1 --stream --no-prefix && yarn coverage:merge",
+    "test:depcheck": "yarn workspaces foreach --parallel --topological-dev --no-private run test:depcheck",
+    "test:depaudit": "yarn npm audit --all --severity moderate",
+    "test:depauditfix": "npm_config_yes=true npx yarn-audit-fix --audit-level=moderate",
+    "test:concurrent": "yarn workspaces foreach --parallel --topological-dev --no-private run test && yarn coverage:merge",
+    "build": "yarn workspaces foreach -pt run build",
     "coverage:merge": "node scripts/js/coverage-merge.js",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls || echo 'coveralls push failed :(' && exit 0",
-    "docs": "typedoc packages/**/src/main",
-    "postupdate": "yarn && npx yarn-audit-fix --audit-level=moderate && yarn bootstrap && yarn build && yarn test"
+    "docs": "typedoc packages/*/src/main",
+    "postupdate": "yarn && yarn clean && yarn build && yarn test",
+    "updeps": "npm_config_yes=true npx npm-upgrade-monorepo"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
@@ -29,11 +30,11 @@
     "coveralls": "^3.1.0",
     "find-git-root": "^1.0.4",
     "jest": "^26.6.3",
-    "lerna": "^4.0.0",
     "snazzy": "^9.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gerritkit/client.git"
-  }
+  },
+  "packageManager": "yarn@4.0.0-rc.14"
 }

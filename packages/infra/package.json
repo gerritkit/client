@@ -1,7 +1,6 @@
 {
   "name": "@gerritkit/infra",
   "version": "1.2.3",
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
@@ -9,29 +8,45 @@
   "keywords": [],
   "files": [],
   "scripts": {
-    "postupdate": "yarn"
+    "postupdate": "yarn",
+    "infra:npm-run-all": "cd $INIT_CWD && npm-run-all",
+    "infra:libdefkit": "cd $INIT_CWD && libdefkit",
+    "infra:buildstamp": "cd $INIT_CWD && buildstamp",
+    "infra:c8": "cd $INIT_CWD && c8",
+    "infra:depcheck": "cd $INIT_CWD && depcheck",
+    "infra:eslint": "cd $INIT_CWD && eslint",
+    "infra:prettier": "cd $INIT_CWD && prettier",
+    "infra:rimraf": "cd $INIT_CWD && rimraf",
+    "infra:terser": "cd $INIT_CWD && terser",
+    "infra:mkdirp": "cd $INIT_CWD && mkdirp",
+    "infra:tsc": "cd $INIT_CWD && tsc",
+    "infra:uglify": "./scripts/sh/uglify.sh"
   },
-  "dependencies": {},
   "devDependencies": {
     "@qiwi/libdefkit": "^2.1.8",
+    "@qiwi/npm-run-all": "^4.1.7",
+    "@swissquote/crafty-preset-jest": "^1.14.0",
     "@types/jest": "^26.0.22",
+    "@types/mkdirp": "^1",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "jest": "^26.6.3",
-    "terser": "^5.6.1",
-    "ts-jest": "^26.5.4",
-    "typedoc": "^0.19.2",
+    "buildstamp": "^2.1.0",
+    "c8": "^7.12.0",
+    "depcheck": "^1.4.3",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-qiwi": "^1.10.8",
+    "jest": "^26.6.3",
+    "mkdirp": "^1.0.4",
     "prettier": "^2.2.1",
+    "prettier-config-qiwi": "^1.7.3",
+    "rimraf": "^3.0.2",
+    "terser": "^5.6.1",
+    "ts-jest": "^26.5.4",
+    "typedoc": "^0.19.2",
     "typedoc-plugin-external-module-name": "^4.0.6",
     "typescript": "^4.2.3",
-    "typescript-eslint-parser": "^22.0.0",
-    "rimraf": "^3.0.2",
-    "@swissquote/crafty-preset-jest": "^1.14.0"
+    "typescript-eslint-parser": "^22.0.0"
   },
-  "peerDependencies": {},
-  "optionalDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gerritkit/client.git"

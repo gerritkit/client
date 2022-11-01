@@ -1,27 +1,4 @@
 {
-  "branch": "master",
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
-    "@semantic-release/npm",
-    [
-      "@semantic-release/github",
-      {
-        "successComment": false,
-        "failComment": false
-      }
-    ],
-    "@semantic-release/git",
-    [
-      "@qiwi/semantic-release-gh-pages-plugin",
-      {
-        "branch": "gh-pages",
-        "msg": "docs updated <%= nextRelease.gitTag %>",
-        "src": "packages/native/docs",
-        "dst": "./docs/native",
-        "pullTagsBranch": ""
-      }
-    ]
-  ]
+  "cmd": "yarn",
+  "changelog": "changelog"
 }
