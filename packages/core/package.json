@@ -38,8 +38,8 @@
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@qiwi/substrate": "^1.20.6",
-    "tslib": "^2.2.0"
+    "@qiwi/substrate": "^1.20.15",
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@gerritkit/infra": "workspace:*"
