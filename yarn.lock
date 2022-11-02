@@ -612,6 +612,7 @@ __metadata:
   dependencies:
     "@types/jest": "npm:^29.2.1"
     "@types/node": "npm:^18.11.9"
+    codeclimate-test-reporter: "npm:^0.5.1"
     coveralls: "npm:^3.1.1"
     find-git-root: "npm:^1.0.4"
     jest: "npm:^29.2.2"
@@ -2087,6 +2088,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async@npm:~1.5.2":
+  version: 1.5.2
+  resolution: "async@npm:1.5.2"
+  checksum: 51df0a983eaae75e4514ae0066092a4d6e70fe798a27eb78e6b414f55e9576be1bd40475625391fbdba70a024fa7760fa85d3464a71d9008c985bc1f0f25142b
+  languageName: node
+  linkType: hard
+
 "asynckit@npm:^0.4.0":
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
@@ -2744,6 +2752,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"codeclimate-test-reporter@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "codeclimate-test-reporter@npm:0.5.1"
+  dependencies:
+    async: "npm:~1.5.2"
+    commander: "npm:2.9.0"
+    lcov-parse: "npm:0.0.10"
+    request: "npm:~2.88.0"
+  bin:
+    codeclimate-test-reporter: ./bin/codeclimate.js
+  checksum: 0f740838e5f6564df1066c66638ea63b7ad290779c240957c66304f0f3e0e5e66c6f10cfaa38c557fff09abf9bb723b756573a2aebde2d359ee7179bed38594e
+  languageName: node
+  linkType: hard
+
 "collect-v8-coverage@npm:^1.0.0":
   version: 1.0.1
   resolution: "collect-v8-coverage@npm:1.0.1"
@@ -2812,6 +2834,15 @@ __metadata:
   dependencies:
     delayed-stream: "npm:~1.0.0"
   checksum: c3224efc798a4f2066ff2f65c28d60b48ec73b38bf76331ecc61814875cc5c8a93beccc268ca08aaa98a141c262de5787d68685b6682b8b67ad2dadb8bd2ddd2
+  languageName: node
+  linkType: hard
+
+"commander@npm:2.9.0":
+  version: 2.9.0
+  resolution: "commander@npm:2.9.0"
+  dependencies:
+    graceful-readlink: "npm:>= 1.0.0"
+  checksum: 6ca4a6f7344b26c6e35c2e1ea3bc4ba8e5e3782a4561675858d3239637d60efb6cac7a6b3ee6d536587130ee5468bbeddb2657684561cdf2cd8ae403ec6bdea2
   languageName: node
   linkType: hard
 
@@ -5038,6 +5069,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graceful-readlink@npm:>= 1.0.0":
+  version: 1.0.1
+  resolution: "graceful-readlink@npm:1.0.1"
+  checksum: 4a7faf9cc055f675d966507a59e42c986c1ff26255754f0f2421c838f900699f134763c1fc5b72039bcb9a360bcad2b734d0bab6df126d076f57a547ff9f07a2
+  languageName: node
+  linkType: hard
+
 "grapheme-splitter@npm:^1.0.4":
   version: 1.0.4
   resolution: "grapheme-splitter@npm:1.0.4"
@@ -6582,6 +6620,13 @@ __metadata:
   dependencies:
     package-json: "npm:^6.3.0"
   checksum: 212765a6cc0f19dd0e56957046edc5df33bce7eadf3fcdb0aef079f15c838a645a7ea09064fc9be8a43888a91dfa90f9dfd9adeb658c2635cce70cc9a7c4991a
+  languageName: node
+  linkType: hard
+
+"lcov-parse@npm:0.0.10":
+  version: 0.0.10
+  resolution: "lcov-parse@npm:0.0.10"
+  checksum: e1983015efd2cbc4ebed0198e8756721a9a56f016d0d7a5b63512bb944fa1036797fed68b7e59bdf84ac02aa82bdf8382434644b0fd084922218cd6381eeeccc
   languageName: node
   linkType: hard
 
@@ -8250,7 +8295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"request@npm:^2.88.2":
+"request@npm:^2.88.2, request@npm:~2.88.0":
   version: 2.88.2
   resolution: "request@npm:2.88.2"
   dependencies:
