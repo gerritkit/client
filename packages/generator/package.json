@@ -1,7 +1,6 @@
 {
   "name": "@gerritkit/generator",
   "version": "1.3.2",
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
@@ -21,32 +20,33 @@
     "flow-typed"
   ],
   "scripts": {
-    "test": "yarn lint && yarn test:spec",
+    "test": "yarn infra:npm-run-all -p -l  lint test:spec",
     "test:spec": "yarn jest",
     "jest": "jest -w=1 --config=jest.config.json",
-    "format": "prettier --write \"src/**/*.{ts,js,md}\"",
-    "lint": "eslint src/main/ts/**/*.ts",
+    "format": "yarn infra:prettier --write 'src/**/*.ts'",
+    "lint": "yarn infra:eslint src/main/ts/**/*.ts",
     "lint:fix": "yarn lint --fix",
-    "clean": "rimraf target typings flow-typed buildcache",
-    "build": "yarn build:es5 && yarn build:es6 && yarn build:ts && yarn build:libdef && yarn docs && yarn uglify",
-    "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
-    "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
-    "build:ts": "cp -r src/main/ts/ target/ts/",
-    "build:libdef": "libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json",
-    "docs": "typedoc --out docs/typedoc ./ --readme README.md --tsconfig tsconfig.es5.json src/main",
-    "uglify": "for f in $(find target -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done",
+    "clean": "yarn infra:rimraf target typings flow-typed buildcache coverage docs buildstamp.json",
+    "test:depcheck": "yarn infra:depcheck --ignores='typedoc,tslib,earljs,eslint-*,prettier-*,**/*-infra' --ignore-patterns='typings'",
+    "prebuild": "yarn infra:buildstamp --git --out.path buildstamp.json",
+    "build": "yarn infra:npm-run-all -p -l build:es5 build:es6 build:ts build:libdef docs uglify",
+    "build:es5": "yarn infra:mkdirp target/es5 && yarn infra:tsc -p tsconfig.es5.json",
+    "build:es6": "yarn infra:mkdirp target/es6 && yarn infra:tsc -p tsconfig.es6.json",
+    "build:ts": "cpy src/main/ts/ target/ts/",
+    "build:libdef": "yarn infra:libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json",
+    "docs": "run -T typedoc",
+    "uglify": "yarn infra:uglify",
     "postupdate": "yarn && yarn build && yarn test"
   },
   "dependencies": {
-    "@qiwi/substrate": "^1.20.6",
-    "@types/cheerio": "0.22.22",
-    "axios": "0.21.1",
-    "cheerio": "1.0.0-rc.3",
+    "@gerritkit/core": "workspace:*",
+    "@qiwi/substrate": "^1.20.15",
+    "@types/cheerio": "0.22.31",
+    "axios": "1.1.3",
+    "cheerio": "1.0.0-rc.12",
     "docsify-tools": "^1.0.20",
-    "tslib": "^2.2.0"
+    "tslib": "^2.4.1"
   },
-  "peerDependencies": {},
-  "optionalDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gerritkit/client.git"
@@ -58,7 +58,7 @@
   },
   "homepage": "https://github.com/gerritkit/client/#readme",
   "devDependencies": {
-    "axios-mock-adapter": "^1.19.0",
-    "docsify-cli": "^4.4.3"
+    "axios-mock-adapter": "^1.21.2",
+    "docsify-cli": "^4.4.4"
   }
 }

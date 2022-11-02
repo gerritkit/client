@@ -64,3 +64,15 @@ buildcache
 
 # Integration test assets
 creds.json
+
+
+# Yarn berry
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+.npmrc
