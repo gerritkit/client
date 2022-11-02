@@ -13,7 +13,8 @@ module.exports = {
         'camelcase': 'off',
         'simple-import-sort/imports': 'off',
         'no-template-curly-in-string': 'off',
-        'unicorn/escape-case': 'off'
+        'unicorn/escape-case': 'off',
+        'sonarjs/no-nested-template-literals': 'off'
       },
     }]
   };

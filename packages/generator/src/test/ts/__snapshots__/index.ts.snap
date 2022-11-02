@@ -34,7 +34,7 @@ TDashboardInfo,
 TLabelDefinitionInfo
      } from '../types/index'
   // NOTE: https://gerrit-review.googlesource.com/Documentation/rest-api.html#output
-  const xssiPrefix = ')]}\\\\''
+  const xssiPrefix = ')]}\\''
   const parseGerritResponse = (data: string) => JSON.parse(data.slice(xssiPrefix.length))
   
     export function projectEndpoints ({ baseUrl, auth }: { baseUrl: string, auth: {

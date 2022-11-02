@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`parser getSectionInfo with params 1`] = `
-Object {
-  "methods": Array [
-    Object {
+{
+  "methods": [
+    {
       "description": "
 Lists the projects accessible by the caller. This is the same as
 using the ls-projects command over SSH,
@@ -13,47 +13,47 @@ As result a map is returned that maps the project names to
 ProjectInfo entries. The entries in the map are sorted
 by project name.
 ",
-      "inputs": Object {
-        "args": Array [],
+      "inputs": {
+        "args": [],
         "body": undefined,
-        "params": Array [
-          Array [
+        "params": [
+          [
             "branch",
             "b",
           ],
-          Array [
+          [
             "description",
             "d",
           ],
-          Array [
+          [
             "limit",
             "n",
           ],
-          Array [
+          [
             "prefix",
             "p",
           ],
-          Array [
+          [
             "regex",
             "r",
           ],
-          Array [
+          [
             "skip",
             "S",
           ],
-          Array [
+          [
             "substring",
             "m",
           ],
-          Array [
+          [
             "tree",
             "t",
           ],
-          Array [
+          [
             "type",
             "type",
           ],
-          Array [
+          [
             "state",
             "s",
           ],
@@ -63,12 +63,12 @@ by project name.
       "methodName": "listProjects",
       "originalName": "List Projects",
       "path": "/projects/",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectInfo",
         "wrapper": "map",
       },
     },
-    Object {
+    {
       "description": "
 Queries projects visible to the caller. The
 query string must be
@@ -77,44 +77,44 @@ can be used to skip/limit results.
 
 As result a list of ProjectInfo entities is returned.
 ",
-      "inputs": Object {
-        "args": Array [],
+      "inputs": {
+        "args": [],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "queryProjects",
       "originalName": "Query Projects",
       "path": "/projects/",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectInfo",
         "wrapper": "list",
       },
     },
-    Object {
+    {
       "description": "
 Retrieves a project.
 
 As response a ProjectInfo entity is returned that
 describes the project.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getProject",
       "originalName": "Get Project",
       "path": "/projects/\${projectName}",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Creates a new project.
 
@@ -124,44 +124,44 @@ ProjectInput.
 As response the ProjectInfo entity is returned that
 describes the created project.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "createProject",
       "originalName": "Create Project",
       "path": "/projects/\${projectName}",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Retrieves the description of a project.
 
 If the project does not have a description an empty string is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getProjectDescription",
       "originalName": "Get Project Description",
       "path": "/projects/\${projectName}/description",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Sets the description of a project.
 
@@ -172,25 +172,25 @@ As response the new project description is returned.
 
 If the description was deleted the response is “204 No Content”.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "ProjectDescriptionInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "setProjectDescription",
       "originalName": "Set Project Description",
       "path": "/projects/\${projectName}/description",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Deletes the description of a project.
 
@@ -200,45 +200,45 @@ Historically, this method allowed a body in the DELETE, but that behavior is
 deprecated.
 In this case, use PUT instead.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "ProjectDescriptionInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "DELETE",
       "methodName": "deleteProjectDescription",
       "originalName": "Delete Project Description",
       "path": "/projects/\${projectName}/description",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Retrieves the name of a project’s parent project. For the
 All-Projects root project an empty string is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getProjectParent",
       "originalName": "Get Project Parent",
       "path": "/projects/\${projectName}/parent",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Sets the parent project for a project.
 
@@ -247,44 +247,44 @@ inside a ProjectParentInput entity.
 
 As response the new parent project name is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "ProjectParentInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "setProjectParent",
       "originalName": "Set Project Parent",
       "path": "/projects/\${projectName}/parent",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Retrieves for a project the name of the branch to which HEAD points.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getHEAD",
       "originalName": "Get HEAD",
       "path": "/projects/\${projectName}/HEAD",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Sets HEAD for a project.
 
@@ -293,48 +293,48 @@ request body inside a HeadInput entity.
 
 As response the new ref to which HEAD points is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "HeadInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "setHEAD",
       "originalName": "Set HEAD",
       "path": "/projects/\${projectName}/HEAD",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Return statistics for the repository of a project.
 
 The repository statistics are returned as a
 RepositoryStatisticsInfo entity.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getRepositoryStatistics",
       "originalName": "Get Repository Statistics",
       "path": "/projects/\${projectName}/statistics.git",
-      "returnType": Object {
+      "returnType": {
         "type": "RepositoryStatisticsInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Gets some configuration information about a project. Note that this
 config info is not simply the contents of project.config; it generally
@@ -344,23 +344,23 @@ A ConfigInfo entity is returned that describes the
 project configuration. Some fields are only visible to users that have
 read access to refs/meta/config.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "getConfig",
       "originalName": "Get Config",
       "path": "/projects/\${projectName}/config",
-      "returnType": Object {
+      "returnType": {
         "type": "ConfigInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Sets the configuration of a project.
 
@@ -370,26 +370,26 @@ ConfigInput entity.
 As response the new configuration is returned as a 
 ConfigInfo entity.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "ConfigInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "setConfig",
       "originalName": "Set Config",
       "path": "/projects/\${projectName}/config",
-      "returnType": Object {
+      "returnType": {
         "type": "ConfigInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Run the Git garbage collection for the repository of a project.
 
@@ -398,25 +398,25 @@ request body as a GCInput entity.
 
 The response is the streamed output of the garbage collection.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "GCInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "POST",
       "methodName": "runGC",
       "originalName": "Run GC",
       "path": "/projects/\${projectName}/gc",
-      "returnType": Object {
+      "returnType": {
         "type": "any",
       },
     },
-    Object {
+    {
       "description": "
 Marks commits as banned for the project. If a commit is banned Gerrit
 rejects every push that includes this commit with
@@ -429,26 +429,26 @@ The caller must be project owner.
 
 As response a BanResultInfo entity is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
-        "body": Object {
+        "body": {
           "type": "BanInput",
           "wrapper": undefined,
         },
-        "params": Array [],
+        "params": [],
       },
       "method": "PUT",
       "methodName": "banCommit",
       "originalName": "Ban Commit",
       "path": "/projects/\${projectName}/ban",
-      "returnType": Object {
+      "returnType": {
         "type": "BanResultInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Lists the access rights for a single project.
 
@@ -456,23 +456,23 @@ As result a
 ProjectAccessInfo
 entity is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "GET",
       "methodName": "listAccessRightsforProject",
       "originalName": "List Access Rights for Project",
       "path": "/projects/\${projectName}/access",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectAccessInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 Sets access rights for the project using the diff schema provided by
 ProjectAccessInput. Deductions are used to
@@ -492,23 +492,23 @@ As result a
 ProjectAccessInfo
 entity is returned.
 ",
-      "inputs": Object {
-        "args": Array [
+      "inputs": {
+        "args": [
           "projectName",
         ],
         "body": undefined,
-        "params": Array [],
+        "params": [],
       },
       "method": "POST",
       "methodName": "addUpdateandDeleteAccessRightsforProject",
       "originalName": "Add, Update and Delete Access Rights for Project",
       "path": "/projects/\${projectName}/access",
-      "returnType": Object {
+      "returnType": {
         "type": "ProjectAccessInfo",
         "wrapper": undefined,
       },
     },
-    Object {
+    {
       "description": "
 This command runs access checks for other users. This requires the
 View Access global
@@ -518,19 +518,19 @@ The result is a AccessCheckInfo entity
 detailing the access of the given user for the given project,
 project-ref, or project-permission-ref combination.
 ",
-      "inputs": Object {
-        "args": Array [],
+      "inputs": {
+        "args": [],
         "body": undefined,
-        "params": Array [
-          Array [
+        "params": [
+          [
             "account",
             "account",
           ],
-          Array [
+          [
             "permission",
             "perm",
           ],
-          Array [
+          [
             "ref",
             "ref",
           ],
@@ -540,7 +540,7 @@ project-ref, or project-permission-ref combination.
       "methodName": "checkAccess",
       "originalName": "Check Access",
       "path": "/projects/MyProject/check.access",
-      "returnType": Object {
+      "returnType": {
         "type": "AccessCheckInfo",
         "wrapper": undefined,
       },
