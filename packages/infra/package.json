@@ -6,12 +6,6 @@
   },
   "description": "Gerritkit infra assets",
   "keywords": [],
-  "main": "target/es5/index.js",
-  "source": "target/ts/index.ts",
-  "types": "target/es5/index.d.ts",
-  "typescript": {
-    "definition": "target/es5/index.d.ts"
-  },
   "scripts": {
     "postupdate": "yarn",
     "infra:npm-run-all": "cd $INIT_CWD && npm-run-all",
