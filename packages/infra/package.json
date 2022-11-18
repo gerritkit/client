@@ -4,8 +4,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Gerritkit infra assets",
+  "description": "GerritKit infra assets",
   "keywords": [],
+  "files": [],
   "scripts": {
     "postupdate": "yarn",
     "infra:npm-run-all": "cd $INIT_CWD && npm-run-all",
