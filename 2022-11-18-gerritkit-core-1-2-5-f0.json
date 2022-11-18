@@ -1,0 +1,9 @@
+{
+  "META_VERSION": "1",
+  "name": "@gerritkit/core",
+  "hash": "93dc78c81aea02681ab984f5870ac8545eda2888",
+  "version": "1.2.5",
+  "devDependencies": {
+    "@gerritkit/infra": "1.2.7"
+  }
+}
