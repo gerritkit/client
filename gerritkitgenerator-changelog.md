@@ -1,3 +1,8 @@
+## [@gerritkit/generator@1.3.4](https://github.com/gerritkit/client/compare/2022.11.18-gerritkit.generator.1.3.3-f0...2022.11.18-gerritkit.generator.1.3.4-f0) (2022-11-18)
+
+### Dependencies
+* perf: @gerritkit/core updated to 1.2.6
+
 ## [@gerritkit/generator@1.3.3](https://github.com/gerritkit/client/compare/@gerritkit/generator@1.3.2...2022.11.18-gerritkit.generator.1.3.3-f0) (2022-11-18)
 
 ### Fixes & improvements
@@ -6,5 +11,3 @@
 
 ### Dependencies
 * perf: @gerritkit/core updated to 1.2.5
-
-
