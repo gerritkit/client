@@ -1,3 +1,8 @@
+## [@gerritkit/infra@1.2.7](https://github.com/gerritkit/client/compare/2022.11.3-gerritkit.infra.1.2.6-f0...2022.11.18-gerritkit.infra.1.2.7-f0) (2022-11-18)
+
+### Fixes & improvements
+* fix: up dev deps, fix esm bundles [93dc78c](https://github.com/gerritkit/client/commit/93dc78c81aea02681ab984f5870ac8545eda2888)
+
 ## [@gerritkit/infra@1.2.6](https://github.com/gerritkit/client/compare/2022.11.3-gerritkit.infra.1.2.5-f0...2022.11.3-gerritkit.infra.1.2.6-f0) (2022-11-03)
 
 ### Fixes & improvements
