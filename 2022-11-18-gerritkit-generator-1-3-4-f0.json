@@ -1,0 +1,9 @@
+{
+  "META_VERSION": "1",
+  "name": "@gerritkit/generator",
+  "hash": "ac516b57c60c1b78f0833aaf383fca016a8ee2aa",
+  "version": "1.3.4",
+  "dependencies": {
+    "@gerritkit/core": "1.2.6"
+  }
+}
