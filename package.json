@@ -25,14 +25,14 @@
     "updeps": "npm_config_yes=true npx npm-upgrade-monorepo"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.1",
+    "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "coveralls": "^3.1.1",
     "find-git-root": "^1.0.4",
-    "jest": "^29.2.2",
+    "jest": "^29.3.1",
     "snazzy": "^9.0.0",
     "tsm": "^2.2.2",
-    "typedoc": "^0.23.20"
+    "typedoc": "^0.23.21"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
 module.exports = {
-    ...require('../infra/.eslintrc')
-  };
+  ...require('../infra/.eslintrc')
+};
   

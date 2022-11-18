@@ -1,7 +1,7 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
 
-import { TMethodInfo, TSectionInfo } from './types'
+import { TMethodInfo, TSectionInfo, TObjectTypeBucket } from './types'
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -41,12 +41,11 @@ export async function getSections(api: string) {
 export function getBodyType(method: cheerio.Element) {
   const $ = cheerio.load(method)
 
-  const sentences =
-    $('.paragraph')
+  const sentences: string[] = $('.paragraph')
       .text()
-      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
+      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) ?? []
   const types = sentences.reduce(
-    (acc, el) => {
+    (acc: TObjectTypeBucket, el: string) => {
       if (el.includes('body')) {
         parseTypes(el, /\S+?\s(?=entries)/g).forEach((type) => acc.push(type))
         parseTypes(el, /\S+?\s(?=entities)/g).forEach((type) => acc.push(type))
@@ -54,10 +53,7 @@ export function getBodyType(method: cheerio.Element) {
       }
       return acc
     },
-    [] as Array<{
-      wrapper?: string
-      type: string
-    }>,
+    []
   )
 
   if (types.length !== 1) {
@@ -254,12 +250,13 @@ function parseTypes(sentence: string, regexp: RegExp) {
 export function getReturnType(method: cheerio.Element) {
   const $ = cheerio.load(method)
 
-  const sentences =
+  const sentences: string[] =
     $('.paragraph')
       .text()
-      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) || []
+      .match(/([^!.?]+[!.?]+)|([^!.?]+$)/g) ?? []
+
   const types = sentences.reduce(
-    (acc, el) => {
+    (acc: TObjectTypeBucket, el: string) => {
       if (
         el.includes('returned') ||
         el.includes('returns') ||
@@ -272,10 +269,7 @@ export function getReturnType(method: cheerio.Element) {
       }
       return acc
     },
-    [] as Array<{
-      wrapper?: string
-      type: string
-    }>,
+    [],
   )
 
   if (types.length > 1) {

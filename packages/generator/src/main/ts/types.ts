@@ -23,3 +23,5 @@ export type TSectionInfo = {
 }
 
 export type TType = Record<string, string[]>
+
+export type TObjectTypeBucket = TObjectType[]
