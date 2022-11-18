@@ -1,0 +1,10 @@
+{
+  "META_VERSION": "1",
+  "name": "@gerritkit/rest",
+  "hash": "ac516b57c60c1b78f0833aaf383fca016a8ee2aa",
+  "version": "1.4.4",
+  "dependencies": {
+    "@gerritkit/core": "1.2.6",
+    "@gerritkit/native": "1.2.4"
+  }
+}
