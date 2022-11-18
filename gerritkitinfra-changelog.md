@@ -1,3 +1,8 @@
+## [@gerritkit/infra@1.2.8](https://github.com/gerritkit/client/compare/2022.11.18-gerritkit.infra.1.2.7-f0...2022.11.18-gerritkit.infra.1.2.8-f0) (2022-11-18)
+
+### Fixes & improvements
+* perf: tech release [ac516b5](https://github.com/gerritkit/client/commit/ac516b57c60c1b78f0833aaf383fca016a8ee2aa)
+
 ## [@gerritkit/infra@1.2.7](https://github.com/gerritkit/client/compare/2022.11.3-gerritkit.infra.1.2.6-f0...2022.11.18-gerritkit.infra.1.2.7-f0) (2022-11-18)
 
 ### Fixes & improvements
